@@ -1,0 +1,23 @@
+{
+  "name": "job-kit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wtgibson/job-kit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wtgibson/job-kit/issues"
+  },
+  "homepage": "https://github.com/wtgibson/job-kit#readme",
+  "dependencies": {
+    "mysql2": "^2.1.0"
+  }
+}
