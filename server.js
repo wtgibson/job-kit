@@ -1,22 +1,28 @@
+// Dependencies
 const express = require("express");
-const exphbs = require("express-handlebars");
 
+// Set up the Express App
+var app = express();
 var PORT = process.env.PORT || 3000;
 
-var app = express();
+// Static Directory
+app.use(express.static("public"));
 
-app.use(express.statiic("public"));
+// Requiring our Models for Syncing
+var db = require("./models");
 
+// Parse Request Body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.engine("handlebars", exphbs({ defaultLayout: "main"}));
-app.set("view engine", "handlebars");
+// Routes
+require("./routes/apiRoutes.js")(app);
+require("./routes/htmlRoutes.js")(app, path);
 
-// var routes = require("./controllers/jobkit_controller.js");
-
-app.use(routes);
-
-app.listen(PORT, function() {
-    console.log("Server listening at localhost:" + PORT);
+// Syncing Sequelize Models
+db.sequelize.sync().then(function () {
+    // Starting Express app
+    app.listen(PORT, function () {
+        console.log("Server listening at localhost:" + PORT);
+    });
 });
