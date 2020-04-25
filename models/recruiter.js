@@ -31,7 +31,7 @@ module.exports = function(sequelize, DataTypes) {
             onDelete: "cascade"
         });
     
-        models.Recruiter.hasMany(models.Company, {foreignKey: 'id'} {
+        models.Recruiter.hasMany(models.Company, {foreignKey: 'id'}, {
             onDelete: "cascade"
         })
     }
