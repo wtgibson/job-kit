@@ -11,12 +11,11 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
-        Industry: {
+        industry: {
             type: DataTypes.STRING,
             defaultValue: "Technology"
         },
-        // Multiple locations?
-        zipcode: {
+        zipCode: {
             type: DataTypes.INTEGER,
             validate: {
                 len: [5, 5]
@@ -25,56 +24,8 @@ module.exports = function (sequelize, DataTypes) {
         salaryRange: {
             type: DataTypes.INTEGER
         },
-        dateApplied: {
-            type: DataTypes.STRING
-        },
-        currentStage: {
-            type: DataTypes.STRING
-        },
-        dateCurrentStage: {
-            type: DataTypes.STRING
-        },
-        companyContact: {
-            // Name (first, last)
-            type: DataTypes.STRING
-        },
-        contactType: {
-            type: DataTypes.STRING
-        },
-        contactEmail: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-            validate: {
-                isEmail: true
-            }
-        },
-        nextSteps: {
-            type: DataTypes.TEXT
-        },
-        notes: {
-            type: DataTypes.TEXT
-        },
         rating: {
             type: DataTypes.INTEGER
-        },
-        resumeVersion: {
-            type: DataTypes.STRING
-        },
-        // URL to Posting Site
-        linkToPosting: {
-            type: DataTypes.STRING
-        },
-        // Source Posting Site
-        source: {
-            type: DataTypes.STRING
-        },
-        // unique ID from job posting site
-        sourceID: {
-            type: DataTypes.STRING
-        },
-        applyType: {
-            type: DataTypes.STRING
         }
     });
 
@@ -82,6 +33,16 @@ module.exports = function (sequelize, DataTypes) {
         models.Application.belongsTo(models.Company, {
             onDelete: "cascade"
         });
+        models.Application.hasMany(models.Contact, {
+            onDelete: "cascade"
+        });
+        models.Application.hasMany(models.Stage, {
+            onDelete: "cascade"
+        });
+        models.Application.hasMany(models.Source, {
+            onDelete: "cascade"
+        });
     }
+    return Application;
 }
 
