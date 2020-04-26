@@ -18,6 +18,11 @@
   },
   "homepage": "https://github.com/wtgibson/job-kit#readme",
   "dependencies": {
-    "mysql2": "^2.1.0"
-  }
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "require": "^2.4.20",
+    "sequelize": "^5.21.7"
+  },
+  "keywords": []
 }
