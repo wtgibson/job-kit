@@ -19,18 +19,12 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        zipcode: {
+        zipCode: {
             type: DataTypes.STRING
         },
         jobTitle: {
             type: DataTypes.STRING
-        },
-        // linkedInURL: {
-        //     type: DataTypes.STRING
-        // },
-        // gitHubURL: {
-        //     type: DataTypes.STRING
-        // }
+        }
 
     });
 
@@ -40,9 +34,6 @@ module.exports = function (sequelize, DataTypes) {
         });
 
         models.User.hasMany(models.Company, {foreignkey: 'id'}, {
-            onDelete: "cascade"
-        });
-        models.User.hasMany(models.Recruiter, {foreignkey: 'id'}, {
             onDelete: "cascade"
         });
     }
