@@ -2,7 +2,7 @@ var db = require("../models");
 
 module.exports = function (app) {
 
-    app.put("/api/user", (req, res) => {
+    app.put("/api/login", (req, res) => {
         // search User table for one item where email & password matches req.body
         db.User.findOne({
             where: req.body
@@ -17,7 +17,7 @@ module.exports = function (app) {
         })
     })
 
-    app.post("/api/login", (req, res) => {
+    app.post("/api/user", (req, res) => {
         db.User.create(req.body)
             .then(user => {
                 res.json(user.id);
@@ -27,7 +27,7 @@ module.exports = function (app) {
             });
     });
 
-    app.get("/api/login/:email", (req, res) => {
+    app.get("/api/user/:email", (req, res) => {
         db.User.findAll({
             where: {
                 email: req.params.id
@@ -45,7 +45,7 @@ module.exports = function (app) {
     });
 
     // route used to update information for a specific user
-    app.put("/api/login/:id", (req, res) => {
+    app.put("/api/user/:id", (req, res) => {
         // update a row in User table where id matches
         db.User.update(req.body, {
             where: 

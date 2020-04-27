@@ -16,6 +16,11 @@ var db = require("./models");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 // Routes
 require("./routes/api-user-routes.js")(app);
 require("./routes/api-application-routes.js")(app);
@@ -28,7 +33,6 @@ db.sequelize.sync().then(function () {
         console.log("Server listening at localhost:" + PORT);
     });
 });
-
 
 
 // call to github jobs API needs to happen on the server side
@@ -44,8 +48,7 @@ app.get("/jobs", function (req, res) {
 
         // The whole response has been received. Print out the result.
         resp.on('end', () => {
-            
-            res.json(JSON.parse(data));
+            res.render("index",data);
         });
 
     }).on("error", (err) => {
