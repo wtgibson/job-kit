@@ -34,6 +34,14 @@ $(function(){
         $("div").data("job-id)`)
     })
 
+    // $("jobs-nav").on("click", function(){
+    //     $.ajax("/api/jobs", {
+    //         type: "GET",
+    //     }).then(function(result){
+            
+    //     })
+    // })
+
 
 
 });
