@@ -39,7 +39,7 @@ module.exports = function (app) {
                 // one matches for the email
                 res.send("Login Failed");
             } else {
-                res.json(user);
+                res.render("login", user);
             }
         });
     });
