@@ -8,7 +8,7 @@ module.exports = function (app) {
             where: req.body
         }).then(user=> {
             // send user id back to client
-            res.json(user.id);
+            res.send(user.id);
         }).catch(err => {
             // error
             console.log(err);
@@ -39,7 +39,7 @@ module.exports = function (app) {
                 // one matches for the email
                 res.send("Login Failed");
             } else {
-                res.json(user);
+                res.render("login", user);
             }
         });
     });

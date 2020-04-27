@@ -30,7 +30,7 @@ module.exports = function (app) {
                     }
             }
         }).then(company => {
-            res.json(company);
+            res.render("application", company);
         }).catch(err => {
             console.log(err);
             res.send('No data found');

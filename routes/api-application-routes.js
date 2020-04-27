@@ -2,19 +2,40 @@ var db = require("../models");
 
 module.exports = function (app) {
 
-    // Get All Applications
-    app.get("/api/application", (req, res) => {
+    // Get All Applications where the AJAX request includes the userId in the body {userId: ##}
+    app.get("/api/application/all", (req, res) => {
         db.Application.findAll({
+            where: {UserId: req.body.userId},
             include: {
-                
+                model: db.Company,
+                model: db.Contact,
+                model: db.Source,
+                model: db.Stage
+
             }
         }).then(applications => {
-            res.json(applications)
+            res.render("index", applications);
         }).catch(err => {
             console.log(err);
             res.send("No data found");
         });
             
+    });
+
+    // Find all applications where the req.body has the objects to search
+    // {User.id: "id", Company.name: "name"}  OR {User.id: "id", Application.title: "title"}
+    app.get("/api/application/", (req, res) => {
+        db.Application.findAll({
+            where: req.body,
+            include: {
+                model: db.Company,
+                model: db.Contact,
+                model: db.Source,
+                model: db.Stage
+            },
+            
+        }).then(appliactions.)
+
     });
 
     // Get Unique Application
@@ -24,12 +45,13 @@ module.exports = function (app) {
                 id: req.params.id
             },
             include: {
+                model: db.Company,
                 model: db.Contact,
                 model: db.Source,
                 model: db.Stage
             }
         }).then(application => {
-            res.json(application)
+            res.render("index", application);
         }).catch(err => {
             console.log(err);
             res.send("No data found");
@@ -39,16 +61,12 @@ module.exports = function (app) {
 
      // Get Unique Application
      app.get("/api/application/:id/stages", (req, res) => {
-        db.Application.findAll({
+        db.Stages.findAll({
             where: {
-                id: req.params.id
+                ApplicationId: req.params.id
             },
-            include: {
-                model: db.stage,
-                // attributes: ["name"]
-            }
         }).then(stages => {
-            res.json(stages)
+            res.render("index", stages);
         }).catch(err => {
             console.log(err);
             res.send(false);
@@ -78,8 +96,7 @@ module.exports = function (app) {
         }).catch(err => {
             console.log(err);
             res.send("Failed to update");
-        });
-            
+        });  
     });
 
     // Delete Application
