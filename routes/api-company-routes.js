@@ -4,12 +4,13 @@ module.exports = function (app) {
 
     app.post("/api/company", (req, res) => {
         // Create company and contacts
-        db.Company.create(req.body);
+        db.Company.create(req.body, {
     }).then(company => {
         res.send(`Company, ${company.name}, has been created`)
     }).catch(err => {
         console.log(err);
         res.send(`Company, ${company.name}, was NOT created`)
+    });
     });
 
     // find one compnay with all the associated table fields

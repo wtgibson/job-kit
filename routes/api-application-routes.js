@@ -1,4 +1,4 @@
-var db = require("../modeels");
+var db = require("../models");
 
 module.exports = function (app) {
 
