@@ -3,9 +3,18 @@ var db = require("../models");
 module.exports = function (app) {
 
     // send default page to all routes that are undefined
-        app.get("/", (req, res) => {
-            res.render("index");
-        });
+    app.get("/", (req, res) => {
+        res.render("index");
+    });
+
+     // send default page to all routes that are undefined
+     app.get("/profile", (req, res) => {
+        res.render("profile");
+    });
+
+    app.get("/jobs", (req, res) => {
+        res.render("jobs");
+    });
 
 
 
