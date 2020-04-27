@@ -2,7 +2,6 @@ var db = require("../models");
 
 module.exports = function (app) {
     
-
     app.get("/", (req, res) => {
         res.render("index");
     })
@@ -36,10 +35,13 @@ module.exports = function (app) {
                 model: db.Company,
                 model: db.Contact,
                 model: db.Source,
-                model: db.Stage
+                model: db.Stage,
+                model: db.User
             },
             
-        }).then(appliactions.)
+        }).then(appliactions => {
+            res.render("index", applications)
+        });
 
     });
 
