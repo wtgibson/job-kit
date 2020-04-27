@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "express": "^4.17.1",
+    "express-handlebars": "^4.0.3",
     "mysql2": "^2.1.0",
     "require": "^2.4.20",
     "sequelize": "^5.21.7"

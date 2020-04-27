@@ -1,23 +1,39 @@
 
 $(function(){
 
-    $.ajax("/jobs",{
-        method: "GET"
-    }).then(function(data){
-        var jobH2 = $("<h2>Here are exciting jobs from Github</h2>");
-        $("#attach").append(jobH2)
-        for(let i =0; i<data.length; i++){
-            var el = data[i];
-            var div = $("<div></div>")
-            $(jobH2).append(div)
-           
-            $(div).data("id",`${el.id}`);
-            $(div).append(`<p>${el.title}</p>`);
-            $(div).append(`<p>${el.company}</p>`);
-            $(div).append(`<p>${el.location}</p>`);
-            $(div).append(`<p>${el.how_to_apply}</p>`);
-            $(div).append(`<a href="${el.url}" target="_blank">link</a>`);
-            $(div).append(`<img src="${el.company_logo}" alt="company logo"/><hr>`); 
+    var globalUserId;
+    // login function
+    $("#login").on("click", function(event){
+        event.preventDefault();
+        var username = $("#username").val().trim()
+        var password = $("#password").val().trim()
+        var login = {
+            email: username,
+            password: password
         }
+
+        $.ajax("/api/login", {
+            type: "PUT",
+            data: login
+        }).then(
+            function (data) {
+                globalUserId = data;
+
+                console.log("You send me the user id " + data)
+
+                console.log("You just tried to log in!")
+            }
+        );
     })
+
+    // function for saving job data
+    $(document).on("click", ".link-to-ext", function(){
+        event.preventDefault();
+        var id = $(this).data("job-id"); 
+        console.log(`You clicked on this role to apply:
+        $("div").data("job-id)`)
+    })
+
+
+
 });
