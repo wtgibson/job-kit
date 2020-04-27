@@ -2,6 +2,10 @@ var db = require("../models");
 
 module.exports = function (app) {
 
+    app.get("/", (req, res) => {
+        res.render("index");
+    })
+
     // Get All Applications where the AJAX request includes the userId in the body {userId: ##}
     app.get("/api/application/all", (req, res) => {
         db.Application.findAll({
@@ -22,23 +26,23 @@ module.exports = function (app) {
             
     });
 
-    // Find all applications where the req.body has the objects to search
-    // {User.id: "id", Company.name: "name"}  OR {User.id: "id", Application.title: "title"}
-    // app.get("/api/application/", (req, res) => {
-    //     db.Application.findAll({
-    //         where: req.body,
-    //         include: {
-    //             model: db.Company,
-    //             model: db.Contact,
-    //             model: db.Source,
-    //             model: db.Stage
-    //         },
+//    Find all applications where the req.body has the objects to search
+//    {User.id: "id", Company.name: "name"}  OR {User.id: "id", Application.title: "title"}
+    app.get("/api/application/", (req, res) => {
+        db.Application.findAll({
+            where: req.body,
+            include: {
+                model: db.Company,
+                model: db.Contact,
+                model: db.Source,
+                model: db.Stage
+            },
             
-    //     }).then(appliactions.)
+        }).then(appliactions.)
 
-    // });
+    });
 
-    // Get Unique Application
+    Get Unique Application
     app.get("/api/application/:id", (req, res) => {
         db.Application.findOne({
             where: {
