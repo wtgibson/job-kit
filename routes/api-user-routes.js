@@ -7,9 +7,6 @@ module.exports = function (app) {
             res.render("index");
         });
 
-
-
-
     app.put("/api/login", (req, res) => {
         // search User table for one item where email & password matches req.body
         db.User.findOne({

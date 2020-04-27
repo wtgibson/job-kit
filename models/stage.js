@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
 
     Stage.association = models => {
         models.Stage.hasMany(models.Contact, {foreignKey: 'id'}, {
-            onDelete: "cascade"
+
         });
     }
     return Stage;
