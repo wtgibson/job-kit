@@ -17,9 +17,7 @@ $(function(){
             $(div).append(`<p>${el.location}</p>`);
             $(div).append(`<p>${el.how_to_apply}</p>`);
             $(div).append(`<a href="${el.url}" target="_blank">link</a>`);
-            $(div).append(`<img src="${el.company_logo}" alt="company logo"/><hr>`);
-
-            
+            $(div).append(`<img src="${el.company_logo}" alt="company logo"/><hr>`); 
         }
     })
 });
