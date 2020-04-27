@@ -1,5 +1,5 @@
 // Dependencies
-const https = require("https")
+
 const express = require("express");
 
 
@@ -24,6 +24,7 @@ app.set("view engine", "handlebars");
 
 // Routes
 require("./routes/api-user-routes.js")(app);
+require("./routes/html-routes.js")(app);
 // require("./routes/api-application-routes.js")(app);
 // require("./routes/api-company-routes.js")(app);
 
@@ -38,21 +39,3 @@ db.sequelize.sync().then(function () {
 
 // call to github jobs API needs to happen on the server side
 // helpful code that needs to be examined more:
-app.get("/api/jobs", function (req, res) {
-    https.get("https://jobs.github.com/positions.json?search=code", (resp) => {
-        let data = "";
-
-        // A chunk of data has been received.
-        resp.on('data', (chunk) => {
-            data += chunk;
-        });
-
-        // The whole response has been received. Print out the result.
-        resp.on('end', () => {
-            res.json(data);
-        });
-
-    }).on("error", (err) => {
-        console.log("Error: " + err.message);
-    });
-})

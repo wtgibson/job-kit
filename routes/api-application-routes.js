@@ -1,6 +1,7 @@
 var db = require("../models");
 
 module.exports = function (app) {
+    
 
     // Get All Applications where the AJAX request includes the userId in the body {userId: ##}
     app.get("/api/application/all", (req, res) => {
