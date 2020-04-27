@@ -17,8 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Routes
-require("./routes/apiRoutes.js")(app);
-require("./routes/htmlRoutes.js")(app, path);
+require("./routes/api-user-routes.js")(app);
+require("./routes/api-application-routes.js")(app);
+require("api-company-routes.js")(app);
 
 // Syncing Sequelize Models
 db.sequelize.sync().then(function () {
