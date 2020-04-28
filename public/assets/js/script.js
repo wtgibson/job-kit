@@ -7,24 +7,24 @@ $(function () {
     globalUserId = 1;
     // login function that confirms login and returns global user id
 
-    $("#login-button").on("click", function (event) {
-        event.preventDefault();
-        var username = $("#username").val().trim()
-        var password = $("#password").val().trim()
-        var login = {
-            email: username,
-            password: password
-        }
+    // $("#login-button").on("click", function (event) {
+    //     event.preventDefault();
+    //     var username = $("#username").val().trim()
+    //     var password = $("#password").val().trim()
+    //     var login = {
+    //         email: username,
+    //         password: password
+    //     }
 
-        $.ajax("/api/login", {
-            type: "PUT",
-            data: login
-        }).then(
-            function (data) {
-                globalUserId = data;
-            }
-        );
-    })
+    //     $.ajax("/api/login", {
+    //         type: "PUT",
+    //         data: login
+    //     }).then(
+    //         function (data) {
+    //             globalUserId = data;
+    //         }
+    //     );
+    // })
 
     // function for saving job data
 
