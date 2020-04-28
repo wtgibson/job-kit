@@ -7,6 +7,10 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         },
+        type: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         description: {
             type: DataTypes.STRING,
             allowNull: false
@@ -23,6 +27,9 @@ module.exports = function (sequelize, DataTypes) {
         },
         salaryRange: {
             type: DataTypes.INTEGER
+        },
+        dateApplied: {
+            type: DataTypes.STRING
         },
         rating: {
             type: DataTypes.INTEGER
