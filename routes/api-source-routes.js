@@ -3,12 +3,11 @@ var db = require("../models");
 module.exports = function (app) {
     
     // Get All Possible Sources from an Application
-    app.get("/api/user/:userId/application/:applicationId/source/all", (req, res) => {
+    app.get("/api/application/:applicationId/source/all", (req, res) => {
         db.Source.findAll({
             where: {
-                UserId: req.params.userId, 
                 ApplicationId: req.params.applicationId
-            },
+            }
         }).then(sources => {
             res.json(sources);
         }).catch(err => {
@@ -19,10 +18,9 @@ module.exports = function (app) {
     });
 
     // Get Single Source from an Application
-    app.get("/api/user/:userId/application/:applicationId/source/:sourceId", (req, res) => {
+    app.get("/api/application/:applicationId/source/:sourceId", (req, res) => {
         db.Source.findOne({
             where: {
-                UserId: req.params.userId, 
                 ApplicationId: req.params.applicationId,
                 id: req.params.sourceId
             },
@@ -36,8 +34,7 @@ module.exports = function (app) {
     });
 
     // Create New Source
-    app.post("/api/user/:userId/application/:applicationId/source", (req, res) => {
-        // Create company and contacts
+    app.post("/api/application/:applicationId/source", (req, res) => {
         db.Source.create(req.body, {
         }).then(source => {
             res.send(`Source, ${source.source}, has been created`)
@@ -48,10 +45,9 @@ module.exports = function (app) {
     });
 
      // Update Source
-     app.put("/api/user/:userId/application/:applicationId/source/:sourceId", (req, res) => {
+     app.put("/api/application/:applicationId/source/:sourceId", (req, res) => {
         db.Source.update({
             where: {
-                UserId: req.params.userId, 
                 ApplicationId: req.params.applicationId,
                 id: req.params.sourceId
             },
@@ -64,10 +60,9 @@ module.exports = function (app) {
     });
 
     // Delete Source
-    app.delete("/api/user/:userId/application/:applicationId/source/:sourceId", (req, res) => {
+    app.delete("/api/application/:applicationId/source/:sourceId", (req, res) => {
         db.Source.destroy({
             where: {
-                UserId: req.params.userId, 
                 ApplicationId: req.params.applicationId,
                 id: req.params.sourceId
             },
