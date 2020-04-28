@@ -1,7 +1,7 @@
 var db = require("../models");
 
 module.exports = function (app) {
-    
+
     app.get("/", (req, res) => {
         res.render("index");
     })
@@ -9,7 +9,7 @@ module.exports = function (app) {
     // Get All Applications where the AJAX request includes the userId in the body {userId: ##}
     app.get("/api/user/:id/application/all", (req, res) => {
         db.Application.findAll({
-            where: {UserId: req.params.id},
+            where: { UserId: req.params.id },
             include: {
                 model: db.Company,
                 model: db.Contact,
@@ -23,7 +23,7 @@ module.exports = function (app) {
             console.log(err);
             res.send("No data found");
         });
-            
+
     });
 
 
@@ -45,22 +45,7 @@ module.exports = function (app) {
             console.log(err);
             res.send("No data found");
         });
-            
-    });
 
-     // Get Unique Application Stages
-     app.get("/api/application/:id/stages", (req, res) => {
-        db.Stages.findAll({
-            where: {
-                ApplicationId: req.params.id
-            },
-        }).then(stages => {
-            res.json(stages);
-        }).catch(err => {
-            console.log(err);
-            res.send(false);
-        });
-            
     });
 
     // Create Application
@@ -86,14 +71,14 @@ module.exports = function (app) {
         }).catch(err => {
             console.log(err);
             res.send("Failed to update");
-        });  
+        });
     });
 
     // Delete Application
     app.delete("/api/user/:userId/application/:applicationId", (req, res) => {
         db.Application.destroy({
             where: {
-                id: req.params.id
+                id: req.params.applicationId
             },
         }).then(() => {
             res.send(true);
@@ -102,5 +87,5 @@ module.exports = function (app) {
             res.send(false);
         });
     });
-            
+
 }
