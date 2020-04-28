@@ -1,13 +1,4 @@
-<div class="uk-card uk-card-default uk-card-body" data-jobId="{{id}}">
-	<p id="title-{{id}}">{{title}}</p>
-	<a id="company-{{id}}" href="{{company_url}}">{{company}}</p>
-	<p id="loc-{{id}}">{{location}}</p>
-	<p id="desc-{{id}}">{{description}}</p>
-	<button class="link-to-ext" href="{{url}}" target="_blank" data-jobId="{{id}}">link</button>
-	{{!-- <img src="{{company_logo}}" alt="company logo" /> --}}
-</div>
-
-{{!-- <div class="application-card" id="application1">
+<div class="application-card" id="application1">
 	<div class="uk-card uk-card-small uk-card-secondary">
 		<div class="uk-card-header">
 			<div class="uk-grid uk-grid-small uk-text-small" data-uk-grid>
@@ -20,10 +11,10 @@
 			</div>
 		</div>
 		<div class="uk-card-body">
-			<h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">Job Title</h3>
-			<h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">Company Name</h4>
-			<h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">Location</h5>
-			<p class="uk-text-small uk-text-muted">Job Description</p>
+			<h3 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="title-${{id}}">Job Title: {{title}}</h3>
+			<h4 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="company-${{id}}" href="{{company_url}}">Company: {{company}}</h4>
+			<h5 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="loc-${{id}}">Location: {{location}}</h5>
+			{{!-- <p class="uk-text-small uk-text-muted"id="desc-${{id}}">Description: {{description}}</p> --}}
 			<p class="uk-text-small uk-text-muted uk-text-bold">Salary Range</p>
 			<!-- Model Button -->
 			<a class="uk-button uk-button-default" href="#modal-center" uk-toggle>Details</a>
@@ -33,10 +24,11 @@
 
 					<button class="uk-modal-close-default" type="button" uk-close></button>
 
-					<h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">Job Title</h3>
-					<h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">Company Name</h4>
-					<h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">Location</h5>
-					<p class="uk-text-small uk-text-muted">Job Description</p>
+					<h3 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="title-${{id}}">Job Title: {{title}}</h3>
+					<h4 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="company-${{id}}" href="{{company_url}}">Company: {{company}}</h4>
+					{{!-- <img src="{{company_logo}}" alt="company logo" /> --}}
+					<h5 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="loc-${{id}}">Location: {{location}}</h5>
+					<p class="uk-text-small uk-text-muted"id="desc-${{id}}">Description: {{description}}</p>
 					<p class="uk-text-small uk-text-muted uk-text-bold">Salary Range</p>
 					
 					<hr>
@@ -68,10 +60,19 @@
 					Current Stage
 				</div>
 				<div class="uk-width-expand uk-text-small">
-					<a href="#">Job Posting</a> 
+					<a class="link-to-ext" href="{{url}}" target="_blank" data-jobId="{{id}}">Job Posting</a> 
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<!-- /card --> --}}
+<!-- /card -->
+
+{{!-- <div class="uk-card uk-card-default uk-card-body" data-jobId="{{id}}">
+	<p id="title-${{id}}">Job Title: {{title}}</p>
+	<a id="company-${{id}}" href="{{company_url}}">Company: {{company}}</p>
+	<p id="loc-${{id}}">Location: {{location}}</p>
+	{{!-- <p id="desc-${{id}}">Description: {{description}}</p> --}}
+	{{!-- <button class="link-to-ext" href="{{url}}" target="_blank" data-jobId="{{id}}">link</button> --}}
+	{{!-- <img src="{{company_logo}}" alt="company logo" /> --}}
+{{!-- </div> --}} --}}
