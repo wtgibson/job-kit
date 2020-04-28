@@ -2,11 +2,6 @@ var db = require("../models");
 
 module.exports = function (app) {
 
-    // send default page to all routes that are undefined
-    app.get("/", (req, res) => {
-        res.render("index");
-    });
-
     app.put("/api/login", (req, res) => {
         // search User table for one item where email & password matches req.body
         db.User.findOne({

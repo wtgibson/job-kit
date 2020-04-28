@@ -3,6 +3,16 @@ const axios = require("axios")
 
 module.exports = function (app) {
 
+
+    // send default page to all routes that are undefined
+    app.get("/", (req, res) => {
+        res.render("index");
+    });
+
+    app.get("/login", (req, res) => {
+        res.render("login");
+    });
+
     // send default page to all routes that are undefined
     app.get("/profile", (req, res) => {
         res.render("profile");

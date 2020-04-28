@@ -45,7 +45,7 @@ module.exports = function (app) {
 
     });
 
-    Get Unique Application
+    // Get Unique Application
     app.get("/api/application/:id", (req, res) => {
         db.Application.findOne({
             where: {
