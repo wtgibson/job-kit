@@ -1,7 +1,7 @@
 // REQUIREMENTS - The routes are providing access to the models.  PASSPORT is used to authenticate the user on the MySql Server
 
 var db = require("../models");
-var passport = require("../config/passport.js");
+// var passport = require("../config/passport.js");
 
 // Create the routes for the USER model.  Login, SignUp, View Profile, Update Profile.
 module.exports = function (app) {
