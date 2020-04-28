@@ -15,6 +15,7 @@ module.exports = function (app) {
             // attributes: ["ApplicationId"] 
         }).then(applications => {
             res.json(applications);
+            console.log(applications)
         }).catch(err => {
             console.log(err);
             res.send("No data found");
