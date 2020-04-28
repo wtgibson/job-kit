@@ -3,7 +3,7 @@ var db = require("../models");
 module.exports = function (app) {
  
     // Get All Stages for Application
-    app.get("/api/application/:applicationId/stages", (req, res) => {
+    app.get("/api/application/:applicationId/stage/all", (req, res) => {
         db.Stage.findAll({
             where: {
                 ApplicationId: req.params.applicationId
