@@ -23,9 +23,7 @@ module.exports = function (app) {
             console.log(err);
             res.send("No data found");
         });
-            
     });
-
 
     // Get Unique Application
     app.get("/api/application/:id", (req, res) => {
