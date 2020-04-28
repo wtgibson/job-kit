@@ -45,12 +45,12 @@ module.exports = function (app) {
 
     // Create Application
     app.post("/api/application", (req, res) => {
-        db.Application.create(req.body, {
-        }).then(application => {
-            res.send(`Application for ${application.title}, has been created`)
+        db.Application.create(req.body, { 
+        }).then((application) => {
+            res.send(`Application for ${application.dataValues.title}, has been created`)
         }).catch(err => {
             console.log(err);
-            res.send(`Application for ${application.title}, was NOT created`)
+            res.send(`Application for ${application.dataValues.title}, was NOT created`)
         });
     });
 

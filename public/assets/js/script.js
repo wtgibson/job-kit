@@ -39,26 +39,31 @@ $(function () {
 
     $(document).on("click", ".link-to-ext", function () {
         event.preventDefault();
+        console.log("you clicked me!")
         var id = $(this).data("jobid");
         var title = $(`#title-${id}`).text();
         var desc = $(`#desc-${id}`).text();
 
+        console.log(title)
+        console.log(desc)
+
         var newApp = {
             title: title,
-            description: desc,
+            description: "desc",
             industry: "None",
             zipCode: "94114",
             salaryRange: 0,
             rating: 0,
+            createdAt: "03/20/2020",
+            updatedAt: "03/20/2020",
             UserId: globalUserId
         }
 
-        console.log("here is the new app" + JSON.stringify(newApp))
         $.ajax("/api/application", {
             type: "POST",
             data: newApp,
-        }).then(function () {
-            console.log("successfully added the app")
+        }).then(function (res) {
+            console.log(res)
             // var newCompany = {
             //     name: $(`company-${id}`).text(),
             //     zipCode: "None",
@@ -75,20 +80,9 @@ $(function () {
             // })
         })
 
-        // var newSources = {
-        //     source: "Github",
-        //     linkToPosting: $(this).attr("href"),
-        //     jobId: id,
-        //     applyType: "none",
-        //     resumeVersion: "",
-        //     createdAt: 0,
-        //     updatedAt: 0,
-        //     ApplicationId: "none"
-        // }
-
     })
 
-    $("#app-add").on("click", function (event) {
+    $("#app-add").on("submit", function (event) {
         event.preventDefault();
         console.log("You tried to add something")
 
