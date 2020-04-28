@@ -5,7 +5,10 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
         },
         zipCode: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            validate: {
+                len:[5,5]
+            }
         },
         URL: {
             type: DataTypes.STRING
