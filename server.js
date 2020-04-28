@@ -5,7 +5,7 @@ const express = require("express");
 
 // Set up the Express App
 var app = express();
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 8000;
 
 // Static Directory
 app.use(express.static("public"));

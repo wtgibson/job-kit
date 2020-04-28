@@ -39,19 +39,21 @@ $(function () {
 
     $(document).on("click", ".link-to-ext", function () {
         event.preventDefault();
-        var id = $(this).data("job-id");
+        var id = $(this).data("jobid");
+        var title = $(`#title-${id}`).text();
+        var desc = $(`#desc-${id}`).text();
 
         var newApp = {
-            // title: $(`title-${id}}`).text(),
-            // description: $(`desc-${id}}`).text(),
-            title: "test-title3",
-            description: "test desc3",
+            title: title,
+            description: desc,
             industry: "None",
             zipCode: "94114",
             salaryRange: 0,
             rating: 0,
             UserId: globalUserId
         }
+
+        console.log("here is the new app" + JSON.stringify(newApp))
         $.ajax("/api/application", {
             type: "POST",
             data: newApp,
@@ -84,20 +86,27 @@ $(function () {
         //     ApplicationId: "none"
         // }
 
-  // var newAppForm = {
-        //     title: $(`title-${id}}`).text(),
-        //     description: $(`desc-${id}}`).text(),
-        //     industry: $(`industr-${id}}`).val(),
-        //     zipCode: $(`zip-${id}}`).text(),
-        //     salaryRange: $(`salary-${id}}`).text(),
-        //     rating: $(`desc-${id}}`).text(),
-        //     createdAt: "NOW()",
-        //     updatedAt: "NOW()",
-        // }
     })
 
+    $("#app-add").on("click", function (event) {
+        event.preventDefault();
+        console.log("You tried to add something")
 
-
-
-
+        var newApp = {
+            title: $("#app-title").val(),
+            type: $("#app-type").val(),
+            description: $("#app-desc").val(),
+            industry: $("#app-industry").val(),
+            zipCode: $("#app-zipCode").val(),
+            salaryRange: $("#app-salary").val(),
+            rating: $("#app-rating").val(),
+            UserId: globalUserId
+        }
+        $.ajax("/api/application", {
+            type: "POST",
+            data: newApp,
+        }).then(function () {
+            console.log("successfully added the app")
+        })
+    })
 });
