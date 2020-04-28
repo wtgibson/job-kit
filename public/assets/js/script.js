@@ -1,11 +1,13 @@
 
-$(function(){
+$(function () {
 
     var globalUserId;
+    var defaultZipCode;
+    var defaultJob;
     globalUserId = 1;
     // login function that confirms login and returns global user id
-    
-    $("#login-button").on("click", function(event){
+
+    $("#login-button").on("click", function (event) {
         event.preventDefault();
         var username = $("#username").val().trim()
         var password = $("#password").val().trim()
@@ -26,62 +28,72 @@ $(function(){
 
     // function for saving job data
 
-    $("#applications-nav").on("click", function(){
+    $("#applications-nav").on("click", function () {
         console.log("You updated the data")
         $.ajax("/api/user/1/application/all"), {
             type: "GET"
-        }.then(function(data){
+        }.then(function (data) {
             console.log(JSON.stringify(data))
         })
     })
 
-    $(document).on("click", ".link-to-ext", function(){
+    $(document).on("click", ".link-to-ext", function () {
         event.preventDefault();
-        var id = $(this).data("job-id"); 
+        var id = $(this).data("job-id");
+
         var newApp = {
-            title: $(`title-${id}}`).text(),
-            description: $(`desc-${id}}`).text(),
+            // title: $(`title-${id}}`).text(),
+            // description: $(`desc-${id}}`).text(),
+            title: "test-title3",
+            description: "test desc3",
             industry: "None",
-            zipCode: "None",
+            zipCode: "94114",
             salaryRange: 0,
             rating: 0,
-            createdAt: 0,
-            updatedAt: 0
+            UserId: globalUserId
         }
-        $.ajax("/api/application"),{
+        $.ajax("/api/application", {
             type: "POST",
             data: newApp,
-        }.then(function (){
+        }).then(function () {
             console.log("successfully added the app")
+            // var newCompany = {
+            //     name: $(`company-${id}`).text(),
+            //     zipCode: "None",
+            //     url: $(`company-${id}`).attr("href"),
+            //     createdAt: 0,
+            //     updatedAt: 0,
+            //     UserID: globalUserId
+            // }
+            // $.ajax("/api/company", {
+            //     type: "POST",
+            //     data: newCompany
+            // }).then(function () {
+            //     console.log("Successfully added the company")
+            // })
         })
 
-        var newCompany = {
-            name: $(`company-${id}`).text(),
-            zipCode: "None",
-            url: $(`company-${id}`).attr("href"),
-            createdAt: 0,
-            updatedAt: 0,
-            UserID: globalUserId
-        }
-        $.ajax("/api/company", {
-            type: "POST",
-            data: newCompany
-        }).then(function(){
-            console.log("Successfully added the company")
-        })
+        // var newSources = {
+        //     source: "Github",
+        //     linkToPosting: $(this).attr("href"),
+        //     jobId: id,
+        //     applyType: "none",
+        //     resumeVersion: "",
+        //     createdAt: 0,
+        //     updatedAt: 0,
+        //     ApplicationId: "none"
+        // }
 
-        var newSources = {
-            source: "Github",
-            linkToPosting: $(this).attr("href"),
-            jobId: id,
-            applyType: "none",
-            resumeVersion: "",
-            createdAt: 0,
-            updatedAt: 0,
-            ApplicationId: "none"
-        }
-
-        var 
+  // var newAppForm = {
+        //     title: $(`title-${id}}`).text(),
+        //     description: $(`desc-${id}}`).text(),
+        //     industry: $(`industr-${id}}`).val(),
+        //     zipCode: $(`zip-${id}}`).text(),
+        //     salaryRange: $(`salary-${id}}`).text(),
+        //     rating: $(`desc-${id}}`).text(),
+        //     createdAt: "NOW()",
+        //     updatedAt: "NOW()",
+        // }
     })
 
 

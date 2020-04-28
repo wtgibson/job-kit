@@ -1,7 +1,17 @@
-var db = require("../models");
+// REQUIREMENTS - The routes are providing access to the models.  PASSPORT is used to authenticate the user on the MySql Server
 
+var db = require("../models");
+var passport = require("../config/passport.js");
+
+// Create the routes for the USER model.  Login, SignUp, View Profile, Update Profile.
 module.exports = function (app) {
 
+    // Route to use with [Login] utilizing passport.
+    // app.post("/api/login", passport.authenticate("local"), function (req, res) {
+    //     res.json(req.user);
+    // });
+
+    // Route to use for login when not utilizing passport.
     app.put("/api/login", (req, res) => {
         // search User table for one item where email & password matches req.body
         db.User.findOne({
@@ -17,17 +27,43 @@ module.exports = function (app) {
         })
     })
 
-    app.post("/api/user", (req, res) => {
+    // Route to use to signup a new user without passport
+    app.post("/api/signup", (req, res) => {
         db.User.create(req.body)
-            .then(user => {
-                res.json(user.id);
+            .then(() => {
+                res.redirect(307, "/api/login");
             }).catch(err => {
                 console.log(err)
-                res.send(false);
+                res.status(401).json(err);
             });
     });
 
-    // Get user profile for the user
+    // Get user profile with Passport Authtentication
+    app.get("/api/userProfile", function (req, res) {
+        if (!req.user) {
+            // The user is not logged in, send back an empty object
+            res.json({});
+        } else {
+            // Otherwise send back the user's email and id
+            // Sending back a password, even a hashed password, isn't a good idea
+            db.User.findOne({
+                where: {
+                    id: req.params.id
+                }
+                // attributes: ["id", "email", "name"]
+        }).then(user => {
+            res.json({
+                email: req.user.email,
+                id: req.user.id,
+                name: req.user.name,
+                zipCode: req.user.zipCode,
+                jobTitle: req.user.jobTitle
+            });
+        });
+        };
+    });
+
+    // Get user profile without Passport
     app.get("/api/user/:id", (req, res) => {
         db.User.findOne({
             where: {
@@ -61,6 +97,12 @@ module.exports = function (app) {
             res.send("Failed to update")
         });
     });
+
+    // route to logout
+    app.get("/logout", (req, res) => {
+        req.logout();
+        res.redirect("/");
+    })
 
 // END of module
 }
