@@ -2,7 +2,7 @@ var db = require("../models");
 
 module.exports = function (app) {
  
-    // Get All Stages for Unique Application
+    // Get All Stages for Application
     app.get("/api/application/:applicationId/stages", (req, res) => {
         db.Stage.findAll({
             where: {
@@ -16,7 +16,7 @@ module.exports = function (app) {
         });  
     });
 
-    // Get One Stage for Unique Application
+    // Get One Stage for Application
     app.get("/api/application/:applicationId/stage/:stageId", (req, res) => {
         db.Stage.findOne({
             where: {

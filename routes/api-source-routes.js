@@ -5,7 +5,10 @@ module.exports = function (app) {
     // Get All Possible Sources from an Application
     app.get("/api/user/:userId/application/:applicationId/source/all", (req, res) => {
         db.Source.findAll({
-            where: {UserId: req.params.userId, ApplicationId: req.params.applicationId},
+            where: {
+                UserId: req.params.userId, 
+                ApplicationId: req.params.applicationId
+            },
         }).then(sources => {
             res.json(sources);
         }).catch(err => {
@@ -48,6 +51,7 @@ module.exports = function (app) {
      app.put("/api/user/:userId/application/:applicationId/source/:sourceId", (req, res) => {
         db.Source.update({
             where: {
+                UserId: req.params.userId, 
                 ApplicationId: req.params.applicationId,
                 id: req.params.sourceId
             },
@@ -63,6 +67,7 @@ module.exports = function (app) {
     app.delete("/api/user/:userId/application/:applicationId/source/:sourceId", (req, res) => {
         db.Source.destroy({
             where: {
+                UserId: req.params.userId, 
                 ApplicationId: req.params.applicationId,
                 id: req.params.sourceId
             },
