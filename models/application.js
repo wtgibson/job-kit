@@ -12,7 +12,7 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: true
         },
         description: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false
         },
         industry: {
@@ -21,12 +21,14 @@ module.exports = function (sequelize, DataTypes) {
         },
         zipCode: {
             type: DataTypes.INTEGER,
+            allowNull: true,
             validate: {
                 len: [5, 5]
             }
         },
         salaryRange: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            allowNull: true
         },
         dateApplied: {
             type: DataTypes.STRING
