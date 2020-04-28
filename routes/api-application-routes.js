@@ -1,6 +1,10 @@
 var db = require("../models");
 
 module.exports = function (app) {
+    
+    app.get("/", (req, res) => {
+        res.render("index");
+    })
 
     // Get All Applications where the AJAX request includes the userId in the body {userId: ##}
     app.get("/api/user/:id/application/all", (req, res) => {
@@ -21,6 +25,7 @@ module.exports = function (app) {
         });
             
     });
+
 
     // Get Unique Application
     app.get("/api/application/:id", (req, res) => {

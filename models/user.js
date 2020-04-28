@@ -20,10 +20,12 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
         },
         zipCode: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         jobTitle: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: true,
         }
 
     });
@@ -34,7 +36,6 @@ module.exports = function (sequelize, DataTypes) {
         });
 
         models.User.hasMany(models.Company, {foreignkey: 'id'}, {
-            onDelete: "cascade"
         });
     }
     return User;

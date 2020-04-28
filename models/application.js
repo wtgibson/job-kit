@@ -30,11 +30,11 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     Application.associate = models => {
-        models.Application.belongsTo(models.Company, {
-            onDelete: "cascade"
+        models.Application.hasOne(models.Company, {
         });
+        
         models.Application.hasMany(models.Contact, {
-            onDelete: "cascade"
+
         });
         models.Application.hasMany(models.Stage, {
             onDelete: "cascade"

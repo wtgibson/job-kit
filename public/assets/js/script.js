@@ -2,8 +2,9 @@
 $(function(){
 
     var globalUserId;
-    // login function
-    $("#login").on("click", function(event){
+    // login function that confirms login and returns global user id
+    
+    $("#login-button").on("click", function(event){
         event.preventDefault();
         var username = $("#username").val().trim()
         var password = $("#password").val().trim()
@@ -18,21 +19,28 @@ $(function(){
         }).then(
             function (data) {
                 globalUserId = data;
-
-                console.log("You send me the user id " + data)
-
-                console.log("You just tried to log in!")
             }
         );
     })
 
     // function for saving job data
+
+    $("application-nav").on("click", function(){
+        $.ajax("/api/application/all/"+1), {
+            type: "GET"
+        }.then(function(data){
+            console.log(data)
+        })
+    })
+
     $(document).on("click", ".link-to-ext", function(){
         event.preventDefault();
         var id = $(this).data("job-id"); 
         console.log(`You clicked on this role to apply:
-        $("div").data("job-id)`)
+        ${$("div").data("job-id")}`)
     })
+
+
 
 
 

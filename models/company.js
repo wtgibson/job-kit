@@ -16,11 +16,9 @@ module.exports = function (sequelize, DataTypes) {
 
     Company.associate = models => {
         models.Company.hasMany(models.Contact, {foreignkey: 'id'}, {
-            onDelete: "cascade"
         });
-        models.Company.hasMany(models.Application, {foreignkey: 'id'}, {
-            onDelete: "cascade"
-        });
+        // models.Company.hasMany(models.Application, {foreignkey: 'id'}, {
+        // });
 
     }
     return Company;
