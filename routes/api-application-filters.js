@@ -2,7 +2,27 @@ var db = require("../models");
 
 module.exports = function (app) {
 
-    // Get Title, ZipCode, Rating
+    // Get All Field
+    // app.get("/api/user/:userId/application/filter/:field", (req, res) => {
+    //     db.Application.findAll({
+    //         where: {userId: req.params.userId},
+    //         include: {
+    //             model: db.Company,
+    //             model: db.Contact,
+    //             model: db.Source,
+    //             model: db.Stage
+    //         },
+    //         attributes: [req.params.field]
+    //     }).then(applications => {
+    //         res.json(applications);
+    //     }).catch(err => {
+    //         console.log(err);
+    //         res.send("No data found");
+    //     });
+
+    // });
+
+    // Get All Apps with Title
     app.get("/api/user/:userId/application/filter/title/:title", (req, res) => {
         db.Application.findAll({
             where: {userId: req.params.userId, title: req.params.title},
@@ -13,8 +33,7 @@ module.exports = function (app) {
                 model: db.Stage
             },
         }).then(applications => {
-            var arrayOfColValues = applications.map(application => application[req.params.field])
-            res.render("index", arrayOfColValues);
+            res.json(applications);
         }).catch(err => {
             console.log(err);
             res.send("No data found");
@@ -22,9 +41,41 @@ module.exports = function (app) {
 
     });
 
-    // Filter on Source
+    // Get All Apps with ZipCode
+    app.get("/api/user/:userId/application/filter/zipCode/:zipCode", (req, res) => {
+        db.Application.findAll({
+            where: {userId: req.params.userId, zipCode: req.params.zipCode},
+            include: {
+                model: db.Company,
+                model: db.Contact,
+                model: db.Source,
+                model: db.Stage
+            },
+        }).then(applications => {
+            res.json(applications);
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
 
-    // Filter on Stage
+    });
 
-    // Filer on Company
+    // Get All Apps with Rating
+    app.get("/api/user/:userId/application/filter/rating/:rating", (req, res) => {
+        db.Application.findAll({
+            where: {userId: req.params.userId, rating: req.params.rating},
+            include: {
+                model: db.Company,
+                model: db.Contact,
+                model: db.Source,
+                model: db.Stage
+            },
+        }).then(applications => {
+            res.json(applications);
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+
+    });
 }
