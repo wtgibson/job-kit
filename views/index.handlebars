@@ -1,18 +1,71 @@
-<h1> This will be our home page </h1>
-
-<div class="uk-position-top">
-    <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
-        <div class="uk-navbar-right">
-            <ul class="uk-navbar-nav">
-                <li><a id="home-nav" href="/">home</a></li>
-                <li><a id="applications-nav" href="/applications">Applications</a></li>
-                <li class="uk-active"><a id="jobs-nav" href="/jobs">Jobs</a></li>
-                <li><a id="profile-nav" href="/profile">Profile</a></li>
-            </ul>
+=======
+<!--HEADER-->
+<header id="site-head">
+    <div class="uk-container uk-container-expand uk-background-secondary uk-padding-small">
+        <div class="uk-grid uk-grid-medium uk-flex uk-flex-middle" data-uk-grid>
+            <div class="uk-width-auto">
+                <a href="#" class="uk-logo" title=""><img src="img/logo.svg" alt=""></a>
+            </div>
+            <div class="uk-width-expand">
+            </div>
+            <div class="uk-width-auto">
+                <ul class="uk-subnav" data-uk-margin>
+                    <li class=""><a href="#">Applications</a></li>
+                    <li><a href="#">Jobs</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
+            </div>
         </div>
-    </nav>
-</div>
+    </div>
+</header>
+<!--/HEADER-->
+<div class="spacer"></div>
 
+<!-- /overlay -->
+
+<section class="uk-section-large uk-preserve-color">
+    <div class="uk-container">
+        
+        <br>
+
+        <div class="uk-panel uk-dark">
+            <h1>Welcome to JobKit!</h1>
+        </div>
+
+        <br>
+
+        <div class="uk-grid-match uk-child-width-expand@m" uk-grid>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <p>Company Details</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="uk-preserve-color uk-margin-large-bottom">
+    <div class="uk-section-large">
+
+        <div class="uk-grid-match uk-child-width-expand@m" uk-grid>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <div class="uk-flex uk-flex-middle uk-flex-center">
+                        <button class="uk-button-large uk-button-secondary">Applications</button>
+                    </div>
+                    <h3 class="uk-text-center">Tracked Job Applications</h3>
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body">
+                    <div class="uk-flex uk-flex-middle uk-flex-center">
+                        <button class="uk-button-large uk-button-secondary">Jobs</button>
+                    </div>
+                    <h3 class="uk-text-center">Open Job Opportunties</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <div>
     <h1>Placeholder Add Form</h1>
@@ -49,3 +102,10 @@
 
 
 </div>
+<!--FOOTER-->
+<footer id="site-foot" class="uk-section uk-section-secondary uk-section-xsmall uk-position-bottom uk-position-fixed">
+    <div class="uk-container uk-text-small uk-text-center">
+        Made with Love by JobKit
+    </div>
+</footer>
+<!--/FOOTER-->
