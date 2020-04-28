@@ -1,5 +1,5 @@
 // bcrypt is required to hash the user password.  
-var bcrypt = require("bcryptjs");
+// var bcrypt = require("bcryptjs");
 
 // Constructs the User model
 module.exports = function (sequelize, DataTypes) {

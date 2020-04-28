@@ -20,7 +20,7 @@ module.exports = function (sequelize, DataTypes) {
             defaultValue: "Technology"
         },
         zipCode: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: true,
             validate: {
                 len: [5, 5]
