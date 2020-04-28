@@ -22,6 +22,9 @@ module.exports = function (sequelize, DataTypes) {
         zipCode: {
             type: DataTypes.STRING,
             allowNull: false,
+            validate: {
+                len:[5,5]
+            }
         },
         jobTitle: {
             type: DataTypes.STRING,

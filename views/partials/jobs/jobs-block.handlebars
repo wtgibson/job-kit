@@ -1,9 +1,10 @@
 <div class="uk-card uk-card-default uk-card-body" data-jobId="{{id}}">
-	<p>Job Title: {{title}}</p>
-	<p>Company: {{company}}</p>
-	<p>Location: {{location}}</p>
-	<p>Location: {{location}}</p>
+	<p id="title-${{id}}">Job Title: {{title}}</p>
+	<a id="company-${{id}}" href="{{company_url}}">Company: {{company}}</p>
+	<p id="loc-${{id}}">Location: {{location}}</p>
+	<p id="desc-${{id}}">Location: {{location}}</p>
+
 
 	<button class="link-to-ext" href="{{url}}" target="_blank" data-jobId="{{id}}">link</button>
-	<img src="{{company_logo}}" alt="company logo" />
+	{{!-- <img src="{{company_logo}}" alt="company logo" /> --}}
 </div>

@@ -2,11 +2,6 @@ var db = require("../models");
 
 module.exports = function (app) {
 
-    // send default page to all routes that are undefined
-        app.get("/", (req, res) => {
-            res.render("index");
-        });
-
     app.put("/api/login", (req, res) => {
         // search User table for one item where email & password matches req.body
         db.User.findOne({
@@ -32,19 +27,20 @@ module.exports = function (app) {
             });
     });
 
-    app.get("/api/user/:email", (req, res) => {
-        db.User.findAll({
+    // Get user profile for the user
+    app.get("/api/user/:id", (req, res) => {
+        db.User.findOne({
             where: {
-                email: req.params.id
-            },
-            attributes: ["id", "email", "name"]
+                id: req.params.id
+            }
+            // attributes: ["id", "email", "name"]
         }).then(user => {
             if (user.length > 0 || user === undefined) {
                 // Send a failure statement if there are more
                 // one matches for the email
                 res.send("Login Failed");
             } else {
-                res.render("login", user);
+                res.json(user);
             }
         });
     });

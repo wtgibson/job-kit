@@ -1,0 +1,35 @@
+<!-- overlay -->
+<div class="uk-position-cover uk-overlay-primary"></div>
+<!-- /overlay -->
+<div class="uk-position-top-center uk-position-large uk-visible@m uk-position-z-index">
+    <span class="uk-text-large uk-text-muted">Welcome to JobKit!
+</div>
+<div class="uk-width-medium uk-padding-small uk-position-z-index" uk-scrollspy="cls: uk-animation-fade">
+
+    <div class="uk-text-center uk-margin">
+        <!-- <img src="img/login-logo.svg" alt="Logo"> -->
+    </div>
+
+    <!-- login -->
+    <form class="toggle-class" action="/profile">
+        <fieldset class="uk-fieldset">
+            <div class="uk-margin-small">
+                <div class="uk-inline uk-width-1-1">
+                    <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: user"></span>
+                    <input class="uk-input uk-border-pill" required placeholder="Username" type="text" id="username">
+                </div>
+            </div>
+            <div class="uk-margin-small">
+                <div class="uk-inline uk-width-1-1">
+                    <span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
+                    <input class="uk-input uk-border-pill" required placeholder="Password" type="password"
+                        id="password">
+                </div>
+            </div>
+         
+            <div class="uk-margin-bottom">
+                <button id="#login-button" type="submit" class="uk-button uk-button-primary uk-border-pill uk-width-1-1">LOG IN</button>
+            </div>
+        </fieldset>
+    </form>
+</div>

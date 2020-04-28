@@ -2,16 +2,17 @@
     <nav class="uk-navbar-container uk-navbar-transparent" uk-navbar>
         <div class="uk-navbar-right">
             <ul class="uk-navbar-nav">
-                <li><a href="#">Applications</a></li>
-                <li class="uk-active"><a href="#">Jobs</a></li>
-                <li><a href="#">Profile</a></li>
+                <li><a id="home-nav" href="/">home</a></li>
+                <li><a id="applications-nav" href="/applications">Applications</a></li>
+                <li class="uk-active"><a id="jobs-nav" href="/jobs">Jobs</a></li>
+                <li><a id="profile-nav" href="/profile">Profile</a></li>
             </ul>
         </div>
     </nav>
 </div>
 
-<div id="github-jobs" class="uk-grid-column-medium uk-grid-row-medium uk-child-width-1-3@s uk-text-center" uk-grid>
+<div id="github-jobs" class="uk-grid-column-medium uk-grid-row-medium uk-child-width-1-3@s uk-text-center uk-grid">
     {{#each jobs}}
-        {{> jobs/jobs-block }}
+    {{> jobs/jobs-block}}
     {{/each}}
 </div>

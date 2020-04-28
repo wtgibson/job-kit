@@ -7,8 +7,12 @@ module.exports = function (sequelize, DataTypes) {
                 len: [1]
             }
         },
-        description: {
+        type: {
             type: DataTypes.STRING,
+            allowNull: true
+        },
+        description: {
+            type: DataTypes.TEXT,
             allowNull: false
         },
         industry: {
@@ -17,12 +21,17 @@ module.exports = function (sequelize, DataTypes) {
         },
         zipCode: {
             type: DataTypes.INTEGER,
+            allowNull: true,
             validate: {
                 len: [5, 5]
             }
         },
         salaryRange: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        dateApplied: {
+            type: DataTypes.STRING
         },
         rating: {
             type: DataTypes.INTEGER
