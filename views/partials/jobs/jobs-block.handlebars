@@ -11,11 +11,11 @@
 			</div>
 		</div>
 		<div class="uk-card-body">
-			<h3 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="title-{{id}}">Job Title: {{title}}</h3>
-			<h4 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="company-{{id}}" href="{{company_url}}">Company: {{company}}</h4>
-			<h5 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="loc-{{id}}">Location: {{location}}</h5>
+			<h3 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="title-{{id}}"> {{title}}</h3>
+			<h4 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="company-{{id}}" href="{{company_url}}">{{company}}</h4>
+			<h5 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="loc-{{id}}">{{location}}</h5>
 			{{!-- <p class="uk-text-small uk-text-muted"id="desc-${{id}}">Description: {{description}}</p> --}}
-			<p class="uk-text-small uk-text-muted uk-text-bold">Salary Range</p>
+			{{!-- <p class="uk-text-small uk-text-muted uk-text-bold">Salary Range</p> --}}
 			<!-- Model Button -->
 			<a class="uk-button uk-button-default" href="#modal-center" uk-toggle>Details</a>
 			<!-- Modal Info -->
@@ -24,11 +24,11 @@
 
 					<button class="uk-modal-close-default" type="button" uk-close></button>
 
-					<h3 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="title-{{id}}">Job Title: {{title}}</h3>
-					<h4 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="company-{{id}}" href="{{company_url}}">Company: {{company}}</h4>
+					<h3 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="title-{{id}}">{{title}}</h3>
+					<h4 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="company-{{id}}" href="{{company_url}}">{{company}}</h4>
 					{{!-- <img src="{{company_logo}}" alt="company logo" /> --}}
-					<h5 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="loc-${{id}}">Location: {{location}}</h5>
-					<p class="uk-text-small uk-text-muted"id="desc-{{id}}">Description: {{description}}</p>
+					<h5 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="loc-${{id}}">{{location}}</h5>
+					<p class="uk-text-small uk-text-muted"id="desc-{{id}}">{{description}}</p>
 					<p class="uk-text-small uk-text-muted uk-text-bold">Salary Range</p>
 					
 					<hr>
