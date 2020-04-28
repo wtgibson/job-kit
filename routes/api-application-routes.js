@@ -7,18 +7,18 @@ module.exports = function (app) {
     })
 
     // Get All Applications where the AJAX request includes the userId in the body {userId: ##}
-    app.get("/api/application/all", (req, res) => {
-        db.Application.findAll({
-            where: {UserId: req.body.userId},
+    app.get("/api/user/:id/application/all", (req, res) => {
+        db.User.findOne({
+            where: {id: req.params.id},
             include: {
                 model: db.Company,
                 model: db.Contact,
                 model: db.Source,
                 model: db.Stage
-
-            }
+            },
+            attributes: ["ApplicationId"] // specify cols to send back (foreignkey)
         }).then(applications => {
-            res.render("index", applications);
+            res.json(applications);
         }).catch(err => {
             console.log(err);
             res.send("No data found");
@@ -26,24 +26,6 @@ module.exports = function (app) {
             
     });
 
-//    Find all applications where the req.body has the objects to search
-//    {User.id: "id", Company.name: "name"}  OR {User.id: "id", Application.title: "title"}
-    app.get("/api/application/", (req, res) => {
-        db.Application.findAll({
-            where: req.body,
-            include: {
-                model: db.Company,
-                model: db.Contact,
-                model: db.Source,
-                model: db.Stage,
-                model: db.User
-            },
-            
-        }).then(appliactions => {
-            res.render("index", applications)
-        });
-
-    });
 
     // Get Unique Application
     app.get("/api/application/:id", (req, res) => {
@@ -66,7 +48,7 @@ module.exports = function (app) {
             
     });
 
-     // Get Unique Application
+     // Get Unique Application Stages
      app.get("/api/application/:id/stages", (req, res) => {
         db.Stages.findAll({
             where: {
@@ -93,10 +75,11 @@ module.exports = function (app) {
     });
 
     // Update Application
-    app.put("/api/application/:id", (req, res) => {
+    app.put("/api/user/:userId/application/:applicationId", (req, res) => {
+        // check user authentication userId -> 403 if not
         db.Application.update({
             where: {
-                id: req.params.id
+                id: req.params.applicationId
             },
         }).then(() => {
             res.json("Completed");
@@ -107,7 +90,7 @@ module.exports = function (app) {
     });
 
     // Delete Application
-    app.delete("/api/application/:id", (req, res) => {
+    app.delete("/api/user/:userId/application/:applicationId", (req, res) => {
         db.Application.destroy({
             where: {
                 id: req.params.id
