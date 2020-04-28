@@ -13,12 +13,12 @@ module.exports = function (app) {
         });
     });
 
-    // find one compnay with all the associated table fields
-    app.get("/api/company/:name", (req, res) => {
+    // find one compnay with all the associated applications
+    app.get("/api/company/:id", (req, res) => {
         db.Company.findAll({
             where: 
             {
-                name: req.params.name
+                name: req.params.id
             },
             include: 
             {
@@ -37,8 +37,12 @@ module.exports = function (app) {
         });
     });
 
-    app.get("/api/company/all", (req, res) => {
+    // find all company names and id that match the user
+    // this could be a drop down to select a list of companies and
+    // then pull all the applications associated with that company
+    app.get("/api/company/:id/all", (req, res) => {
         db.Company.findAll({
+            where: {UserId: req.params.id},
             include: 
             {
                 model: db.Application,
@@ -55,6 +59,5 @@ module.exports = function (app) {
             res.send('No data found');
         })
     })
-    
 
 }
