@@ -7,7 +7,8 @@ module.exports = function (app) {
     app.get("/api/user/:userId/source/filter/sourceType/:source", (req, res) => {
         db.Source.findAll({
             where: {
-                userId: req.params.userId, source: req.params.source
+                userId: req.params.userId, 
+                source: req.params.source
             },
         }).then(sources => {
             res.json(sources);
