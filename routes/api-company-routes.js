@@ -7,15 +7,6 @@ module.exports = function (app) {
         db.Company.findAll({
             where: {
                 UserId: req.params.userId
-            },
-            include: 
-            {
-                model: db.Application,
-                    include:{ 
-                        model: db.Contact,
-                        model: db.Source,
-                        model: db.Stage
-                    }
             }
         }).then(companies => {
             res.json(companies);
@@ -32,15 +23,6 @@ module.exports = function (app) {
             {
                 UserId: req.params.userId,
                 name: req.params.companyName
-            },
-            include: 
-            {
-                model: db.Application,
-                    include:{ 
-                        model: db.Contact,
-                        model: db.Source,
-                        model: db.Stage
-                    }
             }
         }).then(company => {
             res.render("application", company);
