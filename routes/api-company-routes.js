@@ -25,7 +25,7 @@ module.exports = function (app) {
                 name: req.params.companyName
             }
         }).then(company => {
-            res.render("application", company);
+            res.json(company);
         }).catch(err => {
             console.log(err);
             res.send('No data found');
