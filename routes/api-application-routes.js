@@ -8,15 +8,15 @@ module.exports = function (app) {
 
     // Get All Applications where the AJAX request includes the userId in the body {userId: ##}
     app.get("/api/user/:id/application/all", (req, res) => {
-        db.User.findOne({
-            where: {id: req.params.id},
+        db.Application.findAll({
+            where: {UserId: req.params.id},
             include: {
                 model: db.Company,
                 model: db.Contact,
                 model: db.Source,
                 model: db.Stage
-            },
-            attributes: ["ApplicationId"] // specify cols to send back (foreignkey)
+            }
+            // attributes: ["ApplicationId"] 
         }).then(applications => {
             res.json(applications);
         }).catch(err => {
@@ -40,7 +40,7 @@ module.exports = function (app) {
                 model: db.Stage
             }
         }).then(application => {
-            res.render("index", application);
+            res.json(application);
         }).catch(err => {
             console.log(err);
             res.send("No data found");
@@ -55,7 +55,7 @@ module.exports = function (app) {
                 ApplicationId: req.params.id
             },
         }).then(stages => {
-            res.render("index", stages);
+            res.json(stages);
         }).catch(err => {
             console.log(err);
             res.send(false);

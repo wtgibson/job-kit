@@ -7,12 +7,20 @@
  DELETE // DON'T NEED
 
 # APPLICATION
-// get all applications for a userid
-// get one application for a userid and company
+Get all applications for a userid
+
+Get all applications based on the object passed to req.body
+    db.Application.get({
+    where: req.body}).then(applications=>{res.render("index", applications)});
+- all applications for a given db.User.id: "#", && db.Company.name : "name"
+- all applications for a given db.User.id
+
+Get one application for a userid and company
     findAll({
         where: company = req.body.company
 })
-// get one application for a userid and titl
+
+Get one application for a userid and title
 
 
 
