@@ -1,7 +1,9 @@
 $(function () {
-    $.ajax("/api/user/1", {
+    console.log(`loading using the profile data using this id: ${userObj} `)
+    $.ajax("/api/user/"+globalUserID, {
         type: "GET",
     }).then(function (data) {
+        
         $("#user-profile").append(data)
     })
 

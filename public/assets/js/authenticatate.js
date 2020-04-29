@@ -56,8 +56,10 @@ $("#login-button").on("click", function (event) {
           type: "PUT",
           data: loginData,
         }).then(res => {
-          console.log(res);
-        window.location.replace("/applications");
+          // stores the user id to the globalUserID
+          globalUserID = res
+          // reroutes the user to the applications page once they have been authenticated
+          window.location.replace("/applications");
         });
 
       })
