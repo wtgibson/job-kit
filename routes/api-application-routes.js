@@ -20,38 +20,29 @@ module.exports = function (app) {
             ]
         }).then(applications => {
             // res.json(applications);
+            // // console.log("-----------------/n", applications[0])
+            // // var parsedApps = JSON.parse(applications[0])
+            var arrOfObjs = []
+
+            applications.forEach(element => arrOfObjs.push({
+                id: element.dataValues.id,
+                title: element.dataValues.title,
+                type: element.dataValues.type,
+                industry: element.dataValues.industry,
+                zipCode: element.dataValues.zipCode,
+                description: element.dataValues.description,
+                salaryRange: element.dataValues.salaryRange,
+                dateApplied: element.dataValues.dateApplied,
+                rating: element.dataValues.rating,
+                createdAt: element.dataValues.createdAt,
+                company: element.dataValues.company,
+                // linktoPosting: element.dataValues.sources.linktoPosting
+            }))
+
+            console.log(arrOfObjs)
             var x = {
                 layout: false,
-                applications: [
-                {
-                    id: 1,
-                    title: 'Angular Full Stack Software Engineer',
-                    type: 'FTE or PTE',
-                    description: 'Mean Stack Software Engineer',
-                    industry: 'Oil and Energy',
-                    zipCode: '94536',
-                    salaryRange: '3',
-                    dateApplied: '03-02-2020',
-                    rating: "2",
-                    createdAt: '2020 - 04 - 28T15: 41: 53.000Z',
-                    updatedAt: '2020 - 04 - 28T15: 41: 53.000Z',
-                    UserId: "1",
-                },
-                {
-                    id: 2,
-                    title: 'Angular Software Engineer',
-                    type: 'FTE or PTE',
-                    description: 'Mean are Engineer',
-                    industry: 'Oil and Energy',
-                    zipCode: '94536',
-                    salaryRange: '3',
-                    dateApplied: '03-02-2020',
-                    rating: "2",
-                    createdAt: '2020 - 04 - 28T15: 41: 53.000Z',
-                    updatedAt: '2020 - 04 - 28T15: 41: 53.000Z',
-                    UserId: "1",
-                }
-            ]}
+                applications: arrOfObjs}
 
             res.render("partials/jobs/application-block",x)
 
