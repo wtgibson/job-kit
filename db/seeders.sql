@@ -1,18 +1,16 @@
 USE jobkitDB;
 
-INSERT INTO Users (email, password, name, zipCode, jobTitle, createdAt, updatedAt)
+INSERT INTO Users (email, name, zipCode, jobTitle, createdAt, updatedAt)
 VALUES 
-    ("joe.smith@email.com", "notSecure", "Joe Smith", "95103","Software Engineer", NOW(), NOW()),
-    ("betty.brown@email.com", "surelySimple", "Betty Brown", "94122", "Engineer Manager", NOW(), NOW()),
-    ("jojo@email.com","password", "JoJo", "94011", "Full Stack Developer", NOW(), NOW());
+    ("joe.smith@email.com", "Joe Smith", "95103","Software Engineer", NOW(), NOW()),
+    ("betty.brown@email.com", "Betty Brown", "94122", "Engineer Manager", NOW(), NOW()),
+    ("jojo@email.com", "JoJo", "94011", "Full Stack Developer", NOW(), NOW());
 
 INSERT INTO Companies (name, zipCode, URL, createdAt, updatedAt, UserId)
 VALUES ("John Crane", "60605", "https://www.johncrane.com/about/press/news/2013/john-crane-moves-headquarters-to-downtown-chicago", NOW(), NOW(), 1),
     ("Gorgias", "", "https://www.gorgias.com/", NOW(), NOW(), 1),
     ("Citizens Bank", "", "https://www.citizensbank.com/", NOW(), NOW(), 2),
     ("Recharge Payments", "", "https://rechargepayments.com/about", NOW(), NOW(), 3);
-
-
 
 INSERT INTO Applications (title, type, description, industry, zipCode, salaryRange, dateApplied, rating, createdAt, updatedAt, UserId)
 VALUES ("Angular Full Stack Software Engineer", "FTE or PTE", "Mean Stack Software Engineer", "Oil and Energy", "94536", 3, "03-02-2020", 2, NOW(), NOW(), 1),

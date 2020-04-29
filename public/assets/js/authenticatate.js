@@ -43,6 +43,7 @@ $("#login-button").on("click", function (event) {
       .then(function (data) {
         // console log the returned data
         console.log(`authentiated user: ${data.user.email}`);
+        console.log(data);
 
         // let's clear the input fields
         email.val("");

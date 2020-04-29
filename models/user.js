@@ -12,20 +12,20 @@ module.exports = function (sequelize, DataTypes) {
                 isEmail: true
             }
         },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [6]
-            }
-        },
+        // password: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false,
+        //     validate: {
+        //         len: [6]
+        //     }
+        // },
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         zipCode: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 len:[5,5]
             }
