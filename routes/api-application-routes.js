@@ -5,14 +5,37 @@ module.exports = function (app) {
     // Get All Applications
     app.get("/api/user/:id/application/all", (req, res) => {
         db.Application.findAll({
-            where: { UserId: req.params.id },
-            include: {
-                model: db.Company,
-                model: db.Contact,
-                model: db.Source,
-                model: db.Stage
-            }
+            where: {
+                UserId: req.params.id
+            },
+            include: [
+                {
+                    model: db.Company,
+                    include:
+                        [db.Contact]
+                },
+                { model: db.Contact },
+                { model: db.Source },
+                { model: db.Stage }
+            ]
             // attributes: ["ApplicationId"] 
+        }).then(applications => {
+            res.json(applications);
+            console.log(applications)
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+
+    });
+
+    // Get All Application - Title, Type, Industry,  Zipcode, Rating
+    app.get("/api/user/:id/application/:field", (req, res) => {
+        db.Application.findAll({
+            where: {
+                UserId: req.params.id
+            },
+            attributes: [req.params.field]
         }).then(applications => {
             res.json(applications);
             console.log(applications)
@@ -29,12 +52,16 @@ module.exports = function (app) {
             where: {
                 id: req.params.applicationId
             },
-            include: {
-                model: db.Company,
-                model: db.Contact,
-                model: db.Source,
-                model: db.Stage
-            }
+            include: [
+                {
+                    model: db.Company,
+                    include:
+                        [db.Contact]
+                },
+                { model: db.Contact },
+                { model: db.Source },
+                { model: db.Stage }
+            ]
         }).then(application => {
             res.json(application);
         }).catch(err => {
@@ -46,7 +73,7 @@ module.exports = function (app) {
 
     // Create Application
     app.post("/api/application", (req, res) => {
-        db.Application.create(req.body, { 
+        db.Application.create(req.body, {
         }).then((application) => {
             res.send(`Application for ${application.dataValues.title}, has been created`)
         }).catch(err => {
@@ -56,9 +83,9 @@ module.exports = function (app) {
     });
 
     // Update Application
-    app.put("/api/user/:userId/application/:applicationId", (req, res) => {
+    app.put("/api/application/:applicationId", (req, res) => {
         // check user authentication userId -> 403 if not
-        db.Application.update({
+        db.Application.update(req.body, {
             where: {
                 id: req.params.applicationId
             },
@@ -71,13 +98,14 @@ module.exports = function (app) {
     });
 
     // Delete Application
-    app.delete("/api/user/:userId/application/:applicationId", (req, res) => {
+    app.delete("/api/application/:applicationId", (req, res) => {
         db.Application.destroy({
             where: {
                 id: req.params.applicationId
             },
-        }).then(() => {
-            res.send(true);
+        }).then((rowsDeleted) => {
+            // Check that rows were actually deleted
+            rowsDeleted ? res.send(true) : res.send(false)
         }).catch(err => {
             console.log(err);
             res.send(false);
