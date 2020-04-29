@@ -1,19 +1,19 @@
-var firebaseConfig = {
-    apiKey: "AIzaSyCOL2GHyCkjocrhm2VJdOZUP_1eZMK9wVE",
-    authDomain: "jobkit-project-2.firebaseapp.com",
-    databaseURL: "https://jobkit-project-2.firebaseio.com",
-    projectId: "jobkit-project-2",
-    storageBucket: "jobkit-project-2.appspot.com",
-    messagingSenderId: "978184031668",
-    appId: "1:978184031668:web:403d06d916e942e6ee76e1",
-    measurementId: "G-TKMGLB01WM"
-};
+// var firebaseConfig = {
+//     apiKey: "AIzaSyCOL2GHyCkjocrhm2VJdOZUP_1eZMK9wVE",
+//     authDomain: "jobkit-project-2.firebaseapp.com",
+//     databaseURL: "https://jobkit-project-2.firebaseio.com",
+//     projectId: "jobkit-project-2",
+//     storageBucket: "jobkit-project-2.appspot.com",
+//     messagingSenderId: "978184031668",
+//     appId: "1:978184031668:web:403d06d916e942e6ee76e1",
+//     measurementId: "G-TKMGLB01WM"
+// };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// firebase.initializeApp(firebaseConfig);
 
 // event listener for submit button
-$(".#signup-button").on("click", function (event) {
+$("#signup-button").on("click", function (event) {
     // prevent form submit button from doing default things like sending information and refreshing the page
     event.preventDefault();
   
@@ -23,6 +23,7 @@ $(".#signup-button").on("click", function (event) {
     var email = $("#email");
     var password = $("#password");
     var confirm = $("#confirm");
+    console.log(email.val());
   
     // now we validate them
   
@@ -52,10 +53,11 @@ $(".#signup-button").on("click", function (event) {
   
     // if all validations check out
     else {
+      console.log("authenticating with Firebase");
       // use firebase to register
       firebase.auth().createUserWithEmailAndPassword(email.val(), password.val())
         // after user is registered
-        .then(function (data) {
+        .then(function (resp) {
           // user is now registered, so...
           // let's clear the input fields
           email.val("");
@@ -64,11 +66,22 @@ $(".#signup-button").on("click", function (event) {
           confirm.val("");
           confirm.attr("placeholder", "");
             
-          console.log("==== signup ====");
-          console.log(data);
+          console.log("==== signedup ====");
+          console.log(resp);
           
+          let user = {email: resp.user.email};
+
+          $.ajax("/api/signup", {
+            type: "POST",
+            data: user,
+          }).then(res => {
+            console.log(res);
+            globalUserId = res;
+            window.location.replace("/profile");
+          });
+     
           // then tell them
-          res.render('login');
+          // location.assign("/login");
         })
         // error handling
         .catch(function (error) {

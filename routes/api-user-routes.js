@@ -33,8 +33,8 @@ module.exports = function (app) {
     // Signup a new authenticated user
     app.post("/api/signup", (req, res) => {
         db.User.create(req.body)
-            .then(() => {
-                res.redirect(307, "/api/login");
+            .then((user) => {
+                res.json(user.id);
             }).catch(err => {
                 console.log(err)
                 res.status(401).json(err);
