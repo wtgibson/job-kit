@@ -1,27 +1,60 @@
+#navbar-logo {
+	width: 30%;
+	/* height: 10%; */
+}
+
+#index-logo {
+	width: 20%;
+	/* height: 10%; */
+}
+
+#login-logo {
+	width: 75%;
+	/* height: 10%; */
+}
+
+textarea {
+	font-size: 1.25rem;
+}
+
+textarea::placeholder {
+	font-style: italic;
+	text-align: middle; 
+}
+
 /* Background Image Media Queries */
-body.login {
+body.background {
 	background-image: url('https://wallpaperaccess.com/full/656665.jpg');
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-attachment: fixed;
 }
+
+hr{ 
+	height: 2px;
+	color: #3e4444;
+	background-color: #3e4444;
+	border: none;
+}
+
 @media screen and (min-width: 640px){
-	body.login {
+	body.background {
 		background-image: url('https://wallpaperaccess.com/full/656665.jpg');
 	}
 }	
 @media screen and (min-width: 960px){
-	body.login {
+	body.background {
 		background-image: url('https://wallpaperaccess.com/full/656665.jpg');
 	}
 }	
 @media screen and (min-width: 1200px){
-	body.login {
+	body.background {
 		background-image: url('https://wallpaperaccess.com/full/656665.jpg');
 	}
 }	
 @media screen and (min-width: 1600px){
-	body.login {
+	body.background {
 		background-image: url('https://wallpaperaccess.com/full/656665.jpg');
 	}
 }
