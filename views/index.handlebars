@@ -2,17 +2,21 @@
 <header id="site-head">
     <div class="uk-container uk-container-expand uk-background-secondary uk-padding-small">
         <div class="uk-grid uk-grid-medium uk-flex uk-flex-middle" data-uk-grid>
-            <div class="uk-width-auto">
-                <a href="#" class="uk-logo" title=""><img src="img/logo.svg" alt=""></a>
+			<div class="uk-width-1-6 uk-margin-large-left">
+                <a href="/" class="uk-logo" title=""><img id="navbar-logo" src="https://dewey.tailorbrands.com/production/brand_version_mockup_image/852/2922780852_17e18edb-4281-4a6c-8a36-9f026bf29cf2.png?cb=1588108119" alt="jobkit-logo"></a>
             </div>
             <div class="uk-width-expand">
             </div>
             <div class="uk-width-auto">
                 <ul class="uk-subnav" data-uk-margin>
-					<li class=""><a id="nav-app" href="/applications">Applications</a></li>
+					<li><a id="nav-home" class="uk-text-bold uk-text-primary" id="home" href="/">Home</a></li>
+					<li></li>
+					<li><a id="nav-app" class="" href="/applications">Applications</a></li>
 					<li><a id="nav-jobs" href="/jobs">Jobs</a></li>
 					<li><a id="nav-profile" href="/profile">Profile</a></li>
-                </ul>
+					<li></li>
+					<li><a id="nav-login" class="uk-text-bold uk-text-success" id="login" href="/login">Login</a></li>
+				</ul>
             </div>
         </div>
     </div>
@@ -22,96 +26,58 @@
 
 <!-- /overlay -->
 
-<section class="uk-section-large uk-preserve-color">
+<section class="uk-section uk-preserve-color uk-margin-large-top">
     <div class="uk-container">
         
-        <br>
-
-        <div class="uk-panel uk-dark">
-            <h1>Welcome to JobKit!</h1>
+        <div class="uk-panel uk-dark uk-text-center">
+            <img id="index-logo" class="uk-center" src="https://dewey.tailorbrands.com/production/brand_version_mockup_image/852/2922780852_17e18edb-4281-4a6c-8a36-9f026bf29cf2.png?cb=1588108119" alt="jobkit-logo">
         </div>
 
         <br>
 
         <div class="uk-grid-match uk-child-width-expand@m" uk-grid>
             <div>
-                <div class="uk-card uk-card-default uk-card-body">
-                    <p>Company Details</p>
+                <div class="uk-card uk-card-secondary uk-card-body uk-text-center uk-border-rounded">
+                    <h3 class="uk-text-lead">
+                        JobKit is a cloud-based application enabling users to actively track and manage jobs they’ve
+                        applied to along with specific details and information that is pertinent to their job hunt,
+                        ultimately giving them the best opportunity at landing their dream job
+                    </h3>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<section class="uk-preserve-color uk-margin-large-bottom">
-    <div class="uk-section-large">
-
-        <div class="uk-grid-match uk-child-width-expand@m" uk-grid>
-            <div>
-                <div class="uk-card uk-card-default uk-card-body">
-                    <div class="uk-flex uk-flex-middle uk-flex-center">
-                        <button class="uk-button-large uk-button-secondary">Applications</button>
-                    </div>
-                    <h3 class="uk-text-center">Tracked Job Applications</h3>
-                </div>
-            </div>
-            <div>
-                <div class="uk-card uk-card-default uk-card-body">
-                    <div class="uk-flex uk-flex-middle uk-flex-center">
-                        <button class="uk-button-large uk-button-secondary">Jobs</button>
-                    </div>
-                    <h3 class="uk-text-center">Open Job Opportunties</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="uk-preserve-color uk-margin-large-bottom">
+<section class="uk-preserve-color uk-margin-bottom">
     <div class="uk-section">
         <div class="uk-container">
-            <div class="uk-panel uk-dark">
-                <h1>Create Account Placeholder</h1>
-            </div>
-
-            <form class="create-form" style="background-color: white; color: black">
-                <div class="form-group" id="app-qs">
-                    <label for="app-title">App Title:</label>
-                    <input type="text" id="app-title" name="app-id" placeholder="">
-                    {{!-- should be a radio button --}}
-                    <label for="app-type">Type:</label>
-                    <input type="text" id="app-type" name="app-type" placeholder="FTE">
-
-                    <label for="app-desc">Description:</label>
-                    <input type="text" id="app-desc" name="app-desc" placeholder="">
-
-                    <label for="app-industry">Industry:</label>
-                    <input type="text" id="app-industry" name="app-industry" placeholder="tech">
-
-                    <label for="app-zipCode">Zipcode:</label>
-                    <input type="text" id="app-zipCode" name="app-zipCode" placeholder="">
-
-                    <label for="app-salary">Salary:</label>
-                    <input type="text" id="app-salary" name="app-salary" placeholder="0">
-
-                    {{!-- should probably be a date type --}}
-                    <label for="app-applied">Date Applied:</label>
-                    <input type="text" id="app-applied" name="app-applied" placeholder="">
-                    {{!-- should probably be radio button with a few options --}}
-                    <label for="app-rating">Rating:</label>
-                    <input type="text" id="app-rating" name="app-rating" placeholder="">
+            <div class="uk-grid-match uk-child-width-expand@m" uk-grid>
+                <div>
+                    <div class="uk-card uk-card-secondary uk-card-body uk-border-rounded">
+                        <div class="uk-flex uk-flex-middle uk-flex-center">
+                            <button class="uk-button-large uk-button-secondary uk-border-rounded" href="/applications">Applications</button>
+                        </div>
+                        <h3 class="uk-text-center">Tracked Job Applications</h3>
+                    </div>
                 </div>
-                <button type="submit" id="app-add"> Add Application </button>
-            </form>
+                <div>
+                    <div class="uk-card uk-card-secondary uk-card-body uk-border-rounded">
+                        <div class="uk-flex uk-flex-middle uk-flex-center">
+                            <button class="uk-button-large uk-button-secondary uk-border-rounded" href="/jobs">Jobs</button>
+                        </div>
+                        <h3 class="uk-text-center">Open Job Opportunties</h3>
+                    </div>
+                </div>
+            </div>
         </div>
-        
     </div>
-</section>    
+</section>
 
 </div>
 <!--FOOTER-->
 <footer id="site-foot" class="uk-section uk-section-secondary uk-section-xsmall">
     <div class="uk-container uk-text-small uk-text-center">
-        Made with Love by JobKit
+        Made with ❤️ by JobKit
     </div>
 </footer>
 <!--/FOOTER-->

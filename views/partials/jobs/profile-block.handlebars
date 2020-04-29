@@ -1,47 +1,47 @@
 <div class="profile-card" id="profile">
-				<div class="uk-card uk-card-large uk-card-secondary">
-					<div class="uk-card-header">
-						<div class="uk-grid uk-grid-small uk-text-small" data-uk-grid>
-							<div class="uk-width-expand">
-								<span class="cat-txt">User Profile</span>
-							</div>
-							<div class="uk-width-1-2 uk-text-right uk-text-muted">
-								<span data-uk-icon="icon:clock; ratio: 0.8"></span> Date Joined : {{createdAt}}
-							</div>
-						</div>
-					</div>
-					<div class="uk-card-body uk-padding-remove-bottom">
-						<ul uk-accordion="multiple: true">
-							<li class="uk-open">
-								<a class="uk-accordion-title" href="#">Name: {{name}} </a>
-								<div class="uk-accordion-content">
-									<textarea name="" id="" cols="40" rows="3"></textarea>
-								</div>
-								<hr>
-							</li>
-							<li class="uk-open">
-								<a class="uk-accordion-title" href="#">Desired Job Title: {{jobTitle}}</a>
-								<div class="uk-accordion-content">
-									<textarea name="" id="" cols="40" rows="3"></textarea>
-								</div>
-								<hr>
-							</li>
-							<li class="uk-open">
-								<a class="uk-accordion-title" href="#">Location: {{zipCode}}</a>
-								<div class="uk-accordion-content">
-									<textarea name="" id="" cols="40" rows="3"></textarea>
-								</div>
-								<hr>
-							</li>
-						</ul>
-					</div>
-					<div class="uk-card-footer">
-						<div class="uk-grid uk-grid-small uk-grid-divider uk-flex uk-flex-middle" data-uk-grid>
-							<div class="uk-width-expand uk-text-small">
-								<button
-									class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Save</button>
-							</div>
-						</div>
-					</div>
+	<div class="uk-card uk-card-large uk-card-secondary uk-border-rounded">
+		<div class="uk-card-header">
+			<div class="uk-grid uk-grid-small uk-text-small" data-uk-grid>
+				<div class="uk-width-expand">
+					<span class="cat-txt">User Profile</span>
+				</div>
+				<div class="uk-width-1-2 uk-text-right uk-text-muted">
+					<span data-uk-icon="icon:clock; ratio: 0.8"></span> Date Joined : {{createdAt}}
 				</div>
 			</div>
+		</div>
+		<div class="uk-card-body uk-padding-remove-bottom">
+			<ul uk-accordion="multiple: true">
+				<li class="uk-open">
+					<a class="uk-accordion-title" href="#">Name: {{name}} </a>
+					<div class="uk-accordion-content">
+						<textarea name="" id="" class="uk-width-expand uk-border-rounded" rows="2" placeholder=" {{name}}"></textarea>
+					</div>
+					<hr>
+				</li>
+				<li class="uk-open">
+					<a class="uk-accordion-title" href="#">Desired Job Title: {{jobTitle}}</a>
+					<div class="uk-accordion-content">
+						<textarea name="" id="" class="uk-width-expand uk-border-rounded" rows="2" placeholder=" {{jobTitle}}"></textarea>
+					</div>
+					<hr>
+				</li>
+				<li class="uk-open">
+					<a class="uk-accordion-title" href="#">Location: {{zipCode}}</a>
+					<div class="uk-accordion-content">
+						<textarea name="" id="" class="uk-width-expand uk-border-rounded" rows="2" placeholder=" {{zipCode}}"></textarea>
+					</div>
+					<hr>
+				</li>
+			</ul>
+		</div>
+		<div class="uk-card-footer">
+			<div class="uk-grid uk-grid-small uk-grid-divider uk-flex uk-flex-middle" data-uk-grid>
+				<div class="uk-width-expand uk-text-small">
+					<button
+						class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-border-rounded">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
