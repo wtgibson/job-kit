@@ -17,6 +17,10 @@ module.exports = function (app) {
         res.render("login");
     });
 
+    app.get("/signup", (req,res) => {
+        res.render("signup");
+    });
+
     // send default page to all routes that are undefined
     app.get("/profile", (req, res) => {
         res.render("profile")
