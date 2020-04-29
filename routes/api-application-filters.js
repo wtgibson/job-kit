@@ -2,26 +2,6 @@ var db = require("../models");
 
 module.exports = function (app) {
 
-    // Get All Field
-    // app.get("/api/user/:userId/application/filter/:field", (req, res) => {
-    //     db.Application.findAll({
-    //         where: {userId: req.params.userId},
-    //         include: {
-    //             model: db.Company,
-    //             model: db.Contact,
-    //             model: db.Source,
-    //             model: db.Stage
-    //         },
-    //         attributes: [req.params.field]
-    //     }).then(applications => {
-    //         res.json(applications);
-    //     }).catch(err => {
-    //         console.log(err);
-    //         res.send("No data found");
-    //     });
-
-    // });
-
     // Get All Apps with Title
     app.get("/api/user/:userId/application/filter/title/:title", (req, res) => {
         db.Application.findAll({
