@@ -16,7 +16,7 @@ module.exports = function (app) {
         // search User table for one item where email & password matches req.body
         db.User.findOne({
             where: req.body
-        }).then(user=> {
+        }).then(user => {
             // send user id back to client
             res.json(user.id);
         }).catch(err => {
@@ -51,15 +51,15 @@ module.exports = function (app) {
                     id: req.params.id
                 }
                 // attributes: ["id", "email", "name"]
-        }).then(user => {
-            res.json({
-                email: req.user.email,
-                id: req.user.id,
-                name: req.user.name,
-                zipCode: req.user.zipCode,
-                jobTitle: req.user.jobTitle
+            }).then(user => {
+                res.json({
+                    email: req.user.email,
+                    id: req.user.id,
+                    name: req.user.name,
+                    zipCode: req.user.zipCode,
+                    jobTitle: req.user.jobTitle
+                });
             });
-        });
         };
     });
 
@@ -76,7 +76,15 @@ module.exports = function (app) {
                 // one matches for the email
                 res.send("Login Failed");
             } else {
-                res.json(user);
+                // res.json(user)
+                res.render("partials/jobs/profile-block", {
+                    layout: false,
+                    createdAt: user.createdAt,
+                    name: user.name,
+                    zipCode: user.zipCode,
+                    jobTitle: user.jobTitle,
+                });
+
             }
         });
     });
@@ -85,7 +93,7 @@ module.exports = function (app) {
     app.put("/api/user/:id", (req, res) => {
         // update a row in User table where id matches
         db.User.update(req.body, {
-            where: 
+            where:
             {
                 id: req.params.id
             }
@@ -104,5 +112,5 @@ module.exports = function (app) {
         res.redirect("/");
     })
 
-// END of module
+    // END of module
 }
