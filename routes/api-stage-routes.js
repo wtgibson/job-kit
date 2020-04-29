@@ -66,8 +66,8 @@ module.exports = function (app) {
             where: {
                 id: req.params.stageId
             },
-        }).then(() => {
-            res.send(true);
+        }).then((rowsDeleted) => {
+            rowsDeleted ? res.send(true) : res.send(false);
         }).catch(err => {
             console.log(err);
             res.send(false);

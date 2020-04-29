@@ -123,7 +123,7 @@ module.exports = function (app) {
             },
         }).then((rowsDeleted) => {
             // Check that rows were actually deleted
-            rowsDeleted ? res.send(true) : res.send(false)
+            rowsDeleted ? res.send(true) : res.send(false);
         }).catch(err => {
             console.log(err);
             res.send(false);
