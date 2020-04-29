@@ -11,7 +11,7 @@ module.exports = function (app) {
     //     res.json(req.user);
     // });
 
-    // Route to use for login when not utilizing passport.
+    // Login & return the ID for the authenticated user
     app.put("/api/login", (req, res) => {
         // search User table for one item where email & password matches req.body
         db.User.findOne({
@@ -19,6 +19,7 @@ module.exports = function (app) {
         }).then(user => {
             // send user id back to client
             res.json(user.id);
+            res.render('index');
         }).catch(err => {
             // error
             console.log(err);
@@ -27,7 +28,7 @@ module.exports = function (app) {
         })
     })
 
-    // Route to use to signup a new user without passport
+    // Signup a new authenticated user
     app.post("/api/signup", (req, res) => {
         db.User.create(req.body)
             .then(() => {
@@ -38,7 +39,7 @@ module.exports = function (app) {
             });
     });
 
-    // Get user profile with Passport Authtentication
+    // Get user profile
     app.get("/api/userProfile", function (req, res) {
         if (!req.user) {
             // The user is not logged in, send back an empty object
@@ -63,7 +64,7 @@ module.exports = function (app) {
         };
     });
 
-    // Get user profile without Passport
+    // Get user profile
     app.get("/api/user/:id", (req, res) => {
         db.User.findOne({
             where: {
@@ -71,22 +72,15 @@ module.exports = function (app) {
             }
             // attributes: ["id", "email", "name"]
         }).then(user => {
-            if (user.length > 0 || user === undefined) {
-                // Send a failure statement if there are more
-                // one matches for the email
-                res.send("Login Failed");
-            } else {
-                // res.json(user)
-                // res render is calling on the jobs profile partial and returning html with the information provided
-                res.render("partials/jobs/profile-block", {
-                    layout: false,
-                    createdAt: user.createdAt,
-                    name: user.name,
-                    zipCode: user.zipCode,
-                    jobTitle: user.jobTitle,
-                });
-
-            }
+            // res.json(user)
+            // res render is calling on the jobs profile partial and returning html with the information provided
+            res.render("partials/jobs/profile-block", {
+                layout: false,
+                createdAt: user.createdAt,
+                name: user.name,
+                zipCode: user.zipCode,
+                jobTitle: user.jobTitle,
+            });
         });
     });
 
@@ -109,8 +103,8 @@ module.exports = function (app) {
 
     // route to logout
     app.get("/logout", (req, res) => {
-        req.logout();
-        res.redirect("/");
+        firebase.auth().signOut();;
+        res.render("login");
     })
 
     // END of module
