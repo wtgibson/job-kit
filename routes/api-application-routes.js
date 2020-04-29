@@ -9,51 +9,41 @@ module.exports = function (app) {
                 UserId: req.params.id
             },
             include: [
-                {
-                    model: db.Company,
-                    include:
-                        [db.Contact]
-                },
+                { model: db.Company },
                 { model: db.Contact },
+                { model: db.Stage },
                 { model: db.Source },
-                { model: db.Stage }
             ]
         }).then(applications => {
             // res.json(applications);
+            // // console.log("-----------------/n", applications[0])
+            // // var parsedApps = JSON.parse(applications[0])
+            var arrOfObjs = []
+
+            applications.forEach(element => arrOfObjs.push({
+                id: element.dataValues.id,
+                title: element.dataValues.title,
+                type: element.dataValues.type,
+                industry: element.dataValues.industry,
+                zipCode: element.dataValues.zipCode,
+                description: element.dataValues.description,
+                salaryRange: element.dataValues.salaryRange,
+                dateApplied: element.dataValues.dateApplied,
+                rating: element.dataValues.rating,
+                // createdAt: element.dataValues.createdAt,
+                // updatedAt: element.dataValues.updatesAt,
+                company: element.dataValues.company,
+                contacts: element.dataValues.contacts,
+                stages: element.dataValues.stages,
+                sources: element.dataValues.sources
+            }))
+
+            console.log(arrOfObjs)
             var x = {
                 layout: false,
-                applications: [
-                {
-                    id: 1,
-                    title: 'Angular Full Stack Software Engineer',
-                    type: 'FTE or PTE',
-                    description: 'Mean Stack Software Engineer',
-                    industry: 'Oil and Energy',
-                    zipCode: '94536',
-                    salaryRange: '3',
-                    dateApplied: '03-02-2020',
-                    rating: "2",
-                    createdAt: '2020 - 04 - 28T15: 41: 53.000Z',
-                    updatedAt: '2020 - 04 - 28T15: 41: 53.000Z',
-                    UserId: "1",
-                },
-                {
-                    id: 2,
-                    title: 'Angular Software Engineer',
-                    type: 'FTE or PTE',
-                    description: 'Mean are Engineer',
-                    industry: 'Oil and Energy',
-                    zipCode: '94536',
-                    salaryRange: '3',
-                    dateApplied: '03-02-2020',
-                    rating: "2",
-                    createdAt: '2020 - 04 - 28T15: 41: 53.000Z',
-                    updatedAt: '2020 - 04 - 28T15: 41: 53.000Z',
-                    UserId: "1",
-                }
-            ]}
+                applications: arrOfObjs}
 
-            res.render("partials/jobs/application-block",x)
+            res.render("partials/jobs/application-block", x)
 
         }).catch(err => {
             console.log(err);
@@ -85,14 +75,10 @@ module.exports = function (app) {
                 id: req.params.applicationId
             },
             include: [
-                {
-                    model: db.Company,
-                    include:
-                        [db.Contact]
-                },
+                { model: db.Company },
                 { model: db.Contact },
+                { model: db.Stage },
                 { model: db.Source },
-                { model: db.Stage }
             ]
         }).then(application => {
             res.json(application);
