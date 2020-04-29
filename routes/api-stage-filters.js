@@ -2,6 +2,7 @@ var db = require("../models");
 
 module.exports = function (app) {
     // Get All Stages with Current Stage
+    // * Filter by User
     app.get("/api/stage/filter/currentStage/:currentStage", (req, res) => {
         db.Stage.findAll({
             where: {
