@@ -1,4 +1,6 @@
 <!-- card -->
+{{#each applications}}
+				
 <div class="application-card" id="application{{id}}">
     <div class="uk-card uk-card-small uk-card-secondary">
         <div class="uk-card-header">
@@ -7,7 +9,7 @@
                     <span class="cat-txt">Job Application {{id}}</span>
                 </div>
                 <div class="uk-width-auto uk-text-right uk-text-muted">
-                    <span data-uk-icon="icon:clock; ratio: 0.8"></span> Date Applied 
+                    <span data-uk-icon="icon:clock; ratio: 0.8"></span> Date Applied: {{dateApplied}}
                 </div>
             </div>
         </div>
@@ -41,7 +43,7 @@
 
                     <p>Application Process & Method: </p>
                     <p>Resume Version: </p>
-                    <p>Rating: </p>
+                    <p>Rating: {{rating}}</p>
                     <p>Next Steps: </p>
 
                     <hr>
@@ -54,7 +56,7 @@
         <div class="uk-card-footer">
             <div class="uk-grid uk-grid-small uk-grid-divider uk-flex uk-flex-middle" data-uk-grid>
                 <div class="uk-width-expand uk-text-small">
-                    User Rating
+                    User Rating: {{rating}}
                 </div>
                 <div class="uk-width-expand uk-text-small">
                     Current Stage
@@ -67,3 +69,4 @@
     </div>
 </div>
 <!-- /card -->
+{{/each}}

@@ -19,24 +19,12 @@ $(function () {
 
     // function for saving job data
 
-    $("#nav-app").on("click", function () {
-        console.log("You updated the data")
-        $.ajax("/api/user/1/application/all", {
-            type: "GET"
-        }).then(function (data) {
-            console.log(JSON.stringify(data))
-        })
-    })
-
     $(document).on("click", ".link-to-ext", function () {
         event.preventDefault();
-        console.log("you clicked me!")
         var id = $(this).data("jobid");
         var title = $(`#title-${id}`).text();
         var desc = $(`#desc-${id}`).text();
 
-        console.log(title)
-        console.log(desc)
 
         var newApp = {
             title: title,
@@ -71,7 +59,6 @@ $(function () {
 
     $("#app-add").on("submit", function (event) {
         event.preventDefault();
-        console.log("You tried to add something")
 
         var newApp = {
             title: $("#app-title").val(),
@@ -86,8 +73,8 @@ $(function () {
         $.ajax("/api/application", {
             type: "POST",
             data: newApp,
-        }).then(function () {
-            console.log("successfully added the app")
+        }).then(function (response) {
+            console.log(response)
         })
     })
 });

@@ -1,3 +1,5 @@
+<script src="../assets/js/application.js"></script>
+
 <!--HEADER-->
 <header id="site-head">
 	<div class="uk-container uk-container-expand uk-background-secondary uk-padding-small">
@@ -17,11 +19,11 @@
 			</div>
 			<div class="uk-width-auto">
 				<ul class="uk-subnav" data-uk-margin>
-					<li id="nav-app" class=""><a href="/applications">Applications</a></li>
-					<li id="nav-jobs"><a href="/jobs">Jobs</a></li>
-					<li id="nav-profile"><a href="/profile">Profile</a></li>
+					<li class=""><a id="nav-app" href="/applications">Applications</a></li>
+					<li><a id="nav-jobs" href="/jobs">Jobs</a></li>
+					<li><a id="nav-profile" href="/profile">Profile</a></li>
 					<li></li>
-					<li id="nav-signout"><a class="uk-text-bold" id="signout" href="/">Logout</a></li>
+					<li><a id="nav-signout" class="uk-text-bold" id="signout" href="/">Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -36,10 +38,8 @@
 			data-uk-grid data-uk-sortable="handle: .drag-icon">
 
 			<div class="uk-grid uk-grid-medium uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l  uk-child-width-1-5@xl uk-grid-match js-filter"
-				data-uk-grid data-uk-sortable="handle: .drag-icon">
-				{{#each applications}}
-				{{> jobs/application-block}}
-				{{/each}}
+				data-uk-grid data-uk-sortable="handle: .drag-icon" id="app-append">
+			
 			</div>
 
 		</div>

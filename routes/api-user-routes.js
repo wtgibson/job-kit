@@ -77,6 +77,7 @@ module.exports = function (app) {
                 res.send("Login Failed");
             } else {
                 // res.json(user)
+                // res render is calling on the jobs profile partial and returning html with the information provided
                 res.render("partials/jobs/profile-block", {
                     layout: false,
                     createdAt: user.createdAt,

@@ -17,10 +17,44 @@ module.exports = function (app) {
                 { model: db.Contact },
                 { model: db.Source },
                 { model: db.Stage }
-            ] 
+            ]
         }).then(applications => {
-            res.json(applications);
-            console.log(applications)
+            // res.json(applications);
+            var x = {
+                layout: false,
+                applications: [
+                {
+                    id: 1,
+                    title: 'Angular Full Stack Software Engineer',
+                    type: 'FTE or PTE',
+                    description: 'Mean Stack Software Engineer',
+                    industry: 'Oil and Energy',
+                    zipCode: '94536',
+                    salaryRange: '3',
+                    dateApplied: '03-02-2020',
+                    rating: "2",
+                    createdAt: '2020 - 04 - 28T15: 41: 53.000Z',
+                    updatedAt: '2020 - 04 - 28T15: 41: 53.000Z',
+                    UserId: "1",
+                },
+                {
+                    id: 2,
+                    title: 'Angular Software Engineer',
+                    type: 'FTE or PTE',
+                    description: 'Mean are Engineer',
+                    industry: 'Oil and Energy',
+                    zipCode: '94536',
+                    salaryRange: '3',
+                    dateApplied: '03-02-2020',
+                    rating: "2",
+                    createdAt: '2020 - 04 - 28T15: 41: 53.000Z',
+                    updatedAt: '2020 - 04 - 28T15: 41: 53.000Z',
+                    UserId: "1",
+                }
+            ]}
+
+            res.render("partials/jobs/application-block",x)
+
         }).catch(err => {
             console.log(err);
             res.send("No data found");
