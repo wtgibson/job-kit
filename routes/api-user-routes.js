@@ -18,8 +18,10 @@ module.exports = function (app) {
             where: req.body
         }).then(user => {
             // send user id back to client
+            // res.render('applications');
+            console.log(user.id);
             res.json(user.id);
-            res.render('index');
+
         }).catch(err => {
             // error
             console.log(err);

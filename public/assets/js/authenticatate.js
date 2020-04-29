@@ -1,12 +1,12 @@
 var firebaseConfig = {
-    apiKey: "AIzaSyCOL2GHyCkjocrhm2VJdOZUP_1eZMK9wVE",
-    authDomain: "jobkit-project-2.firebaseapp.com",
-    databaseURL: "https://jobkit-project-2.firebaseio.com",
-    projectId: "jobkit-project-2",
-    storageBucket: "jobkit-project-2.appspot.com",
-    messagingSenderId: "978184031668",
-    appId: "1:978184031668:web:403d06d916e942e6ee76e1",
-    measurementId: "G-TKMGLB01WM"
+  apiKey: "AIzaSyCOL2GHyCkjocrhm2VJdOZUP_1eZMK9wVE",
+  authDomain: "jobkit-project-2.firebaseapp.com",
+  databaseURL: "https://jobkit-project-2.firebaseio.com",
+  projectId: "jobkit-project-2",
+  storageBucket: "jobkit-project-2.appspot.com",
+  messagingSenderId: "978184031668",
+  appId: "1:978184031668:web:403d06d916e942e6ee76e1",
+  measurementId: "G-TKMGLB01WM"
 };
 // Initialize Firebase
 
@@ -15,9 +15,9 @@ firebase.initializeApp(firebaseConfig);
 
 // event listener for login screen
 $("#login-button").on("click", function (event) {
-    event.preventDefault();
-    var email = $("#email");
-    var password = $("#password");
+  event.preventDefault();
+  var email = $("#email");
+  var password = $("#password");
 
   // validate the email/password credentials
 
@@ -50,101 +50,67 @@ $("#login-button").on("click", function (event) {
         password.attr("placeholder", "");
 
         // Log authenticated user into local DB
-        let loginData = {email:data.user.email};
+        let loginData = { email: data.user.email };
 
         $.ajax("/api/login", {
           type: "PUT",
           data: loginData,
-        }).then (res => {
-          let globalUserId = res;
+        }).then(res => {
+          console.log(res);
+        window.location.replace("/applications");
         });
-        
+
       })
       // User email/password did not match or is not in firebase
       .catch(function (error) {
-        if(error.code === "auth/user-not-found") {res.render("signup")}
-        console.log(error);
-
-        alert("Error: " + error.message)
+        console.log(error.code);
+        if (error.code === "auth/user-not-found") {
+          location.assign('/signup');
+        }
       })
-  }
-})
 
-// Event listener from Firebase that checks with user auth state changes
-firebase.auth().onAuthStateChanged(function (user) {
-    // if user is authenticated then...
-    if (user) {
+    // Event listener from Firebase that checks with user auth state changes
+    firebase.auth().onAuthStateChanged(function (user) {
+      // if user is authenticated then...
+      if (user) {
         // grantAccess
         grantAccess();
-    } else {
+      } else {
         // run the removeAccess function
         removeAccess();
+      }
+    })
+
+    // function to manipulate dom after user is authenticated
+    function grantAccess() {
+      // get currentUser information from firebase
+      var user = firebase.auth().currentUser;
+      // save that information to sessionStorage
+      sessionStorage.setItem("user", JSON.stringify(user))
+
+      // retrieve user info saved in database
+      // getUserInfo(user.uid)
+
+      // manipulate the dom
+
     }
-})
 
-// function to manipulate dom after user is authenticated
-function grantAccess() {
-    // get currentUser information from firebase
-    var user = firebase.auth().currentUser;
-    // save that information to sessionStorage
-    sessionStorage.setItem("user", JSON.stringify(user))
+    // function to manipulate dom after user is no longer authenticated
+    function removeAccess() {
+      // remove user from sessionStorage
+      sessionStorage.removeItem("user");
 
-    // retrieve user info saved in database
-    // getUserInfo(user.uid)
+      // manipulate the dom
+      // $("#setProfile").addClass("d-none");
+      // $("#signIn").removeClass("d-none");
+    }
 
-    // manipulate the dom
+    // Event listener for Sign Out button
+    $("#signout").on("click", function (event) {
+      event.preventDefault();
 
-}
-
-// function to manipulate dom after user is no longer authenticated
-function removeAccess() {
-    // remove user from sessionStorage
-    sessionStorage.removeItem("user");
-
-    // manipulate the dom
-    // $("#setProfile").addClass("d-none");
-    // $("#signIn").removeClass("d-none");
-}
-
-// Event listener for Sign Out button
-$("#signout").on("click", function (event) {
-    event.preventDefault();
-
-    // sign out of firebase
-    firebase.auth().signOut();
-})
-
-// // Event listener for Save Button
-// $(".save").on("click", function (event) {
-//     event.preventDefault();
-//     // retrieve input field values
-//     var username = $("#name").val().trim();
-//     var favoriteFood = $("#food").val().trim();
-
-//     // retrieve user from sessionStorage
-//     var user = JSON.parse(sessionStorage.getItem("user"))
-
-//     // write to firebase database
-//     database.ref("users/" + user.uid).set({
-//         username: username,
-//         favoriteFood: favoriteFood
-//     })
-//         // then retrieve from database
-//         .then(function () {
-//             // call getUserInfo function with user.uid as argument
-//             getUserInfo(user.uid);
-//         })
-// })
-
-// function to retrieve user info
-// function getUserInfo(uid) {
-//     database.ref("users/" + uid).once("value")
-//         .then(function (snapshot) {
-//             // console log the snapshot's value returned from database
-//             console.log(snapshot.val())
-
-//             // modify the dom to reflect new information
-//             $("#username").html(snapshot.val().username)
-//             $("#favoriteFood").html(snapshot.val().favoriteFood)
-//         })
-// }
+      // sign out of firebase
+      firebase.auth().signOut();
+    })
+  }
+});
