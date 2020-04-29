@@ -19,7 +19,7 @@ $(function () {
 
     // function for saving job data
 
-    $("#applications-nav").on("click", function () {
+    $("#nav-app").on("click", function () {
         console.log("You updated the data")
         $.ajax("/api/user/1/application/all", {
             type: "GET"

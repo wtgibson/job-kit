@@ -8,19 +8,20 @@
 				<form id="search-form" action="">
 					<div class="uk-inline uk-width-1-1">
 						<span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: search"></span>
-						<input class="uk-input uk-width-1-1 search-fld" type="text" placeholder="Search existing applications" autofocus>
+						<input class="uk-input uk-width-1-1 search-fld" type="text"
+							placeholder="Search existing applications" autofocus>
 						<a href="#" class="search-filter" data-uk-filter-control="[data-tags*='']" hidden>Search</a>
 					</div>
 				</form>
 			</div>
 			<div class="uk-width-auto">
 				<ul class="uk-subnav" data-uk-margin>
-					<li class=""><a href="/applications">Applications</a></li>
-					<li><a href="/jobs">Jobs</a></li>
-					<li><a href="/profile">Profile</a></li>
+					<li  class=""><a id="nav-app" href="/applications">Applications</a></li>
+					<li id="nav-jobs"><a href="/jobs">Jobs</a></li>
+					<li id="nav-profile"><a href="/profile">Profile</a></li>
 					<li></li>
-					<li><a class="uk-text-bold" id="signout" href="/">Logout</a></li>
-				</ul>						
+					<li id="nav-signout"><a class="uk-text-bold" id="signout" href="/">Logout</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>
@@ -31,11 +32,12 @@
 <section class="uk-section uk-section-small uk-padding-remove-bottom login uk-cover-container" uk-height-viewport>
 	<div class="uk-container uk-container-expand uk-margin-large-bottom">
 		{{!-- <div class="uk-grid uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l  uk-child-width-1-5@xl uk-grid-match js-filter" data-uk-grid data-uk-sortable="handle: .drag-icon"> --}}
-			<div id="github-jobs" class="uk-grid uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l  uk-child-width-1-5@xl uk-grid-match js-filter uk-grid-large uk-text-center">
-				{{#each jobs}}
-				{{> jobs/jobs-block}}
-				{{/each}}
-			</div>
+		<div id="github-jobs"
+			class="uk-grid uk-child-width-1-2@s uk-child-width-1-3@m uk-child-width-1-4@l  uk-child-width-1-5@xl uk-grid-match js-filter uk-grid-large uk-text-center">
+			{{#each jobs}}
+			{{> jobs/jobs-block}}
+			{{/each}}
+		</div>
 		{{!-- </div> --}}
 	</div>
 </section>
