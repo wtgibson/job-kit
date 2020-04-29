@@ -18,8 +18,6 @@ $("#login-button").on("click", function (event) {
     event.preventDefault();
     var email = $("#email");
     var password = $("#password");
-    console.log(email);
-    console.log(password);
 
   // validate the email/password credentials
 
@@ -44,19 +42,29 @@ $("#login-button").on("click", function (event) {
       // after user is signed in
       .then(function (data) {
         // console log the returned data
-        console.log('authentiated');
-        console.log(data);
+        console.log(`authentiated user: ${data.user.email}`);
 
         // let's clear the input fields
         email.val("");
         password.val("");
         password.attr("placeholder", "");
 
-        
+        // Log authenticated user into local DB
+        let loginData = {email:data.user.email};
+
+        $.ajax("/api/login", {
+          type: "PUT",
+          data: loginData,
+        }).then (res => {
+          let globalUserId = res;
+        });
         
       })
       // User email/password did not match or is not in firebase
       .catch(function (error) {
+        if(error.code === "auth/user-not-found") {res.render("signup")}
+        console.log(error);
+
         alert("Error: " + error.message)
       })
   }
@@ -82,11 +90,10 @@ function grantAccess() {
     sessionStorage.setItem("user", JSON.stringify(user))
 
     // retrieve user info saved in database
-    getUserInfo(user.uid)
+    // getUserInfo(user.uid)
 
     // manipulate the dom
-    $("#signIn").addClass("d-none");
-    $("#setProfile").removeClass("d-none");
+
 }
 
 // function to manipulate dom after user is no longer authenticated
@@ -95,8 +102,8 @@ function removeAccess() {
     sessionStorage.removeItem("user");
 
     // manipulate the dom
-    $("#setProfile").addClass("d-none");
-    $("#signIn").removeClass("d-none");
+    // $("#setProfile").addClass("d-none");
+    // $("#signIn").removeClass("d-none");
 }
 
 // Event listener for Sign Out button

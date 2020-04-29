@@ -9,13 +9,13 @@ $(function () {
 
     // loads user data for default values
 
-    $.ajax("/api/user/"+globalUserId, {
-        type: "GET",
-    }).then(function (data) {
-        defaultZipCode = data.zipCode;
-        defaultJob = data.jobTile;
-        defaultName = data.name;
-    })
+    // $.ajax("/api/user/"+globalUserId, {
+    //     type: "GET",
+    // }).then(function (data) {
+    //     defaultZipCode = data.zipCode;
+    //     defaultJob = data.jobTile;
+    //     defaultName = data.name;
+    // })
 
     // function for saving job data
 
