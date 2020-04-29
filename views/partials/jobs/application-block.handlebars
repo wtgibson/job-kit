@@ -15,9 +15,9 @@
         </div>
         <div class="uk-card-body">
             <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
-            <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">Company Name</h4>
+            <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">Company Name {{company}}</h4>
             <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{zipCode}}</h5>
-            <p class="uk-text-small uk-text-muted">{{Description}}</p>
+            <p class="uk-text-small uk-text-muted">{{description}}</p>
             <p class="uk-text-small uk-text-muted uk-text-bold">{{salaryRange}}</p>
             <!-- Model Button -->
             <a class="uk-button uk-button-default" href="#modal-center" uk-toggle>Details</a>
@@ -28,7 +28,7 @@
                     <button class="uk-modal-close-default" type="button" uk-close></button>
 
                     <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
-                    <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">Company Name</h4>
+                    <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">Company Name {{company}}</h4>
                     <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{zipCode}}</h5>
                     <p class="uk-text-small uk-text-muted">{{description}}</p>
                     <p class="uk-text-small uk-text-muted uk-text-bold">{{salaryRange}}</p>
@@ -36,7 +36,7 @@
                     <hr>
 
                     <p>Job Application ID: {{id}}</p>
-                    <p>Company Field: </p>
+                    <p>Company Field: {{company}}</p>
                     <p>Internal Contacts: </p>
 
                     <hr>
