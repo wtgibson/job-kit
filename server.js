@@ -1,7 +1,7 @@
 // Dependencies
 
 const express = require("express");
-
+var admin = require("firebase-admin");
 
 // Set up the Express App
 var app = express();
@@ -9,6 +9,13 @@ var PORT = process.env.PORT || 3000;
 
 // Static Directory
 app.use(express.static("public"));
+
+// Configure and Initialize Firebase for Authentication
+var serviceAccount = require("./config/jobkit-project-2-firebase-adminsdk-ilq2k-031de0927d.json");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://jobkit-project-2.firebaseio.com"
+});
 
 // Requiring our Models for Syncing
 var db = require("./models");

@@ -11,7 +11,7 @@ module.exports = function (app) {
     //     res.json(req.user);
     // });
 
-    // Route to use for login when not utilizing passport.
+    // May not be necessary with firebase since it is client side.
     app.put("/api/login", (req, res) => {
         // search User table for one item where email & password matches req.body
         db.User.findOne({
@@ -27,7 +27,7 @@ module.exports = function (app) {
         })
     })
 
-    // Route to use to signup a new user without passport
+    // Signup a new authenticated user
     app.post("/api/signup", (req, res) => {
         db.User.create(req.body)
             .then(() => {
@@ -38,7 +38,7 @@ module.exports = function (app) {
             });
     });
 
-    // Get user profile with Passport Authtentication
+    // Get user profile
     app.get("/api/userProfile", function (req, res) {
         if (!req.user) {
             // The user is not logged in, send back an empty object

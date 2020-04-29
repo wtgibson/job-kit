@@ -7,37 +7,22 @@
 		<!-- <link rel="icon" href="img/favicon.ico"> -->
 		<!-- CSS FILES -->
 		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/uikit@latest/dist/css/uikit.min.css">
-		<link rel="stylesheet" type="text/css" href="../assets/css/style.css">
+		<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/uikit@latest/dist/js/uikit-icons.min.js"></script>
 		<script src="https://code.jquery.com/jquery.js"></script>
-		<script src="../assets/js/script.js"></script>
+		<script src="/assets/js/script.js"></script>
 
 	</head>
 	<body class="login">
         {{{body}}}
-	</body>
-	<!-- The core Firebase JS SDK is always required and must be listed first -->
+
 	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
-
-	<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-database.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+	<script src="/__/firebase/7.14.2/firebase-firestore.js"></script>
+	<script src="assets/js/authenticatate.js"></script>
 
-	<script>
-		// Your web app's Firebase configuration
-		var firebaseConfig = {
-			apiKey: "AIzaSyCOL2GHyCkjocrhm2VJdOZUP_1eZMK9wVE",
-			authDomain: "jobkit-project-2.firebaseapp.com",
-			databaseURL: "https://jobkit-project-2.firebaseio.com",
-			projectId: "jobkit-project-2",
-			storageBucket: "jobkit-project-2.appspot.com",
-			messagingSenderId: "978184031668",
-			appId: "1:978184031668:web:403d06d916e942e6ee76e1",
-			measurementId: "G-TKMGLB01WM"
-		};
-		// Initialize Firebase
-		firebase.initializeApp(firebaseConfig);
-		firebase.analytics();
-	</script>
+	</body>
 </html>

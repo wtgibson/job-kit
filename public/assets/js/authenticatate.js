@@ -1,4 +1,3 @@
-// Your web app's Firebase configuration
 var firebaseConfig = {
     apiKey: "AIzaSyCOL2GHyCkjocrhm2VJdOZUP_1eZMK9wVE",
     authDomain: "jobkit-project-2.firebaseapp.com",
@@ -10,47 +9,57 @@ var firebaseConfig = {
     measurementId: "G-TKMGLB01WM"
 };
 // Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
-var database = firebase.database();
+// var database = firebase.database();
 
 // event listener for login screen
 $("#login-button").on("click", function (event) {
     event.preventDefault();
     var email = $("#email");
     var password = $("#password");
+    console.log(email);
+    console.log(password);
 
-    // Validate email is not blank
-    // if (email.val().length < 1) {
-    //     email.attr("placeholder", "email must not be empty")
-    //     email.focus();
-    // }
+  // validate the email/password credentials
 
-    // // password field input validation
-    // else if (password.val().length < 8) { // cannot be less than 6 characters
-    //     // change password input's placeholder and set focus
-    //     password.attr("placeholder", "Password must be at least 8 characters!")
-    //     password.focus();
-    // }
+  // email field input validation
+  if (email.val().length < 1) { // cannot be empty
+    // change the email input's placeholder and set focus
+    email.attr("placeholder", "This field cannot be empty!")
+    email.focus();
+  }
 
-    // else {
-        // Sign In
-        firebase.auth().signInWithEmailAndPassword(email.val(), password.val())
-            // after use is signed in
-            .then(function (data) {
-                // log out the returned data
-                console.log(data)
+  // password field input validation
+  else if (password.val().length < 6) { // cannot be less than 6 characters
+    // change password input's placeholder and set focus
+    password.attr("placeholder", "Password must be at least 6 characters!")
+    password.focus();
+  }
 
-                // clear the input fields
-                email.val("");
-                password.val("");
-                password.attr("placeholder", "");
+  // if all validations check out
+  else {
+    // use firebase to sign in
+    firebase.auth().signInWithEmailAndPassword(email.val(), password.val())
+      // after user is signed in
+      .then(function (data) {
+        // console log the returned data
+        console.log('authentiated');
+        console.log(data);
 
-                res.render("index")
-            })
-            .catch(function (error) {
-                res.send("Error: " + error.message)
-            })
-    }
+        // let's clear the input fields
+        email.val("");
+        password.val("");
+        password.attr("placeholder", "");
+
+        
+        
+      })
+      // User email/password did not match or is not in firebase
+      .catch(function (error) {
+        alert("Error: " + error.message)
+      })
+  }
 })
 
 // Event listener from Firebase that checks with user auth state changes
@@ -91,7 +100,7 @@ function removeAccess() {
 }
 
 // Event listener for Sign Out button
-$(".signout").on("click", function (event) {
+$("#signout").on("click", function (event) {
     event.preventDefault();
 
     // sign out of firebase
