@@ -3,11 +3,12 @@ var db = require("../models");
 module.exports = function (app) {
     
 
-    // Filter Source on Source - Linkedn, GitHub, etc.
-    app.get("/api/user/:userId/source/filter/sourceType/:source", (req, res) => {
+    // Filter Source on Source By User - Linkedn, GitHub, etc.
+    // /api/user/:userId/source/filter/sourceType/:source
+    // Add filter by user
+    app.get("/api/source/filter/sourceType/:source", (req, res) => {
         db.Source.findAll({
             where: {
-                userId: req.params.userId, 
                 source: req.params.source
             },
         }).then(sources => {

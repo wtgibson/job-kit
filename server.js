@@ -23,11 +23,18 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Routes
+require("./routes/api-application-routes.js")(app);
+require("./routes/api-application-filters.js")(app);
+require("./routes/api-company-routes.js")(app);
+// require("./routes/api-company-filters.js")(app);
+require("./routes/api-contact-routes.js")(app);
+require("./routes/api-contact-filters.js")(app);
+require("./routes/api-source-routes.js")(app);
+require("./routes/api-source-filters.js")(app);
+require("./routes/api-stage-routes.js")(app);
+require("./routes/api-stage-filters.js")(app);
 require("./routes/api-user-routes.js")(app);
 require("./routes/html-routes.js")(app);
-require("./routes/api-application-routes.js")(app);
-require("./routes/api-company-routes.js")(app);
-require("./routes/api-application-filters.js")(app);
 
 
 // Syncing Sequelize Models

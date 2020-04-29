@@ -7,7 +7,7 @@ module.exports = function (app) {
         db.Stage.findAll({
             where: {
                 ApplicationId: req.params.applicationId
-            },
+            }
         }).then(stages => {
             res.json(stages);
         }).catch(err => {
@@ -32,6 +32,7 @@ module.exports = function (app) {
     });
 
     // Create New Stage
+    // * Need to add AppID
     app.post("/api/application/:applicationId/stage", (req, res) => {
         db.Stage.create(req.body, {
             where: {
@@ -46,10 +47,9 @@ module.exports = function (app) {
     });
 
      // Update Stage
-     app.put("/api/application/:applicationId/stage/:stageId", (req, res) => {
-        db.Stage.update({
+     app.put("/api/stage/:stageId", (req, res) => {
+        db.Stage.update(req.body, {
             where: {
-                ApplicationId: req.params.applicationId,
                 id: req.params.stageId
             },
         }).then(() => {
@@ -61,10 +61,9 @@ module.exports = function (app) {
     });
 
     // Delete Stage
-    app.delete("/api/application/:applicationId/stage/:stageId", (req, res) => {
+    app.delete("/api/stage/:stageId", (req, res) => {
         db.Stage.destroy({
             where: {
-                ApplicationId: req.params.applicationId,
                 id: req.params.stageId
             },
         }).then(() => {
