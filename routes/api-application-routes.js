@@ -17,8 +17,7 @@ module.exports = function (app) {
                 { model: db.Contact },
                 { model: db.Source },
                 { model: db.Stage }
-            ]
-            // attributes: ["ApplicationId"] 
+            ] 
         }).then(applications => {
             res.json(applications);
             console.log(applications)
@@ -30,20 +29,19 @@ module.exports = function (app) {
     });
 
     // Get All Application - Title, Type, Industry,  Zipcode, Rating
-    app.get("/api/user/:id/application/:field", (req, res) => {
+    app.get("/api/user/:userId/application/:field", (req, res) => {
         db.Application.findAll({
             where: {
-                UserId: req.params.id
+                UserId: req.params.userId
             },
             attributes: [req.params.field]
         }).then(applications => {
             res.json(applications);
-            console.log(applications)
+            console.log(applications);
         }).catch(err => {
             console.log(err);
             res.send("No data found");
         });
-
     });
 
     // Get Unique Application
