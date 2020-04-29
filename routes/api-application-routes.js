@@ -9,14 +9,10 @@ module.exports = function (app) {
                 UserId: req.params.id
             },
             include: [
-                {
-                    model: db.Company,
-                    include:
-                        [db.Contact]
-                },
+                { model: db.Company },
                 { model: db.Contact },
+                { model: db.Stage },
                 { model: db.Source },
-                { model: db.Stage }
             ]
         }).then(applications => {
             // res.json(applications);
@@ -34,9 +30,12 @@ module.exports = function (app) {
                 salaryRange: element.dataValues.salaryRange,
                 dateApplied: element.dataValues.dateApplied,
                 rating: element.dataValues.rating,
-                createdAt: element.dataValues.createdAt,
+                // createdAt: element.dataValues.createdAt,
+                // updatedAt: element.dataValues.updatesAt,
                 company: element.dataValues.company,
-                // linktoPosting: element.dataValues.sources.linktoPosting
+                contacts: element.dataValues.contacts,
+                stages: element.dataValues.stages,
+                sources: element.dataValues.sources
             }))
 
             console.log(arrOfObjs)
@@ -44,7 +43,7 @@ module.exports = function (app) {
                 layout: false,
                 applications: arrOfObjs}
 
-            res.render("partials/jobs/application-block",x)
+            res.render("partials/jobs/application-block", x)
 
         }).catch(err => {
             console.log(err);
@@ -76,14 +75,10 @@ module.exports = function (app) {
                 id: req.params.applicationId
             },
             include: [
-                {
-                    model: db.Company,
-                    include:
-                        [db.Contact]
-                },
+                { model: db.Company },
                 { model: db.Contact },
+                { model: db.Stage },
                 { model: db.Source },
-                { model: db.Stage }
             ]
         }).then(application => {
             res.json(application);
