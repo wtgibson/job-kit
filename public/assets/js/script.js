@@ -4,15 +4,26 @@ $(function () {
     var globalUserId;
     var defaultZipCode;
     var defaultJob;
+    var defaultName;
     globalUserId = 1;
+
+    // loads user data for default values
+
+    $.ajax("/api/user/"+globalUserId, {
+        type: "GET",
+    }).then(function (data) {
+        defaultZipCode = data.zipCode;
+        defaultJob = data.jobTile;
+        defaultName = data.name;
+    })
 
     // function for saving job data
 
     $("#applications-nav").on("click", function () {
         console.log("You updated the data")
-        $.ajax("/api/user/1/application/all"), {
+        $.ajax("/api/user/1/application/all", {
             type: "GET"
-        }.then(function (data) {
+        }).then(function (data) {
             console.log(JSON.stringify(data))
         })
     })
@@ -32,7 +43,7 @@ $(function () {
             description: "desc",
             industry: "None",
             zipCode: "94114",
-            salaryRange: 0,
+            salaryRange: "0",
             rating: 0,
             UserId: globalUserId
         }
