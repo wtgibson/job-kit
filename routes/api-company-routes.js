@@ -56,11 +56,10 @@ module.exports = function (app) {
     app.post("/api/company", (req, res) => {
         db.Company.create(req.body, {
         }).then(company => {
-            console.log(company)
-            res.send(`Company, ${company.dataValues.name}, has been created`)
+            res.send(`Company ${company.dataValues.name}, has been created`)
         }).catch(err => {
             console.log(err);
-            res.send(`Company, ${company.dataValues.name}, was NOT created`)
+            res.send(`Company ${company.dataValues.name}, was NOT created`)
         });
     });
 
