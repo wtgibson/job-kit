@@ -9,9 +9,9 @@ module.exports = function (app) {
         res.render("index");
     });
 
-    // app.get("/new-app", (req, res) => {
-    //     res.render("./views/add-app")
-    // });
+    app.get("/new-app", (req, res) => {
+        res.render("add-app",data)
+    });
 
     app.get("/login", (req, res) => {
         res.render("login");
@@ -19,7 +19,7 @@ module.exports = function (app) {
 
     // send default page to all routes that are undefined
     app.get("/profile", (req, res) => {
-        res.render("profile");
+        res.render("profile")
     });
 
     app.get("/applications", (req, res) => {

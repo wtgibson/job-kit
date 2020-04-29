@@ -4,35 +4,34 @@ $(function () {
     var globalUserId;
     var defaultZipCode;
     var defaultJob;
+    var defaultName;
     globalUserId = 1;
+
+    // loads user data for default values
+
+    $.ajax("/api/user/"+globalUserId, {
+        type: "GET",
+    }).then(function (data) {
+        defaultZipCode = data.zipCode;
+        defaultJob = data.jobTile;
+        defaultName = data.name;
+    })
 
     // function for saving job data
 
-    $("#applications-nav").on("click", function () {
-        console.log("You updated the data")
-        $.ajax("/api/user/1/application/all"), {
-            type: "GET"
-        }.then(function (data) {
-            console.log(JSON.stringify(data))
-        })
-    })
-
     $(document).on("click", ".link-to-ext", function () {
         event.preventDefault();
-        console.log("you clicked me!")
         var id = $(this).data("jobid");
         var title = $(`#title-${id}`).text();
         var desc = $(`#desc-${id}`).text();
 
-        console.log(title)
-        console.log(desc)
 
         var newApp = {
             title: title,
             description: "desc",
             industry: "None",
             zipCode: "94114",
-            salaryRange: 0,
+            salaryRange: "0",
             rating: 0,
             UserId: globalUserId
         }
@@ -60,7 +59,6 @@ $(function () {
 
     $("#app-add").on("submit", function (event) {
         event.preventDefault();
-        console.log("You tried to add something")
 
         var newApp = {
             title: $("#app-title").val(),
@@ -75,8 +73,8 @@ $(function () {
         $.ajax("/api/application", {
             type: "POST",
             data: newApp,
-        }).then(function () {
-            console.log("successfully added the app")
+        }).then(function (response) {
+            console.log(response)
         })
     })
 });

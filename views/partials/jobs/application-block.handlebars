@@ -1,22 +1,24 @@
 <!-- card -->
-<div class="application-card" id="application1">
+{{#each applications}}
+				
+<div class="application-card" id="application{{id}}">
     <div class="uk-card uk-card-small uk-card-secondary">
         <div class="uk-card-header">
             <div class="uk-grid uk-grid-small uk-text-small" data-uk-grid>
                 <div class="uk-width-expand">
-                    <span class="cat-txt">Job Application #</span>
+                    <span class="cat-txt">Job Application {{id}}</span>
                 </div>
                 <div class="uk-width-auto uk-text-right uk-text-muted">
-                    <span data-uk-icon="icon:clock; ratio: 0.8"></span> Date Applied
+                    <span data-uk-icon="icon:clock; ratio: 0.8"></span> Date Applied: {{dateApplied}}
                 </div>
             </div>
         </div>
         <div class="uk-card-body">
-            <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">Job Title</h3>
+            <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
             <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">Company Name</h4>
-            <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">Location</h5>
-            <p class="uk-text-small uk-text-muted">Job Description</p>
-            <p class="uk-text-small uk-text-muted uk-text-bold">Salary Range</p>
+            <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{zipCode}}</h5>
+            <p class="uk-text-small uk-text-muted">{{Description}}</p>
+            <p class="uk-text-small uk-text-muted uk-text-bold">{{salaryRange}}</p>
             <!-- Model Button -->
             <a class="uk-button uk-button-default" href="#modal-center" uk-toggle>Details</a>
             <!-- Modal Info -->
@@ -25,15 +27,15 @@
 
                     <button class="uk-modal-close-default" type="button" uk-close></button>
 
-                    <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">Job Title</h3>
+                    <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
                     <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">Company Name</h4>
-                    <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">Location</h5>
-                    <p class="uk-text-small uk-text-muted">Job Description</p>
-                    <p class="uk-text-small uk-text-muted uk-text-bold">Salary Range</p>
+                    <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{zipCode}}</h5>
+                    <p class="uk-text-small uk-text-muted">{{description}}</p>
+                    <p class="uk-text-small uk-text-muted uk-text-bold">{{salaryRange}}</p>
                     
                     <hr>
 
-                    <p>Job Application ID: </p>
+                    <p>Job Application ID: {{id}}</p>
                     <p>Company Field: </p>
                     <p>Internal Contacts: </p>
 
@@ -41,7 +43,7 @@
 
                     <p>Application Process & Method: </p>
                     <p>Resume Version: </p>
-                    <p>Rating: </p>
+                    <p>Rating: {{rating}}</p>
                     <p>Next Steps: </p>
 
                     <hr>
@@ -54,7 +56,7 @@
         <div class="uk-card-footer">
             <div class="uk-grid uk-grid-small uk-grid-divider uk-flex uk-flex-middle" data-uk-grid>
                 <div class="uk-width-expand uk-text-small">
-                    User Rating
+                    User Rating: {{rating}}
                 </div>
                 <div class="uk-width-expand uk-text-small">
                     Current Stage
@@ -67,3 +69,4 @@
     </div>
 </div>
 <!-- /card -->
+{{/each}}
