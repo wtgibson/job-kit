@@ -32,11 +32,11 @@ module.exports = function (app) {
     });
 
     // Create New Stage
-    // * Need to add AppID
-    app.post("/api/application/:applicationId/stage", (req, res) => {
+    // * AppID in req.body
+    app.post("/api/stage/new", (req, res) => {
         db.Stage.create(req.body, {
             where: {
-                ApplicationId: req.params.applicationId
+                ApplicationId: req.body.applicationId
             }
         }).then(stage => {
             res.send(`Stage, ${stage.currentStage}, has been created`)
