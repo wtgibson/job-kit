@@ -13,8 +13,7 @@ module.exports = function (app) {
         }).catch(err => {
             console.log(err);
             res.send("No data found");
-        });
-            
+        });    
     });
 
     // Get Single Source from an Application
@@ -33,8 +32,23 @@ module.exports = function (app) {
             
     });
 
+    // Get All Source - Source, linkToPosting, JobID, ApplyType, ResumeVersion
+    //  * Need to add by User
+     app.get("/api/source/all/:field", (req, res) => {
+        db.Source.findAll({
+            attributes: [req.params.field]
+        }).then(sources => {
+            res.json(sources);
+            console.log(sources);
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+    });
+
     // Create New Source
-    app.post("/api/application/:applicationId/source", (req, res) => {
+    // * Need to add AppID
+    app.post("/api/source/new", (req, res) => {
         db.Source.create(req.body, {
         }).then(source => {
             res.send(`Source, ${source.source}, has been created`)
@@ -45,10 +59,9 @@ module.exports = function (app) {
     });
 
      // Update Source
-     app.put("/api/application/:applicationId/source/:sourceId", (req, res) => {
-        db.Source.update({
+     app.put("/api/source/:sourceId", (req, res) => {
+        db.Source.update(req.body, {
             where: {
-                ApplicationId: req.params.applicationId,
                 id: req.params.sourceId
             },
         }).then(() => {
@@ -60,10 +73,9 @@ module.exports = function (app) {
     });
 
     // Delete Source
-    app.delete("/api/application/:applicationId/source/:sourceId", (req, res) => {
+    app.delete("/api/source/:sourceId", (req, res) => {
         db.Source.destroy({
             where: {
-                ApplicationId: req.params.applicationId,
                 id: req.params.sourceId
             },
         }).then(() => {

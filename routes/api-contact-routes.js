@@ -4,7 +4,7 @@ module.exports = function (app) {
 
     
     // Get All Contacts for Application
-    app.get("/api/application/:applicationId/contact", (req, res) => {
+    app.get("/api/application/:applicationId/contact/all", (req, res) => {
         db.Contact.findAll({
             where: {
                 ApplicationId: req.params.applicationId
@@ -19,7 +19,7 @@ module.exports = function (app) {
 
     // Get All Contacts for Company
     // Each user has there own instance of Company
-    app.get("/api/company/:companyId/contact", (req, res) => {
+    app.get("/api/company/:companyId/contact/all", (req, res) => {
         db.Contact.findAll({
             where: {
                 CompanyId: req.params.companyId
@@ -33,10 +33,9 @@ module.exports = function (app) {
     });
 
     // Get One Contact
-    app.get("/api/application/:applicationId/contact/:contactId", (req, res) => {
+    app.get("/api/contact/:contactId", (req, res) => {
         db.Contact.findOne({
             where: {
-                ApplicationId: req.params.applicationId,
                 id: req.params.contactId
             },
         }).then(contacts => {
@@ -48,24 +47,22 @@ module.exports = function (app) {
     });
 
     // Create New Contact
-    app.post("/api/application/:applicationId/contact", (req, res) => {
+    app.post("/api/contact/new", (req, res) => {
         db.Contact.create(req.body, {
-            where: {
-                ApplicationId: req.params.applicationId
-            }
+            // Create with model id (application and company) using req.body
+            // Currently Null
         }).then(contact => {
-            res.send(`Contact, ${contact.type}, has been created`)
+            res.send(`Contact ${contact.dataValues.type}, has been created`)
         }).catch(err => {
             console.log(err);
-            res.send(`Contact, ${contact.type}, was NOT created`)
+            res.send(`Contact ${contact.dataValues.type}, was NOT created`)
         });
     });
 
     // Update Contact
-    app.put("/api/application/:applicationId/contact/:contactId", (req, res) => {
-        db.Contact.update({
+    app.put("/api/contact/:contactId", (req, res) => {
+        db.Contact.update(req.body, {
             where: {
-                ApplicationId: req.params.applicationId,
                 id: req.params.contactId
             },
         }).then(() => {
@@ -77,11 +74,10 @@ module.exports = function (app) {
     });
 
     // Delete Contact
-    app.delete("/api/application/:applicationId/contact/:contactId", (req, res) => {
+    app.delete("/api/contact/:contactId", (req, res) => {
         db.Contact.destroy({
             where: {
-                ApplicationId: req.params.applicationId,
-                id: req.params.stageId
+                id: req.params.contactId
             },
         }).then(() => {
             res.send(true);
