@@ -41,13 +41,28 @@
                     <p>Job Application ID: {{id}}</p>
                     <p>Company Field: {{industry}}</p>
                     <p>Internal Contacts: </p>
-
+                    <p>{{contactObj}}</p>
+                    <ul>
+                        {{#each contactObj}}
+                            <li>{{name}}</li>
+                            <li>{{type}}</li>
+                            <li>{{email}}</li>
+                            <li>{{phone}}</li>
+                        {{/each}}
+                    </ul>
+                    
                     <hr>
 
                     <p>Application Process & Method: </p>
                     <p>Resume Version: </p>
                     <p>Rating: {{rating}}</p>
                     <p>Next Steps: </p>
+                        {{#each stage}}
+                            <li>{{currentStage}}</li>
+                            <li>{{dateCurrentStage}}</li>
+                            <li>{{nextStep}}</li>
+                            <li>{{notes}}</li> 
+                        {{/each}}
 
                     <hr>
 
