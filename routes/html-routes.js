@@ -35,7 +35,14 @@ module.exports = function (app) {
 
     app.get("/api/jobs/:id", (req, res) => {
         var zip = req.params.id;
-        axios.get(`https://jobs.github.com/positions.json?search=Javascript&location=${zip}`)
+        var query;
+        if(!zip){
+            query = "https://jobs.github.com/positions.json"
+        }
+        else {
+            query = `https://jobs.github.com/positions.json?search=Javascript&location=${zip}`
+        }
+        axios.get(query)
             .then(function (response) {
                 var rendered = {
                     layout: false,
@@ -47,5 +54,20 @@ module.exports = function (app) {
                 console.log(err)
             });
     })
+
+    // app.get("/api/jobs/:id", (req, res) => {
+    //     var zip = req.params.id;
+    //     axios.get(`https://jobs.github.com/positions.json?search=Javascript&location${zip}`)
+    //         .then(function (response) {
+    //             var rendered = {
+    //                 layout: false,
+    //                 jobs: response.data
+    //             }
+    //             res.render("partials/jobs/jobs-block", rendered)
+    //         })
+    //         .catch(function (err) {
+    //             console.log(err)
+    //         });
+    // })
 
 }

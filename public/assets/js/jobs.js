@@ -1,15 +1,19 @@
 $(function () {
     let globalUserID = sessionStorage.getItem('uuid');
-    // let location;
-    // $("#jobSearch").on('submit', function (event) {
-    //     event.preventDefault();
-    //     location = $('#location');
-    // });
     
-    console.log(`line 9 : ${locationCity}`);
-    let locationCity = location.val();
+    $(document).on("submit","#search-form", function () {
+        event.preventDefault();
+        var locationCity = $(".job-search-bar").val().trim();
+        console.log(`the city location is ${locationCity}`)
+        $.ajax(`/api/jobs/${locationCity}`, {
+            type: "GET"
+        }).then(function (resp) {
+            $("#github-jobs").append(resp)
+        })
+    
+    });
 
-    $.ajax(`/api/jobs/` + locationCity, {
+    $.ajax(`/api/jobs/""`, {
         type: "GET"
     }).then(function (resp) {
         $("#github-jobs").append(resp)
