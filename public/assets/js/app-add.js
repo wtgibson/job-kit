@@ -1,6 +1,4 @@
 $(function () {
-    console.log("is thus thing on")
-
     $("#app-add").on("click", function (event) {
         event.preventDefault();
 
@@ -83,6 +81,8 @@ $(function () {
                 })
             });
         })
+
+        $("#add-data-form").append(`<h2> Your application has been submitted </h2>`)
 
     })
 })
