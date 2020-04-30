@@ -88,6 +88,7 @@ module.exports = function (app) {
             res.render("partials/jobs/profile-block", {
                 layout: false,
                 createdAt: user.createdAt,
+                id: user.id,
                 name: user.name,
                 zipCode: user.zipCode,
                 jobTitle: user.jobTitle,
