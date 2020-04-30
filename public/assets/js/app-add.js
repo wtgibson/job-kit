@@ -1,4 +1,6 @@
 $(function () {
+    let globalUserID = sessionStorage.getItem('uuid');
+    
     $("#app-add").on("click", function (event) {
         event.preventDefault();
 

@@ -1,6 +1,6 @@
 $(function () {
     // import { userObj } from 'userId.js'
-    
+    let globalUserID = sessionStorage.getItem('uuid')
     console.log(`loading using the object id: ${globalUserID} `)
    
     $.ajax(`/api/user/${globalUserID}/application/all`, {

@@ -1,4 +1,5 @@
 $(function () {
+    let globalUserID = sessionStorage.getItem('uuid');
     console.log(`loading using the profile data using this id: ${globalUserID}`)
     $.ajax("/api/user/" + globalUserID, {
         type: "GET",
