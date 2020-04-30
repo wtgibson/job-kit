@@ -71,6 +71,7 @@ $("#login-button").on("click", function (event) {
           location.assign('/signup');
         }
       })
+    }
 
       function getfireBaseUser() {
       var user = firebase.auth().currentUser;
