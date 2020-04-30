@@ -42,7 +42,7 @@
 					<a class="uk-accordion-title" href="#">Primary Coding Language </a>
 					<div class="uk-accordion-content">
 						<span class="cat-txt">Current Selection: {{current_lang}}</span>
-						<select class="uk-select" id="prof-lang">
+						<select class="uk-select" id="prof-lang" default="{{current_lang}}">
 							{{#each languages}}
 							{{> jobs/list-block}}
 							{{/each}}

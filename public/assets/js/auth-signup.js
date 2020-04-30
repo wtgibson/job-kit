@@ -77,7 +77,8 @@ $("#signup-button").on("click", function (event) {
             data: signupData,
           }).then(res => {
             // console.log(res);
-            sessionStorage.setItem('uuid', res);
+            sessionStorage.setItem('uuid', res.id);
+            sessionStorage.setItem('clid', res.codLang);
             window.location.replace("/profile");
           });
         })

@@ -16,7 +16,7 @@ module.exports = function (app) {
         res.render("login");
     });
 
-    app.get("/signup", (req,res) => {
+    app.get("/signup", (req, res) => {
         res.render("signup");
     });
 
@@ -33,16 +33,9 @@ module.exports = function (app) {
         res.render("jobs");
     });
 
-    app.get("/api/jobs/:id", (req, res) => {
-        var zip = req.params.id;
-        var query;
-        if(!zip){
-            query = "https://jobs.github.com/positions.json"
-        }
-        else {
-            query = `https://jobs.github.com/positions.json?search=Javascript&location=${zip}`
-        }
-        axios.get(query)
+    app.get("/api/jobs/:lang", (req, res) => {
+        var lang = req.params.lang;
+        axios.get(`https://jobs.github.com/positions.json?search=${lang}`)
             .then(function (response) {
                 var rendered = {
                     layout: false,
@@ -56,19 +49,22 @@ module.exports = function (app) {
             });
     })
 
-    // app.get("/api/jobs/:id", (req, res) => {
-    //     var zip = req.params.id;
-    //     axios.get(`https://jobs.github.com/positions.json?search=Javascript&location${zip}`)
-    //         .then(function (response) {
-    //             var rendered = {
-    //                 layout: false,
-    //                 jobs: response.data
-    //             }
-    //             res.render("partials/jobs/jobs-block", rendered)
-    //         })
-    //         .catch(function (err) {
-    //             console.log(err)
-    //         });
-    // })
+    app.get("/api/jobs/:lang/:zip", (req, res) => {
+        var lang = req.params.lang;
+        var zip = req.params.zip;
+        console.log(`https://jobs.github.com/positions.json?search=${lang}&location="${zip}"`)
+
+        axios.get(`https://jobs.github.com/positions.json?search=${lang}&location="${zip}"`)
+            .then(function (response) {
+                var rendered = {
+                    layout: false,
+                    jobs: response.data
+                }
+                res.render("partials/jobs/jobs-block", rendered)
+            })
+            .catch(function (err) {
+                console.log(err)
+            });
+    })
 
 }
