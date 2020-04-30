@@ -1,3 +1,5 @@
+<script src="../assets/js/app-add.js"></script>
+
 <section class="uk-section-large uk-preserve-color">
     <div class="uk-container">
  
@@ -30,6 +32,60 @@
             {{!-- should probably be radio button with a few options --}}
             <label for="app-rating">Rating:</label>
             <input type="text" id="app-rating" placeholder="">
+        </div>
+
+        <div class="form-group" id="company-qs">
+            <label for="comp-name">Company Name:</label>
+            <input type="text" id="comp-name" placeholder="">
+            <label for="comp-zipCode">Zipcode:</label>
+            <input type="text" id="comp-zipCode" placeholder="">
+            <label for="comp-link">Company Url</label>
+            <input type="text" id="comp-link" placeholder="">
+        </div>
+
+          <div class="form-group" id="contact-qs">
+
+            <label for="cont-name">Contact Name: </label>
+            <input type="text" id="cont-name" placeholder="">
+
+            <label for="cont-email">Contact Email: </label>
+            <input type="text" id="cont-email" placeholder="">
+
+            <label for="cont-phone">Contact Phone: </label>
+            <input type="text" id="cont-phone" placeholder="">
+
+            {{!--Maybe a drop down?  --}}
+            <label for="cont-type">Contact Type: </label>
+            <input type="text" id="cont-type" placeholder="">
+
+
+        </div>
+
+         <div class="form-group" id="source-qs">
+             {{!-- do we want this to be a drop down? --}}
+            <label for="src-source">Source: </label>
+            <input type="text" id="src-source" placeholder="">
+            <label for="src-posting">Link to Posting:</label>
+            <input type="text" id="src-posting" placeholder="">
+            {{!-- maybe this needs to be a drop down? --}}
+            <label for="src-applyType">Apply Type: </label>
+            <input type="text" id="src-applyType" placeholder="">
+            <label for="src-resume">Resume Version: </label>
+            <input type="text" id="src-resume" placeholder="">
+        </div>
+
+         <div class="form-group" id="stages-qs">
+             {{!-- do we want this to be a drop down? --}}
+            <label for="stgs-current">Current Stage: </label>
+            <input type="text" id="stgs-current" placeholder="Applied">
+            {{!-- should probably be a date field --}}
+            <label for="stgs-dateOfStage">Date of Current Stage:</label>
+            <input type="text" id="stgs-dateOfStage" placeholder="">
+            {{!-- maybe this needs to be a drop down? --}}
+            <label for="stgs-nextStep">Next Steps: </label>
+            <input type="text" id="stgs-nextStep" placeholder="">
+            <label for="stgs-notes">Notes: </label>
+            <input type="text" id="stgs-notes" placeholder="">
         </div>
         <button type="submit" id="app-add"> Add Application </button>
     </form>
