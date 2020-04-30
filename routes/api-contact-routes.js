@@ -1,5 +1,32 @@
 var db = require("../models");
 
+function renderContact(contacts, res, partial) {
+    if (partial === undefined) {
+        return res.json(contacts);
+    }
+    var newContacts = contacts;
+    // If a single object add to an array
+    if (!Array.isArray(contacts)) {
+        newContacts = [contacts];
+    }
+    var arrOfObjs = newContacts.map(({dataValues: {id, name, email, phone, type}}) => ({
+        id,
+        name,
+        email,
+        phone,
+        type
+    }));
+
+    // console.log(arrOfObjs)
+    var x = {
+        layout: false,
+        applications: arrOfObjs
+    }
+
+    // Partial: "partials/jobs/application-block"
+    res.render(partial, x);
+}
+
 module.exports = function (app) {
 
     
@@ -10,7 +37,8 @@ module.exports = function (app) {
                 ApplicationId: req.params.applicationId
             },
         }).then(contacts => {
-            res.json(contacts);
+            // Add Partial as third argument
+            renderContact(contacts, res);
         }).catch(err => {
             console.log(err);
             res.send(false);
@@ -25,7 +53,8 @@ module.exports = function (app) {
                 CompanyId: req.params.companyId
             },
         }).then(contacts => {
-            res.json(contacts);
+            // Add Partial as third argument
+            renderContact(contacts, res);
         }).catch(err => {
             console.log(err);
             res.send(false);
@@ -39,7 +68,8 @@ module.exports = function (app) {
                 id: req.params.contactId
             },
         }).then(contacts => {
-            res.json(contacts);
+            // Add Partial as third argument
+            renderContact(contacts, res);
         }).catch(err => {
             console.log(err);
             res.send(false);
@@ -49,8 +79,7 @@ module.exports = function (app) {
     // Create New Contact
     app.post("/api/contact/new", (req, res) => {
         db.Contact.create(req.body, {
-            // Create with model id (application and company) using req.body
-            // Currently Null
+            // ApplicationId and CompanyId sent from client
         }).then(contact => {
             res.send(`Contact ${contact.dataValues.type}, has been created`)
         }).catch(err => {
