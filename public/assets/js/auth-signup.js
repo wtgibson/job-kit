@@ -57,7 +57,7 @@ $("#signup-button").on("click", function (event) {
       // use firebase to register
       firebase.auth().createUserWithEmailAndPassword(email.val(), password.val())
         // after user is registered
-        .then(function (resp) {
+        .then(function (data) {
           // user is now registered, so...
           // let's clear the input fields
           email.val("");
@@ -67,16 +67,17 @@ $("#signup-button").on("click", function (event) {
           confirm.attr("placeholder", "");
             
           console.log("==== signedup ====");
-          console.log(resp);
+          console.log(data.user.email);
           
-          let user = {email: resp.user.email};
+          let signupData = { email: data.user.email };
+          console.log(signupData);
 
           $.ajax("/api/signup", {
             type: "POST",
-            data: user,
+            data: signupData,
           }).then(res => {
             console.log(res);
-            globalUserId = res;
+            globalUserID = res;
             window.location.replace("/profile");
           });
      
