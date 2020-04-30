@@ -58,16 +58,16 @@ $("#signup-button").on("click", function (event) {
       firebase.auth().createUserWithEmailAndPassword(email.val(), password.val())
         // after user is registered
         .then(function (data) {
-          // user is now registered, so...
-          // let's clear the input fields
+          
+          // clear the input fields
           email.val("");
           password.val("");
           password.attr("placeholder", "");
           confirm.val("");
           confirm.attr("placeholder", "");
             
-          console.log("==== signedup ====");
-          console.log(data.user.email);
+          // console.log("==== signedup ====");
+          // console.log(data.user.email);
           
           let signupData = { email: data.user.email };
           console.log(signupData);
@@ -76,18 +76,15 @@ $("#signup-button").on("click", function (event) {
             type: "POST",
             data: signupData,
           }).then(res => {
-            console.log(res);
+            // console.log(res);
             globalUserID = res;
             window.location.replace("/profile");
           });
-     
-          // then tell them
-          // location.assign("/login");
         })
-        // error handling
         .catch(function (error) {
           // uh oh, something broke. let's tell them why
-          alert("Error: " + error.message)
+          console.log("Error: " + error.message);
+          res.send("Error " + error.message)
         })
     }
   })
