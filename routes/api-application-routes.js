@@ -1,6 +1,9 @@
 var db = require("../models");
 
 function renderApplications(applications, res, partial) {
+    if (partial === undefined) {
+        return res.json(applications);
+    }
     var newApplications = applications;
     // If a single object add to an array
     if (!Array.isArray(applications)) {
@@ -19,9 +22,10 @@ function renderApplications(applications, res, partial) {
         // createdAt: element.dataValues.createdAt,
         // updatedAt: element.dataValues.updatesAt,
         companyName: element.dataValues.Company.name,
-        contact: element.dataValues.Contact,
-        stage: element.dataValues.Stage,
-        source: element.dataValues.Source
+        companyObj: element.dataValues.Company,
+        contactObj: element.dataValues.Contacts,
+        stageObj: element.dataValues.Stages,
+        sourceObj: element.dataValues.Sources
     }))
 
     // console.log(arrOfObjs)
@@ -32,6 +36,7 @@ function renderApplications(applications, res, partial) {
 
     // Partial: "partials/jobs/application-block"
     res.render(partial, x);
+    // res.json(arrOfObjs);
 
 }
 
