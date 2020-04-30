@@ -99,8 +99,9 @@ module.exports = function (app) {
     // Create Application
     app.post("/api/application", (req, res) => {
         db.Application.create(req.body, {
-        }).then((application) => {
-            res.send(`Application for ${application.dataValues.title}, has been created`)
+        }).then( application => {
+            res.json(application.dataValues.id)
+            // res.send(`Application for ${application.dataValues.title}, has been created`)
         }).catch(err => {
             console.log(err);
             res.send(`Application for ${application.dataValues.title}, was NOT created`)
