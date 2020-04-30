@@ -3,6 +3,36 @@
 var db = require("../models");
 // var passport = require("../config/passport.js");
 
+function renderUser(users, res, partial) {
+    if (partial === undefined) {
+        return res.json(users);
+    }
+    var newUsers = users;
+    // If a single object add to an array
+    if (!Array.isArray(users)) {
+        newUsers = [users];
+    }
+    var arrOfObjs = newUsers.map(({dataValues: {id, email, name, zipCode, jobTitle, createdAt}}) => ({
+        id,
+        email,
+        name,
+        zipCode,
+        jobTitle,
+        createdAt
+            
+    }));
+
+    // console.log(arrOfObjs)
+    var x = {
+        layout: false,
+        applications: arrOfObjs
+    }
+
+    // Partial: "partials/jobs/application-block"
+    res.render(partial, x);
+}
+
+
 // Create the routes for the USER model.  Login, SignUp, View Profile, Update Profile.
 module.exports = function (app) {
 
@@ -56,6 +86,8 @@ module.exports = function (app) {
                 }
                 // attributes: ["id", "email", "name"]
             }).then(user => {
+                // Add partial as third argument
+                // renderUser(user, res)
                 res.json({
                     email: req.user.email,
                     id: req.user.id,
@@ -77,6 +109,7 @@ module.exports = function (app) {
         }).then(user => {
             // res.json(user)
             // res render is calling on the jobs profile partial and returning html with the information provided
+            // renderUser(user, res, "partials/jobs/profile-block");
             res.render("partials/jobs/profile-block", {
                 layout: false,
                 createdAt: user.createdAt,
