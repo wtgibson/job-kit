@@ -14,7 +14,7 @@ firebase.initializeApp(firebaseConfig);
 // var database = firebase.database();
 
 // event listener for login screen
-$("#login-button").on("click", function (event) {
+$("#login-button").on("submit", function (event) {
   event.preventDefault();
   var email = $("#email");
   var password = $("#password");
