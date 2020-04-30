@@ -58,22 +58,6 @@ module.exports = function (app) {
 
     });
 
-    // Get All Application - Title, Type, Industry,  Zipcode, Rating
-    app.get("/api/user/:userId/application/:field", (req, res) => {
-        db.Application.findAll({
-            where: {
-                UserId: req.params.userId
-            },
-            attributes: [req.params.field]
-        }).then(applications => {
-            res.json(applications);
-            console.log(applications);
-        }).catch(err => {
-            console.log(err);
-            res.send("No data found");
-        });
-    });
-
     // Get Unique Application
     app.get("/api/application/:applicationId", (req, res) => {
         db.Application.findOne({
@@ -94,6 +78,22 @@ module.exports = function (app) {
             res.send("No data found");
         });
 
+    });
+
+    // Get All Application - Title, Type, Industry,  Zipcode, Rating
+    app.get("/api/user/:userId/application/:field", (req, res) => {
+        db.Application.findAll({
+            where: {
+                UserId: req.params.userId
+            },
+            attributes: [req.params.field]
+        }).then(applications => {
+            res.json(applications);
+            console.log(applications);
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
     });
 
     // Create Application
