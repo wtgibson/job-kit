@@ -72,6 +72,16 @@ $("#login-button").on("click", function (event) {
         }
       })
 
+      function getfireBaseUser() {
+      var user = firebase.auth().currentUser;
+      var name, email;
+      
+      if (user != null) {
+        name = user.displayName;
+        email = user.email;
+        return email;
+      }
+
     // Event listener from Firebase that checks with user auth state changes
     firebase.auth().onAuthStateChanged(function (user) {
       // if user is authenticated then...
