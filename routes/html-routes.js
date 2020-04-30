@@ -51,7 +51,9 @@ module.exports = function (app) {
     app.get("/api/jobs/:lang/:zip", (req, res) => {
         var lang = req.params.lang;
         var zip = req.params.zip;
-        axios.get(`https://jobs.github.com/positions.json??search=${lang}&location${zip}`)
+        console.log(`https://jobs.github.com/positions.json?search=${lang}&location="${zip}"`)
+
+        axios.get(`https://jobs.github.com/positions.json?search=${lang}&location="${zip}"`)
             .then(function (response) {
                 var rendered = {
                     layout: false,
