@@ -1,10 +1,5 @@
 
 $(function () {
-    var defaultZipCode;
-    var defaultJob;
-    var defaultName;
-
-
     $(document).on("click", ".link-to-ext", function () {
         // event.preventDefault();
         var id = $(this).data("jobid");
