@@ -77,7 +77,7 @@ $("#signup-button").on("click", function (event) {
             data: signupData,
           }).then(res => {
             // console.log(res);
-            globalUserID = res;
+            sessionStorage.setItem('uuid', res);
             window.location.replace("/profile");
           });
         })

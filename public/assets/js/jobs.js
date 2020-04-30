@@ -1,4 +1,7 @@
 $(function () {
+    let globalUserID = sessionStorage.getItem('uuid');
+    let 
+
 
     $.ajax(`/api/jobs/` + globalUserZip, {
         type: "GET"
@@ -16,7 +19,7 @@ $(function () {
         var company = $(`#company-${id}`).text();
         var link = $(`#company-${id}`).attr("href");
         var location = $(`#location-${id}`).text();
-       
+        
 
         var newApp = {
             title: title,
