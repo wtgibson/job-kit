@@ -1,5 +1,35 @@
 var db = require("../models");
 
+
+function renderSource(sources, res, partial) {
+    if (partial === undefined) {
+        return res.json(sources);
+    }
+    var newSources = sources;
+    // If a single object add to an array
+    if (!Array.isArray(sources)) {
+        newContacts = [sources];
+    }
+    var arrOfObjs = newSources.map(({dataValues: {id, source, linkToPosting, JobID, applyType, resumeVersion}}) => ({
+        id,
+        source,
+        linkToPosting,
+        JobID,
+        applyType,
+        resumeVersion
+    }));
+
+    // console.log(arrOfObjs)
+    var x = {
+        layout: false,
+        applications: arrOfObjs
+    }
+
+    // Partial: "partials/jobs/application-block"
+    res.render(partial, x);
+}
+
+
 module.exports = function (app) {
     
     // Get All Possible Sources from an Application
@@ -9,7 +39,8 @@ module.exports = function (app) {
                 ApplicationId: req.params.applicationId
             }
         }).then(sources => {
-            res.json(sources);
+            // Add partial as third argument
+            renderSource(sources, res);
         }).catch(err => {
             console.log(err);
             res.send("No data found");
@@ -24,7 +55,8 @@ module.exports = function (app) {
                 id: req.params.sourceId
             },
         }).then(source => {
-            res.json(source);
+            // Add partial as third argument
+            renderSource(source, res);
         }).catch(err => {
             console.log(err);
             res.send("No data found");
@@ -47,8 +79,8 @@ module.exports = function (app) {
     });
 
     // Create New Source
-    // * Need to add AppID
     app.post("/api/source/new", (req, res) => {
+        // ApplicationId sent from client
         db.Source.create(req.body, {
         }).then(source => {
             res.send(`Source, ${source.source}, has been created`)
