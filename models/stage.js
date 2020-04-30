@@ -1,8 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
     var Stage = sequelize.define("Stage", {
-        dateApplied: {
-            type: DataTypes.STRING
-        },
         currentStage: {
             type: DataTypes.STRING
         },
