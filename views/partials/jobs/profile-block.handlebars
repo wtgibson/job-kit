@@ -1,6 +1,7 @@
 <div class="profile-card" id="profile">
 	<div class="uk-card uk-card-large uk-card-secondary uk-border-rounded">
 		<div class="uk-card-header">
+			<img data-src="{{image}}" width="60px" height="" alt="" uk-img class="uk-border-circle">
 			<div class="uk-grid uk-grid-small uk-text-small" data-uk-grid>
 				<div class="uk-width-expand">
 					<span class="cat-txt">User Profile</span>
@@ -11,25 +12,50 @@
 			</div>
 		</div>
 		<div class="uk-card-body uk-padding-remove-bottom">
+			
 			<ul uk-accordion="multiple: true">
 				<li class="uk-open">
 					<a class="uk-accordion-title" href="#">Name: </a>
 					<div class="uk-accordion-content">
-						<textarea name="" id="prof-name" class="uk-width-expand uk-border-rounded" rows="2" placeholder="">{{name}}</textarea>
+						<textarea name="" id="prof-name" class="uk-width-expand uk-border-rounded" rows="2"
+							placeholder="">{{name}}</textarea>
 					</div>
+				</li>
+
+				<li class="uk-open">
+
+					<a class="uk-accordion-title" href="#">Github: </a>
+					<div class="uk-accordion-content">
+						<textarea name="" id="prof-gh-name" class="uk-width-expand uk-border-rounded" rows="2"
+							placeholder="">{{github}}</textarea> 
 					<hr>
 				</li>
 				<li class="uk-open">
 					<a class="uk-accordion-title" href="#">Desired Job Title: </a>
 					<div class="uk-accordion-content">
-						<textarea name="" id="prof-job" class="uk-width-expand uk-border-rounded" rows="2" placeholder="">{{jobTitle}}</textarea>
+						<textarea name="" id="prof-job" class="uk-width-expand uk-border-rounded" rows="2"
+							placeholder="">{{jobTitle}}</textarea>
 					</div>
 					<hr>
 				</li>
 				<li class="uk-open">
+					<a class="uk-accordion-title" href="#">Primary Coding Language </a>
+					<div class="uk-accordion-content">
+						<span class="cat-txt">Current Selection: {{current_lang}}</span>
+						<select class="uk-select" id="prof-lang">
+							{{#each languages}}
+							{{> jobs/list-block}}
+							{{/each}}
+						</select>
+					</div>
+					<hr>
+				</li>
+
+				<li class="uk-open">
 					<a class="uk-accordion-title" href="#">Location: </a>
 					<div class="uk-accordion-content">
-						<textarea name="" id="prof-zip" class="uk-width-expand uk-border-rounded" rows="2" placeholder="">{{zipCode}}</textarea>
+						<textarea name="" id="prof-zip" class="uk-width-expand uk-border-rounded" rows="2"
+							placeholder="">{{zipCode}}</textarea>
 					</div>
 					<hr>
 				</li>
@@ -39,7 +65,8 @@
 			<div class="uk-grid uk-grid-small uk-grid-divider uk-flex uk-flex-middle" data-uk-grid>
 				<div class="uk-width-expand uk-text-small">
 					<button
-						class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-border-rounded profile-save" data-id={{id}}>Save</button>
+						class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-border-rounded profile-save"
+						data-id={{id}}>Save</button>
 				</div>
 			</div>
 		</div>
