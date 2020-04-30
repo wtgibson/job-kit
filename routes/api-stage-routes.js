@@ -1,5 +1,33 @@
 var db = require("../models");
 
+function renderStage(stages, res, partial) {
+    if (partial === undefined) {
+        return res.json(stages);
+    }
+    var newStages = stages;
+    // If a single object add to an array
+    if (!Array.isArray(stages)) {
+        newStages = [stages];
+    }
+    var arrOfObjs = newStages.map(({dataValues: {id, currentStage, dateCurrentStage, nextStep, notes}}) => ({
+        id,
+        currentStage,
+        dateCurrentStage,
+        nextStep,
+        notes
+    }));
+
+    // console.log(arrOfObjs)
+    var x = {
+        layout: false,
+        applications: arrOfObjs
+    }
+
+    // Partial: "partials/jobs/application-block"
+    res.render(partial, x);
+}
+
+
 module.exports = function (app) {
  
     // Get All Stages for Application
@@ -9,7 +37,8 @@ module.exports = function (app) {
                 ApplicationId: req.params.applicationId
             }
         }).then(stages => {
-            res.json(stages);
+            // Add partial ad third argument
+            renderStage(stages, res);
         }).catch(err => {
             console.log(err);
             res.send(false);
@@ -23,8 +52,9 @@ module.exports = function (app) {
                 ApplicationId: req.params.applicationId,
                 id: req.params.stageId
             }
-        }).then(application => {
-            res.json(application);
+        }).then(stage => {
+            // Add partial ad third argument
+            renderStage(stage, res);
         }).catch(err => {
             console.log(err);
             res.send("No data found");
@@ -32,8 +62,8 @@ module.exports = function (app) {
     });
 
     // Create New Stage
-    // * AppID in req.body
     app.post("/api/stage/new", (req, res) => {
+        // ApplicationId sent from client
         db.Stage.create(req.body, {
             where: {
                 ApplicationId: req.body.applicationId
