@@ -9,27 +9,21 @@ $(function () {
 
     $(document).on("click", ".profile-save", function () {
         event.preventDefault(event)
-
-        console.log("you clicke on it!")
-        var zip = $("#prof-zip").text()
-        var name = $("#prof-name").text()
-        var job = $("#prof-job").text()
+        var zip = $("#prof-zip").val().trim()
+        var name = $("#prof-name").val().trim()
+        var job = $("#prof-job").val().trim()
 
         var userUpdate = {
             name: name,
             jobTitle: job,
             zipCode: zip
         }
-
-        console.log(JSON.stringify(userUpdate))
-
         $.ajax("/api/user/" + globalUserID, {
             type: "PUT",
             data: userUpdate,
         }).then(function (data) {
-            console.log(data);
             location.reload()
-    })
+        })
     })
 
 })
