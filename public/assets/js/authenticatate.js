@@ -126,4 +126,4 @@ $("#login-button").on("click", function (event) {
       firebase.auth().signOut();
     })
   }
-});
+  });

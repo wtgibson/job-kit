@@ -23,6 +23,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true,
         },
+
         zipCode: {
             type: DataTypes.STRING,
             allowNull: true,
@@ -31,6 +32,16 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         jobTitle: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+
+        github: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+
+        codingLanguage: {
             type: DataTypes.STRING,
             allowNull: true,
         }

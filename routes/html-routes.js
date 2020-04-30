@@ -22,7 +22,7 @@ module.exports = function (app) {
 
     // send default page to all routes that are undefined
     app.get("/profile", (req, res) => {
-        res.render("profile")
+        res.render("profile");
     });
 
     app.get("/applications", (req, res) => {
