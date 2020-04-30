@@ -8,8 +8,8 @@ module.exports = function (app) {
         res.render("index");
     });
 
-    app.get("/new-app", (req, res) => {
-        res.render("add-app",data)
+    app.get("/add", (req, res) => {
+        res.render("add-app")
     });
 
     app.get("/login", (req, res) => {
