@@ -11,4 +11,11 @@ $(function () {
         // $(document).html(resp)
     })
 
+    $(document).on("click", ".edit-app", function(){
+        event.preventDefault();
+        window.location.replace("/applications");
+    })
+
+
+
 })
