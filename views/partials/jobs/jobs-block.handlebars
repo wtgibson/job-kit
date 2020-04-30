@@ -1,3 +1,5 @@
+{{#each jobs}}
+
 <div class="job-card" id="job1">
 	<div class="uk-card uk-card-small uk-card-secondary uk-border-rounded">
 		<div class="uk-card-header">
@@ -28,7 +30,7 @@
 					<h4 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="company-{{id}}" href="{{company_url}}">{{company}}</h4>
 					{{!-- <img src="{{company_logo}}" alt="company logo" /> --}}
 					<h5 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="loc-{{id}}">Location: {{location}}</h5>
-					<p class="uk-text-small uk-text-muted"id="desc-{{id}}">Description: {{description}}</p>
+					<p class="uk-text-small uk-text-muted"id="desc-{{id}}">Description: {{{description}}}</p>
 
 				</div>
 			</div>
@@ -43,7 +45,10 @@
 					Current Stage
 				</div>
 				<div class="uk-width-expand uk-text-small">
-					<a class="link-to-ext" href="{{url}}" target="_blank" data-jobId="{{id}}">Job Posting</a> 
+					<a class="link-to-ext" target="_blank" data-jobId="{{id}}">Add Application </a> 
+				</div>
+				<div class="uk-width-expand uk-text-small">
+					<a href="{{url}}" target="_blank" data-jobId="{{id}}">Link to Role </a> 
 				</div>
 			</div>
 		</div>
@@ -52,13 +57,5 @@
 	<hr>
 	<br>
 </div>
-<!-- /card -->
 
-{{!-- <div class="uk-card uk-card-default uk-card-body" data-jobId="{{id}}">
-	<p id="title-${{id}}">Job Title: {{title}}</p>
-	<a id="company-${{id}}" href="{{company_url}}">Company: {{company}}</p>
-	<p id="loc-${{id}}">Location: {{location}}</p>
-	{{!-- <p id="desc-${{id}}">Description: {{description}}</p> --}}
-	{{!-- <button class="link-to-ext" href="{{url}}" target="_blank" data-jobId="{{id}}">link</button> --}}
-	{{!-- <img src="{{company_logo}}" alt="company logo" /> --}}
-{{!-- </div> --}}
+{{/each}}

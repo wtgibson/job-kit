@@ -30,12 +30,18 @@ module.exports = function (app) {
     });
 
     app.get("/jobs", (req, res) => {
-        axios.get("https://jobs.github.com/positions.json?search=code")
+        res.render("jobs");
+    });
+
+    app.get("/api/jobs/:id", (req, res) => {
+        var zip = req.params.id;
+        axios.get(`https://jobs.github.com/positions.json?search=Javascript&location=${zip}`)
             .then(function (response) {
                 var rendered = {
+                    layout: false,
                     jobs: response.data
                 }
-                res.render("jobs", rendered)
+                res.render("partials/jobs/jobs-block", rendered)
             })
             .catch(function (err) {
                 console.log(err)

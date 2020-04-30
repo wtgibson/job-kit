@@ -62,42 +62,17 @@ module.exports = function (app) {
 
     // Signup a new authenticated user
     app.post("/api/signup", (req, res) => {
+        console.log(req.body);
         db.User.create(req.body, {
             })
             .then(user => {
-                res.json(user.id);
+                res.json(user.dataValues.id);
             }).catch(err => {
                 console.log(err)
                 res.status(401).json(err);
             });
     });
-
-    // Get user profile
-    app.get("/api/userProfile", function (req, res) {
-        if (!req.user) {
-            // The user is not logged in, send back an empty object
-            res.json({});
-        } else {
-            // Otherwise send back the user's email and id
-            // Sending back a password, even a hashed password, isn't a good idea
-            db.User.findOne({
-                where: {
-                    id: req.params.id
-                }
-                // attributes: ["id", "email", "name"]
-            }).then(user => {
-                // Add partial as third argument
-                // renderUser(user, res)
-                res.json({
-                    email: req.user.email,
-                    id: req.user.id,
-                    name: req.user.name,
-                    zipCode: req.user.zipCode,
-                    jobTitle: req.user.jobTitle
-                });
-            });
-        };
-    });
+  
 
     // Get user profile
     app.get("/api/user/:id", (req, res) => {
@@ -113,6 +88,7 @@ module.exports = function (app) {
             res.render("partials/jobs/profile-block", {
                 layout: false,
                 createdAt: user.createdAt,
+                id: user.id,
                 name: user.name,
                 zipCode: user.zipCode,
                 jobTitle: user.jobTitle,

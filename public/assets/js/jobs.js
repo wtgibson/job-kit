@@ -1,22 +1,35 @@
 $(function () {
-    $("#app-add").on("click", function (event) {
-        event.preventDefault();
 
-        console.log("clicked to submit app")
+    $.ajax(`/api/jobs/` + globalUserZip, {
+        type: "GET"
+    }).then(function (resp) {
+        $("#github-jobs").append(resp)
+    })
+
+
+    $(document).on("click", ".link-to-ext", function () {
+        // event.preventDefault();
+
+        var id = $(this).data("jobid");
+        var title = $(`#title-${id}`).text();
+        var desc = $(`#desc-${id}`).text();
+        var company = $(`#company-${id}`).text();
+        var link = $(`#company-${id}`).attr("href");
+        var location = $(`#location-${id}`).text();
+       
 
         var newApp = {
-            title: $("#app-title").val(),
-            type: $("#app-type").val(),
-            description: $("#app-desc").val(),
-            industry: $("#app-industry").val(),
-            zipCode: $("#app-zipCode").val(),
-            salaryRange: $("#app-salary").val(),
-            dateApplied: $("#app-applied").val(),
-            rating: $("#app-rating").val(),
+            title: title,
+            type: "",
+            description: desc,
+            industry: "None",
+            zipCode: "94114",
+            salaryRange: "0",
+            rating: 0,
+            dataApplied: Date.now(),
             UserId: globalUserID
         }
 
-        console.log(`Trying to apply with the following object ${JSON.stringify(newApp)}`)
         $.ajax("/api/application", {
             type: "POST",
             data: newApp,
@@ -24,9 +37,9 @@ $(function () {
             // receives back the user id
             console.log(res1)
             var newCompany = {
-                name: $("#comp-name").val(),
-                zipCode: $("#comp-zipCode").val(),
-                URL: $("#comp-link").val(),
+                name: company,
+                zipCode: "",
+                URL: "",
                 ApplicationId: res1,
                 UserId: globalUserID
             }
@@ -36,10 +49,10 @@ $(function () {
             }).then(function (res2) {
                 // receives back the company id
                 var newContact = {
-                    name: $("#cont-name").val(),
-                    email: $("#cont-email").val(),
-                    phone: $("#cont-phone").val(),
-                    type: $("#cont-type").val(),
+                    name: "",
+                    email: "",
+                    phone: "",
+                    type: "",
                     ApplicationId: res1,
                     CompanyId: res2
                 }
@@ -50,11 +63,11 @@ $(function () {
                     console.log(res3)
                     // receives back the company id
                     var newSource = {
-                        source: $("#src-source").val(),
-                        linkToPosting: $("#src-posting").val(),
-                        jobID: " ",
-                        applyType: $("#src-applyType").val(),
-                        resumeVersion: $("#src-resume").val(),
+                        source: "GitHub",
+                        linkToPosting: link,
+                        jobID: "",
+                        applyType: "",
+                        resumeVersion: "",
                         ApplicationId: res1,
                     }
                     $.ajax("/api/source/new", {
@@ -65,10 +78,10 @@ $(function () {
                     })
 
                     var newStage = {
-                        currentStage: $("#stgs-current").val(),
-                        dateCurrentStage: $("#stgs-dateOfStage").val(),
-                        nextStep: $("#stgs-nextStep").val(),
-                        notes: $("#stgs-notes").val(),
+                        currentStage: "Application",
+                        dateCurrentStage: "",
+                        nextStep: "",
+                        notes: "",
                         ApplicationId: res1,
                     }
                     $.ajax("/api/stage/new", {
@@ -80,9 +93,9 @@ $(function () {
 
                 })
             });
+
         })
 
-        $("#add-data-form").append(`<h2> Your application has been submitted </h2>`)
-
     })
+
 })
