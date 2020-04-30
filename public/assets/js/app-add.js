@@ -54,7 +54,7 @@ $(function () {
                     var newSource = {
                         source: $("#src-source").val(),
                         linkToPosting: $("#src-posting").val(),
-                        jobId: " ",
+                        jobID: " ",
                         applyType: $("#src-applyType").val(),
                         resumeVersion: $("#src-resume").val(),
                         ApplicationId: res1,
@@ -68,7 +68,7 @@ $(function () {
 
                     var newStage = {
                         currentStage: $("#stgs-current").val(),
-                        dataCurrentStage: $("#stgs-dateOfStage").val(),
+                        dateCurrentStage: $("#stgs-dateOfStage").val(),
                         nextStep: $("#stgs-nextStep").val(),
                         notes: $("#stgs-notes").val(),
                         ApplicationId: res1,
