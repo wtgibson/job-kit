@@ -1,5 +1,40 @@
 var db = require("../models");
 
+function renderApplications(applications, res, partial) {
+    var newApplications = applications;
+    // If a single object add to an array
+    if (!Array.isArray(applications)) {
+        newApplications = [applications];
+    }
+    var arrOfObjs = newApplications.map(element => ({
+        id: element.dataValues.id,
+        title: element.dataValues.title,
+        type: element.dataValues.type,
+        industry: element.dataValues.industry,
+        zipCode: element.dataValues.zipCode,
+        description: element.dataValues.description,
+        salaryRange: element.dataValues.salaryRange,
+        dateApplied: element.dataValues.dateApplied,
+        rating: element.dataValues.rating,
+        // createdAt: element.dataValues.createdAt,
+        // updatedAt: element.dataValues.updatesAt,
+        company: element.dataValues.Company,
+        contacts: element.dataValues.Contacts,
+        stages: element.dataValues.Stages,
+        sources: element.dataValues.Sources
+    }))
+
+    // console.log(arrOfObjs)
+    var x = {
+        layout: false,
+        applications: arrOfObjs
+    }
+
+    // Partial: "partials/jobs/application-block"
+    res.render(partial, x);
+
+}
+
 module.exports = function (app) {
 
     // Get All Applications
@@ -15,36 +50,7 @@ module.exports = function (app) {
                 { model: db.Source },
             ]
         }).then(applications => {
-            // res.json(applications);
-            // // console.log("-----------------/n", applications[0])
-            // // var parsedApps = JSON.parse(applications[0])
-            var arrOfObjs = []
-
-            applications.forEach(element => arrOfObjs.push({
-                id: element.dataValues.id,
-                title: element.dataValues.title,
-                type: element.dataValues.type,
-                industry: element.dataValues.industry,
-                zipCode: element.dataValues.zipCode,
-                description: element.dataValues.description,
-                salaryRange: element.dataValues.salaryRange,
-                dateApplied: element.dataValues.dateApplied,
-                rating: element.dataValues.rating,
-                // createdAt: element.dataValues.createdAt,
-                // updatedAt: element.dataValues.updatesAt,
-                company: element.dataValues.company,
-                contacts: element.dataValues.contacts,
-                stages: element.dataValues.stages,
-                sources: element.dataValues.sources
-            }))
-
-            console.log(arrOfObjs)
-            var x = {
-                layout: false,
-                applications: arrOfObjs}
-
-            res.render("partials/jobs/application-block", x)
-
+            renderApplications(applications, res, "partials/jobs/application-block");
         }).catch(err => {
             console.log(err);
             res.send("No data found");
@@ -81,7 +87,8 @@ module.exports = function (app) {
                 { model: db.Source },
             ]
         }).then(application => {
-            res.json(application);
+            // Change partial to use different block
+            renderApplications(application, res, "partials/jobs/application-block");
         }).catch(err => {
             console.log(err);
             res.send("No data found");
@@ -124,7 +131,7 @@ module.exports = function (app) {
             },
         }).then((rowsDeleted) => {
             // Check that rows were actually deleted
-            rowsDeleted ? res.send(true) : res.send(false)
+            rowsDeleted ? res.send(true) : res.send(false);
         }).catch(err => {
             console.log(err);
             res.send(false);
