@@ -1,11 +1,8 @@
 
 $(function () {
-
-    var globalUserId;
     var defaultZipCode;
     var defaultJob;
     var defaultName;
-    globalUserId = 1;
 
     // loads user data for default values
 
@@ -57,24 +54,5 @@ $(function () {
 
     })
 
-    $("#app-add").on("submit", function (event) {
-        event.preventDefault();
-
-        var newApp = {
-            title: $("#app-title").val(),
-            type: $("#app-type").val(),
-            description: $("#app-desc").val(),
-            industry: $("#app-industry").val(),
-            zipCode: $("#app-zipCode").val(),
-            salaryRange: $("#app-salary").val(),
-            rating: $("#app-rating").val(),
-            UserId: globalUserId
-        }
-        $.ajax("/api/application", {
-            type: "POST",
-            data: newApp,
-        }).then(function (response) {
-            console.log(response)
-        })
-    })
+    
 });
