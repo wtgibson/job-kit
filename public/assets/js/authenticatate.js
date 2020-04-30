@@ -14,7 +14,7 @@ firebase.initializeApp(firebaseConfig);
 // var database = firebase.database();
 
 // event listener for login screen
-$("#login-button").on("click", function (event) {
+$("#login-button").on("submit", function (event) {
   event.preventDefault();
   var email = $("#email");
   var password = $("#password");
@@ -58,7 +58,9 @@ $("#login-button").on("click", function (event) {
           data: loginData,
         }).then(res => {
           // stores the user id to the globalUserID
-          globalUserID = res;
+          sessionStorage.setItem('uuid', res);
+          console.log(`line 62: ${res}`)
+          
           // reroutes the user to the applications page once they have been authenticated
           window.location.replace("/applications");
         });
@@ -71,6 +73,7 @@ $("#login-button").on("click", function (event) {
           location.assign('/signup');
         }
       })
+    }
 
       function getfireBaseUser() {
       var user = firebase.auth().currentUser;

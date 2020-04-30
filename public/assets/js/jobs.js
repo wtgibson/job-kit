@@ -1,6 +1,15 @@
 $(function () {
+    let globalUserID = sessionStorage.getItem('uuid');
+    // let location;
+    // $("#jobSearch").on('submit', function (event) {
+    //     event.preventDefault();
+    //     location = $('#location');
+    // });
+    
+    console.log(`line 9 : ${locationCity}`);
+    let locationCity = location.val();
 
-    $.ajax(`/api/jobs/` + globalUserZip, {
+    $.ajax(`/api/jobs/` + locationCity, {
         type: "GET"
     }).then(function (resp) {
         $("#github-jobs").append(resp)
@@ -16,7 +25,7 @@ $(function () {
         var company = $(`#company-${id}`).text();
         var link = $(`#company-${id}`).attr("href");
         var location = $(`#location-${id}`).text();
-       
+        
 
         var newApp = {
             title: title,

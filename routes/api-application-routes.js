@@ -18,10 +18,10 @@ function renderApplications(applications, res, partial) {
         rating: element.dataValues.rating,
         // createdAt: element.dataValues.createdAt,
         // updatedAt: element.dataValues.updatesAt,
-        company: element.dataValues.Company,
-        contacts: element.dataValues.Contacts,
-        stages: element.dataValues.Stages,
-        sources: element.dataValues.Sources
+        companyName: element.dataValues.Company.name,
+        contact: element.dataValues.Contact,
+        stage: element.dataValues.Stage,
+        source: element.dataValues.Source
     }))
 
     // console.log(arrOfObjs)
