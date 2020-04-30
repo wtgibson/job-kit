@@ -62,8 +62,9 @@ module.exports = function (app) {
 
     // Signup a new authenticated user
     app.post("/api/signup", (req, res) => {
-        db.User.create(req.body)
-            .then((user) => {
+        db.User.create(req.body, {
+            })
+            .then(user => {
                 res.json(user.id);
             }).catch(err => {
                 console.log(err)
