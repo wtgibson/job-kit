@@ -1,5 +1,34 @@
 var db = require("../models");
 
+
+function renderCompanies(companies, res, partial) {
+    if (partial === undefined) {
+        return res.json(companies);
+    }
+    var newCompany = companies;
+    // If a single object add to an array
+    if (!Array.isArray(companies)) {
+        newCompany = [companies];
+    }
+    var arrOfObjs = newCompany.map(({dataValues: {id, name, zipCode, URL, Contacts}}) => ({
+        id,
+        name,
+        zipCode,
+        URL,
+        contacts: Contacts,
+        
+    }));
+
+    // console.log(arrOfObjs)
+    var x = {
+        layout: false,
+        applications: arrOfObjs
+    }
+
+    // Partial: "partials/jobs/application-block"
+    res.render(partial, x);
+}
+
 module.exports = function (app) {
 
     // Get All Companies for User
@@ -11,7 +40,8 @@ module.exports = function (app) {
             include:
                 [db.Contact]
         }).then(companies => {
-            res.json(companies);
+            // Add Partial as third argument
+            renderCompanies(companies, res)
         }).catch(err => {
             console.log(err);
             res.send('No data found');
@@ -29,7 +59,8 @@ module.exports = function (app) {
             include:
                 [db.Contact]
         }).then(company => {
-            res.json(company);
+            // Add Partial as third argument
+            renderCompanies(company, res)
         }).catch(err => {
             console.log(err);
             res.send('No data found');
@@ -54,6 +85,7 @@ module.exports = function (app) {
 
     // Create Company 
     app.post("/api/company", (req, res) => {
+        // ApplicationId and UserId sent from client
         db.Company.create(req.body, {
         }).then(company => {
             res.send(`Company ${company.dataValues.name}, has been created`)
