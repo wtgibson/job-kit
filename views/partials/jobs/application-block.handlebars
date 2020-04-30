@@ -57,12 +57,14 @@
                     <p>Resume Version: </p>
                     <p>Rating: {{rating}}</p>
                     <p>Next Steps: </p>
-                        {{#each stage}}
+                    <ul>
+                        {{#each stageObj}}
                             <li>{{currentStage}}</li>
                             <li>{{dateCurrentStage}}</li>
                             <li>{{nextStep}}</li>
                             <li>{{notes}}</li> 
                         {{/each}}
+                    </ul>
 
                     <hr>
 
