@@ -46,7 +46,7 @@ module.exports = function (app) {
     });
 
     // Get One Stage for Application
-    app.get("/api/application/:applicationId/stage/:stageId", (req, res) => {
+    app.get("/api/stage/:stageId", (req, res) => {
         db.Stage.findOne({
             where: {
                 ApplicationId: req.params.applicationId,
