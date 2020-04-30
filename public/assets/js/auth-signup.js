@@ -69,14 +69,15 @@ $("#signup-button").on("click", function (event) {
           console.log("==== signedup ====");
           console.log(data.user.email);
           
-          let signupData = {email: data.user.email};
+          let signupData = { email: data.user.email };
+          console.log(signupData);
 
           $.ajax("/api/signup", {
             type: "POST",
             data: signupData,
           }).then(res => {
             console.log(res);
-            globalUserId = res;
+            globalUserID = res;
             window.location.replace("/profile");
           });
      
