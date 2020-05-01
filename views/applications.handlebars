@@ -9,10 +9,10 @@
 						src="https://dewey.tailorbrands.com/production/brand_version_mockup_image/852/2922780852_17e18edb-4281-4a6c-8a36-9f026bf29cf2.png?cb=1588108119"
 						alt="jobkit-logo"></a>
 			</div>
-			<div id="filter-container">
+			<div id="uk-width-expand filter-container">
 				<div class="uk-margin">
 					<div uk-form-custom="target: > * > span:last-child">
-						<select id="filter">
+						<select id="field">
 							{{!-- Don't filter on 0 --}}
 							<option value="0">Filter</option>
 							<option value="title">Title</option>
@@ -23,7 +23,19 @@
 							<option value="currentStage">Current Stage</option>
 						</select>
 						<span class="uk-link">
-							<span uk-icon="icon: pencil"></span>
+							<span uk-icon="icon: settings"></span>
+							<span></span>
+						</span>
+					</div>
+				</div>
+				<div class="uk-margin">
+					<div uk-form-custom="target: > * > span:last-child">
+						<select id="filter">
+							{{!-- Don't filter on 0 --}}
+							<option value="0">Filter</option>
+						</select>
+						<span class="uk-link">
+							<span uk-icon="icon: chevron-down"></span>
 							<span></span>
 						</span>
 					</div>

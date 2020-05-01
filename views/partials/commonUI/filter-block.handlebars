@@ -1,15 +1,5 @@
-<div class="uk-margin">
-    <div uk-form-custom="target: > * > span:last-child">
-        <select id="filter">
-            {{!-- Don't filter on 0 --}}
-            <option value="0">Filter</option>
-            {{#each fieldList}}
-                <option value={{this}}>{{this}}</option>
-            {{/each}}
-        </select>
-        <span class="uk-link">
-            <span uk-icon="icon: pencil"></span>
-            <span></span>
-        </span>
-    </div>
-</div>
+{{!-- Don't filter on 0 --}}
+<option value="0">Filter</option>
+{{#each fieldList}}
+    <option value={{this}}>{{this}}</option>
+{{/each}}
