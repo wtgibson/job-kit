@@ -38,49 +38,70 @@
                     <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{zipCode}}</h5>
                     <p class="uk-text-small uk-text-muted">{{description}}</p>
                     <p class="uk-text-small uk-text-muted uk-text-bold">{{salaryRange}}</p>
-                    
+                    <p>Rating: {{rating}}</p>
+
                     <hr>
 
                     <p>Job Application ID: {{id}}</p>
                     <p>Company Field: {{industry}}</p>
-                    <p>Internal Contacts: </p>
+
+                    <h4>Internal Contacts:</h4>
                     
-                    <ul>
+                    <table class="uk-table uk-table-striped">
+                        <thead>
+                            <tr>
+                                <th>Contact Name</th>
+                                <th>Contact Type</th>
+                                <th>Contact Email</th>
+                                <th>Contact Phone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         {{#each contactObj}}
-                            <li>{{dataValues.name}}</li>
-                            <li>{{dataValues.type}}</li>
-                            <li>{{dataValues.email}}</li>
-                            <li>{{dataValues.phone}}</li>
+                            {{> contacts/contact-block}}
                         {{/each}}
-                    </ul>
                     
-                    <hr>
+                         </tbody>
+                    </table>
 
-                    <p>Application Process & Method: </p>
-                    <p>Resume Version: </p>
-                    <p>Rating: {{rating}}</p>
-                    <p>Next Steps: </p>
-                    <ul>
+                    <hr>
+                    
+                    <h4>Application Stages:</h4>
+                    <table class="uk-table uk-table-striped">
+                        <thead>
+                            <tr>
+                                <th>Stage</th>
+                                <th>Date</th>
+                                <th>Next Step</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         {{#each stageObj}}
-                            <li>{{dataValues.currentStage}}</li>
-                            <li>{{dataValues.dateCurrentStage}}</li>
-                            <li>{{dataValues.nextStep}}</li>
-                            <li>{{dataValues.notes}}</li> 
+                            {{> stages/stage-block}}
                         {{/each}}
-                    </ul>
+                    
+                         </tbody>
+                    </table>
 
                     <hr>
 
-                    <p>User Notes: </p>
-                    <ul>
+                    <h4>Sources:</h4>
+                    <table class="uk-table uk-table-striped">
+                        <thead>
+                            <tr>
+                                <th>Source</th>
+                                <th>Apply Type</th>
+                                <th>Resume Version</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         {{#each sourceObj}}
-                            <li>{{dataValues.source}}</li>
-                            <li>{{dataValues.linkToPosting}}</li>
-                            <li>{{dataValues.jobID}}</li>
-                            <li>{{dataValues.applyType}}</li> 
-                            <li>{{dataValues.resumeVersion}}</li> 
+                            {{> sources/source-block}}
                         {{/each}}
-                    </ul>
+                    
+                         </tbody>
+                    </table>
                 </div>
             </div>
             <!-- END OF MODAL -->
