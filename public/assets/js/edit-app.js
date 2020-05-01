@@ -1,46 +1,58 @@
 $(function () {
     let globalUserID = sessionStorage.getItem('uuid');
     let appID = sessionStorage.getItem('caid');
-    
 
-    $.ajax(`/api/application/${appID}`,{
+    $.ajax(`/api/application/${appID}`, {
         type: "GET"
-    }).then (function(res){
+    }).then(function (res) {
         $("#app-title").val(res.title);
-        // $("#app-type").value(res.type);
         $("#app-desc").val(res.description);
         $("#app-industry").val(res.industry);
         $("#app-zipCode").val(res.zipCode);
         $("#app-salary").val(res.salaryRange);
         $("#app-applied").val(res.dateApplied);
         $("#app-rating").val(res.rating);
-        // name: $("#comp-name").val(),
-        //         zipCode: $("#comp-zipCode").val(),
-        //         URL: $("#comp-link").val(),
-        //         name: $("#cont-name").val(),
-        //             email: $("#cont-email").val(),
-        //             phone: $("#cont-phone").val(),
-        //             type: $("#cont-type").val(),
-        //             source: $("#src-source").val(),
-        //             linkToPosting: $("#src-posting").val(),
-        //             jobID: " ",
-        //             applyType: $("#src-applyType").val(),
-        //             resumeVersion: $("#src-resume").val(),
-        //             currentStage: $("#stgs-current").val(),
-        //             dateCurrentStage: $("#stgs-dateOfStage").val(),
-        //             nextStep: $("#stgs-nextStep").val(),
-        //             notes: $("#stgs-notes").val(),
-        //             ApplicationId: res1,
+
+
+        console.log(`the job type is: ${res.type}`)
+        // if(res.type === "FTE" ){
+        //     $("#app-type").attr("checked", "checked");
+        // }
+        // if(res.type === "Part-Time" ){
+        //     $("#app-type").attr("checked", "checked");
+        // }
+        
 
     })
 
-    
-    $("#app-add").on("click", function (event) {
+    console.log(`/api/company/${appID}`)
+
+
+    $.ajax(`/api/company/${appID}`, {
+        type: "GET"
+    }).then(function (res2) {
+        console.log(JSON.stringify(res2))
+        $("#comp-name").val(res2.name);
+        $("#comp-zipCode").val(res2.zipCode);
+        $("#comp-link").val(res2.URL)
+    })
+
+    // $.ajax(`/api/application/${appID}/source/all`, {
+    //     type: "GET"
+    // }).then(function (res3) {
+    //     $("#src-source").val(res3.source);
+    //     $("#src-posting").val(res3.linkToPosting);
+    //     $("#src-applyType").val(res3.applyType);
+    //     $("#src-resume").val(res3.resumeVersion);
+    // })
+
+
+    $("#app-edit").on("click", function (event) {
         event.preventDefault();
+    
 
-        console.log("clicked to submit app")
-
-        var newApp = {
+        // ------- Update App ---------
+        var updateApp = {
             title: $("#app-title").val(),
             type: $("#app-type").val(),
             description: $("#app-desc").val(),
@@ -52,73 +64,52 @@ $(function () {
             UserId: globalUserID
         }
 
-        console.log(`Trying to apply with the following object ${JSON.stringify(newApp)}`)
-        $.ajax("/api/application", {
-            type: "POST",
-            data: newApp,
+        console.log(`Trying to update this app: ${appID}`)
+        $.ajax(`/api/application/${appID}`, {
+            type: "PUT",
+            data: updateApp,
         }).then(function (res1) {
-            // receives back the user id
             console.log(res1)
-            var newCompany = {
-                name: $("#comp-name").val(),
-                zipCode: $("#comp-zipCode").val(),
-                URL: $("#comp-link").val(),
-                ApplicationId: res1,
-                UserId: globalUserID
-            }
-            $.ajax("/api/company", {
-                type: "POST",
-                data: newCompany,
-            }).then(function (res2) {
-                // receives back the company id
-                var newContact = {
-                    name: $("#cont-name").val(),
-                    email: $("#cont-email").val(),
-                    phone: $("#cont-phone").val(),
-                    type: $("#cont-type").val(),
-                    ApplicationId: res1,
-                    CompanyId: res2
-                }
-                $.ajax("/api/contact/new", {
-                    type: "POST",
-                    data: newContact,
-                }).then(function (res3) {
-                    console.log(res3)
-                    // receives back the company id
-                    var newSource = {
-                        source: $("#src-source").val(),
-                        linkToPosting: $("#src-posting").val(),
-                        jobID: " ",
-                        applyType: $("#src-applyType").val(),
-                        resumeVersion: $("#src-resume").val(),
-                        ApplicationId: res1,
-                    }
-                    $.ajax("/api/source/new", {
-                        type: "POST",
-                        data: newSource,
-                    }).then(function (res4) {
-                        console.log(res4)
-                    })
-
-                    var newStage = {
-                        currentStage: $("#stgs-current").val(),
-                        dateCurrentStage: $("#stgs-dateOfStage").val(),
-                        nextStep: $("#stgs-nextStep").val(),
-                        notes: $("#stgs-notes").val(),
-                        ApplicationId: res1,
-                    }
-                    $.ajax("/api/stage/new", {
-                        type: "POST",
-                        data: newStage,
-                    }).then(function (res5) {
-                        console.log(res5)
-                    })
-
-                })
-            });
         })
 
-        $("#add-data-form").append(`<h2> Your application has been submitted </h2>`)
+        // ------- Update Company ---------
+
+        var updateCompany = {
+            name: $("#comp-name").val(),
+            zipCode: $("#comp-zipCode").val(),
+            URL: $("#comp-link").val(),
+        }
+
+        $.ajax(`/api/company/${appID}`, {
+            type: "PUT",
+            data: updateCompany,
+        }).then(function (res) {
+            console.log(res)
+        })
+
+
+        // ------- Update Source ---------
+
+        var updateSource = {
+            source: $("#src-source").val(),
+            linkToPosting: $("#src-posting").val(),
+            applyType: $("#src-applyType").val(),
+            resumeVersion: $("#src-resume").val(),
+        }
+
+        $.ajax(`/api/source/${appID}`, {
+            type: "PUT",
+            data: updateSource,
+        }).then(function (res) {
+            console.log(res)
+        })
+
+        
+        $("#add-data-form").append(`<h2> Your form was submitted </h2>`)
+
 
     })
+
+    
+
 })
