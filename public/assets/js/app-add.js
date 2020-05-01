@@ -41,21 +41,7 @@ $(function () {
                 data: newCompany,
             }).then(function (res2) {
                 console.log(res2)
-                // receives back the company id
-                // var newContact = {
-                //     name: $("#cont-name").val(),
-                //     email: $("#cont-email").val(),
-                //     phone: $("#cont-phone").val(),
-                //     type: $("#cont-type").val(),
-                //     ApplicationId: res1,
-                //     CompanyId: res2
-                // }
-                // $.ajax("/api/contact/new", {
-                //     type: "POST",
-                //     data: newContact,
-                // }).then(function (res3) {
-                //     console.log(res3)
-                //     // receives back the company id
+            
                 var newSource = {
                     source: $("#src-source").val(),
                     linkToPosting: $("#src-posting").val(),

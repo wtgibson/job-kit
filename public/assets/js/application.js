@@ -73,7 +73,7 @@ $(function () {
             type: "POST",
             data: newContact,
         }).then(function (res3) {
-            console.log(res3)
+            window.location.reload()
             // receives back the company id
 
         })
