@@ -123,9 +123,7 @@ module.exports = function (app) {
         }).catch(err => {
             console.log(err);
             res.send("Failed to update");
-        });
+        });  
     });
+
 }
-
-
-

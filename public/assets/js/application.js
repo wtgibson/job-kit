@@ -1,14 +1,15 @@
 $(function () {
     // import { userObj } from 'userId.js'
     let globalUserID = sessionStorage.getItem('uuid')
+    let field;
     console.log(`loading using the object id: ${globalUserID} `)
    
     $.ajax(`/api/user/${globalUserID}/application/all`, {
         type: "GET"
-    }).then(function (resp) {
-        // console.log(resp)
-        $("#app-append").append(resp)
-        // $(document).html(resp)
+    }).then(function (res) {
+        console.log(res)
+        $("#app-append").append(res)
+        // $(document).html(res)
     });
 
     $(document).on("click", ".edit-app", function(event){
@@ -25,7 +26,7 @@ $(function () {
 
         $.ajax(`/api/application/${id}`, {
             type: "DELETE"
-        }).then(function (resp){
+        }).then(function (res){
             window.location.reload()
         })
         
@@ -33,7 +34,7 @@ $(function () {
   
 
     $("#field").on("change", function(event) {
-        const field = event.target.value;
+        field = event.target.value;
         if (field === "0") {
             return
         }
@@ -62,6 +63,59 @@ $(function () {
             })
         }
 
+    });
+
+    $("#filter").on("change", function(event) {
+        const filter = event.target.value;
+        console.log(filter);
+        $("#app-append").empty();
+        if (filter === "0") {
+            return
+        }
+        else if (field === "title") {
+            $.ajax(`/api/user/${globalUserID}/application/filter/title/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                console.log("======================")
+                console.log(res);
+                $("#app-append").append(res)
+            })
+        }
+        else if (field === "zipCode") {
+            $.ajax(`/api/user/${globalUserID}/application/filter/zipCode/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
+        else if (field === "rating") {
+            $.ajax(`/api/user/${globalUserID}/application/filter/rating/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
+        else if (field === "source") {
+            $.ajax(`/api/source/filter/sourceType/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
+        else if (field === "resumeVersion") {
+            $.ajax(`/api/user/:userId/source/filter/resumeVersion/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
+        else if (field === "currentStage") {
+            $.ajax(`/api/stage/filter/currentStage/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
     });
 
 })
