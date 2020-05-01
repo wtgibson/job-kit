@@ -6,6 +6,8 @@ $(function () {
     $.ajax(`/api/user/${globalUserID}/application/all`, {
         type: "GET"
     }).then(function (res) {
+        // console.log(res)
+
         $("#app-append").append(res)
         // $(document).html(res)
     });
@@ -66,7 +68,6 @@ $(function () {
     // Change Filter - "Engineer", "Front-end Developer", etc.
     $("#filter").on("change", function(event) {
         const filter = event.target.value;
-        console.log(filter);
         $("#app-append").empty();
         if (filter === "0") {
             return
