@@ -16,22 +16,26 @@ $(function () {
         window.location.replace("/applications");
     });
 
-    $("#filter").on("change", function(event) {
+    $("#field").on("change", function(event) {
         const field = event.target.value;
-        // $("#filter-container").empty();
+        if (field === "0") {
+            return
+        }
+        $("#filter").empty();
+
         // Filter on Application Field
         if (field === "title" || "zipCode" || "rating") {
             $.ajax(`/api/user/${globalUserID}/application/${field}`, {
                 type: "GET"
             }).then(function (res) {
-                $("#filter-container").append(res);
+                $("#filter").append(res);
             })
         }
         // else if (field === "source" || "resumeVersion") {
         //     $.ajax(`/api/source/all/${field}`, {
         //         type: "GET"
         //     }).then(function (res) {
-        //         $("#filter-container").append(res);
+        //         $("#filter").append(res);
         //     })
         // }
         // if (field === "currentStage") {
