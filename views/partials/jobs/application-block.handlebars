@@ -32,76 +32,82 @@
                     <button class="uk-modal-close-default" type="button" uk-close></button>
 
                     <button class="edit-app" data-appId={{id}} uk-icon="pencil" type="button"></button>
-
+                    <p>Job Application ID: {{id}}</p>
+                    <p class="uk-float-right uk-text-center">Rating: {{rating}} <span uk-icon="star"></span></p>
                     <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
                     <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyName}}</h4>
+                    <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{industry}}</h4>
                     <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{zipCode}}</h5>
-                    <p class="uk-text-small uk-text-muted">{{description}}</p>
-                    <p class="uk-text-small uk-text-muted uk-text-bold">{{salaryRange}}</p>
-                    <p>Rating: {{rating}}</p>
+                    <p class="uk-text-small uk-text-muted uk-text-bold">Salary Range: {{salaryRange}}</p>
+                    <div class="uk-overflow-auto">
+                        <p class="uk-text-small uk-text-muted">{{description}}</p>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="uk-overflow-auto">
+                        <h4>Internal Contacts:</h4>
+                    
+                        <table class="uk-table uk-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Contact Name</th>
+                                    <th>Contact Type</th>
+                                    <th>Contact Email</th>
+                                    <th>Contact Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {{#each contactObj}}
+                                {{> contacts/contact-block}}
+                            {{/each}}
+                        
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="uk-overflow-auto">
+                        <h4>Application Stages:</h4>
+                        <table class="uk-table uk-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Stage</th>
+                                    <th>Date</th>
+                                    <th>Next Step</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {{#each stageObj}}
+                                {{> stages/stage-block}}
+                            {{/each}}
+                        
+                            </tbody>
+                        </table>
+                    </div>
 
                     <hr>
 
-                    <p>Job Application ID: {{id}}</p>
-                    <p>Company Field: {{industry}}</p>
-
-                    <h4>Internal Contacts:</h4>
-                    
-                    <table class="uk-table uk-table-striped">
-                        <thead>
-                            <tr>
-                                <th>Contact Name</th>
-                                <th>Contact Type</th>
-                                <th>Contact Email</th>
-                                <th>Contact Phone</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {{#each contactObj}}
-                            {{> contacts/contact-block}}
-                        {{/each}}
-                    
-                         </tbody>
-                    </table>
-
-                    <hr>
-                    
-                    <h4>Application Stages:</h4>
-                    <table class="uk-table uk-table-striped">
-                        <thead>
-                            <tr>
-                                <th>Stage</th>
-                                <th>Date</th>
-                                <th>Next Step</th>
-                                <th>Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {{#each stageObj}}
-                            {{> stages/stage-block}}
-                        {{/each}}
-                    
-                         </tbody>
-                    </table>
-
-                    <hr>
-
-                    <h4>Sources:</h4>
-                    <table class="uk-table uk-table-striped">
-                        <thead>
-                            <tr>
-                                <th>Source</th>
-                                <th>Apply Type</th>
-                                <th>Resume Version</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {{#each sourceObj}}
-                            {{> sources/source-block}}
-                        {{/each}}
-                    
-                         </tbody>
-                    </table>
+                    <div class="uk-overflow-auto">
+                        <h4>Sources:</h4>
+                        <table class="uk-table uk-table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Source</th>
+                                    <th>Apply Type</th>
+                                    <th>Resume Version</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {{#each sourceObj}}
+                                {{> sources/source-block}}
+                            {{/each}}
+                        
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <!-- END OF MODAL -->
