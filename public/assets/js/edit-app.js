@@ -2,40 +2,54 @@ $(function () {
     let globalUserID = sessionStorage.getItem('uuid');
     let appID = sessionStorage.getItem('caid');
 
-
     $.ajax(`/api/application/${appID}`, {
         type: "GET"
     }).then(function (res) {
         $("#app-title").val(res.title);
-        // $("#app-type").value(res.type);
         $("#app-desc").val(res.description);
         $("#app-industry").val(res.industry);
         $("#app-zipCode").val(res.zipCode);
         $("#app-salary").val(res.salaryRange);
         $("#app-applied").val(res.dateApplied);
         $("#app-rating").val(res.rating);
+
+
+        console.log(`the job type is: ${res.type}`)
+        // if(res.type === "FTE" ){
+        //     $("#app-type").attr("checked", "checked");
+        // }
+        // if(res.type === "Part-Time" ){
+        //     $("#app-type").attr("checked", "checked");
+        // }
+        
+
     })
+
+    console.log(`/api/company/${appID}`)
+
 
     $.ajax(`/api/company/${appID}`, {
         type: "GET"
     }).then(function (res2) {
+        console.log(JSON.stringify(res2))
         $("#comp-name").val(res2.name);
         $("#comp-zipCode").val(res2.zipCode);
         $("#comp-link").val(res2.URL)
     })
 
-    $.ajax(`/api/application/${appID}/source/all`, {
-        type: "GET"
-    }).then(function (res2) {
-        $("#src-source").val(res2.source);
-        $("#src-posting").val(res2.linkToPosting);
-        $("#src-applyType").val(res2.applyType);
-        $("#src-resume").val(res2.resumeVersion);
-    })
+    // $.ajax(`/api/application/${appID}/source/all`, {
+    //     type: "GET"
+    // }).then(function (res3) {
+    //     $("#src-source").val(res3.source);
+    //     $("#src-posting").val(res3.linkToPosting);
+    //     $("#src-applyType").val(res3.applyType);
+    //     $("#src-resume").val(res3.resumeVersion);
+    // })
 
 
     $("#app-edit").on("click", function (event) {
         event.preventDefault();
+    
 
         // ------- Update App ---------
         var updateApp = {

@@ -104,7 +104,8 @@ module.exports = function (app) {
                 ApplicationId: req.params.appId,
             },
         }).then(companies => {
-            res.json(companies);
+            console.log(`companies: ${companies}`)
+            res.json(companies)
             // console.log(companies);
         }).catch(err => {
             console.log(err);
