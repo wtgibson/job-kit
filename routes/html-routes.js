@@ -42,6 +42,7 @@ module.exports = function (app) {
                     jobs: response.data
                 }
                 res.render("partials/jobs/jobs-block", rendered)
+                console.log(response.data)
             })
             .catch(function (err) {
                 console.log(err)
