@@ -96,4 +96,18 @@ module.exports = function (app) {
         });
     });
 
+    // Update Company
+    app.put("/api/company/:companyId", (req, res) => {
+        db.Company.update(req.body, {
+            where: {
+                id: req.params.companyId
+            },
+        }).then(() => {
+            res.json("Completed");
+        }).catch(err => {
+            console.log(err);
+            res.send("Failed to update");
+        });  
+    });
+
 }
