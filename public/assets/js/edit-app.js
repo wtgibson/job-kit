@@ -31,20 +31,21 @@ $(function () {
     $.ajax(`/api/company/${appID}`, {
         type: "GET"
     }).then(function (res2) {
-        console.log(JSON.stringify(res2))
-        $("#comp-name").val(res2.name);
-        $("#comp-zipCode").val(res2.zipCode);
-        $("#comp-link").val(res2.URL)
+        let company = res2[0];
+        $("#comp-name").val(company.name);
+        $("#comp-zipCode").val(company.zipCode);
+        $("#comp-link").val(company.URL)
     })
 
-    // $.ajax(`/api/application/${appID}/source/all`, {
-    //     type: "GET"
-    // }).then(function (res3) {
-    //     $("#src-source").val(res3.source);
-    //     $("#src-posting").val(res3.linkToPosting);
-    //     $("#src-applyType").val(res3.applyType);
-    //     $("#src-resume").val(res3.resumeVersion);
-    // })
+    $.ajax(`/api/application/${appID}/source/all`, {
+        type: "GET"
+    }).then(function (res3) {
+        let firstSource = res3[0];
+        $("#src-source").val(firstSource.source);
+        $("#src-posting").val(firstSource.linkToPosting);
+        $("#src-applyType").val(firstSource.applyType);
+        $("#src-resume").val(firstSource.resumeVersion);
+    })
 
 
     $("#app-edit").on("click", function (event) {

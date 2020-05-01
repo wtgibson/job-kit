@@ -2,11 +2,12 @@ $(function () {
     let globalUserID = sessionStorage.getItem('uuid');
 
 
-    $("#app-add").on("submit", function (event) {
+    $("#app-add").on("click", function (event) {
         event.preventDefault();
-        $("#add-data-form").empty()
-        $("#add-data-form").append(`<h2> Your application has been submitted </h2>
-        <a class="uk-button-large uk-button-secondary uk-border-rounded" href="/applications">Return to Applications Page</a>`)
+        window.location.replace("/applications")
+        // $("#add-data-form").empty()
+        // $("#add-data-form").append(`<h2> Your application has been submitted </h2>
+        // <a class="uk-button-large uk-button-secondary uk-border-rounded" href="/applications">Return to Applications Page</a>`)
        
 
         var newApp = {
@@ -17,7 +18,8 @@ $(function () {
             zipCode: $("#app-zipCode").val(),
             salaryRange: $("#app-salary").val(),
             dateApplied: $("#app-applied").val(),
-            rating: $("#app-rating").val(),
+            rating: 0,
+            // rating: $("#app-rating").val(),
             UserId: globalUserID
         }
 
@@ -38,6 +40,7 @@ $(function () {
                 type: "POST",
                 data: newCompany,
             }).then(function (res2) {
+                console.log(res2)
                 // receives back the company id
                 // var newContact = {
                 //     name: $("#cont-name").val(),
