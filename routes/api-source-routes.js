@@ -10,7 +10,7 @@ function renderSource(sources, res, partial) {
     if (!Array.isArray(sources)) {
         newContacts = [sources];
     }
-    var arrOfObjs = newSources.map(({dataValues: {id, source, linkToPosting, JobID, applyType, resumeVersion}}) => ({
+    var arrOfObjs = newSources.map(({ dataValues: { id, source, linkToPosting, JobID, applyType, resumeVersion } }) => ({
         id,
         source,
         linkToPosting,
@@ -31,7 +31,7 @@ function renderSource(sources, res, partial) {
 
 
 module.exports = function (app) {
-    
+
     // Get All Possible Sources from an Application
     app.get("/api/application/:applicationId/source/all", (req, res) => {
         db.Source.findAll({
@@ -39,12 +39,13 @@ module.exports = function (app) {
                 ApplicationId: req.params.applicationId
             }
         }).then(sources => {
+            res.json(sources)
             // Add partial as third argument
-            renderSource(sources, res);
+            // renderSource(sources, res);
         }).catch(err => {
             console.log(err);
             res.send("No data found");
-        });    
+        });
     });
 
     // Get Single Source from an Application
@@ -61,12 +62,12 @@ module.exports = function (app) {
             console.log(err);
             res.send("No data found");
         });
-            
+
     });
 
     // Get All Source - Source, linkToPosting, JobID, ApplyType, ResumeVersion
     //  * Need to add by User
-     app.get("/api/source/all/:field", (req, res) => {
+    app.get("/api/source/all/:field", (req, res) => {
         db.Source.findAll({
             attributes: [req.params.field]
         }).then(fieldList => {
@@ -95,8 +96,8 @@ module.exports = function (app) {
         });
     });
 
-     // Update Source
-     app.put("/api/source/:sourceId", (req, res) => {
+    // Update Source
+    app.put("/api/source/:sourceId", (req, res) => {
         db.Source.update(req.body, {
             where: {
                 id: req.params.sourceId
@@ -106,7 +107,7 @@ module.exports = function (app) {
         }).catch(err => {
             console.log(err);
             res.send("Failed to update");
-        });  
+        });
     });
 
     // Delete Source
@@ -120,6 +121,22 @@ module.exports = function (app) {
         }).catch(err => {
             console.log(err);
             res.send(false);
+        });
+    });
+
+
+    //   ana added 
+
+    app.put("/api/source/:appId", (req, res) => {
+        db.Source.update(req.body, {
+            where: {
+                ApplicationId: req.params.sourceId
+            },
+        }).then(() => {
+            res.json("Completed");
+        }).catch(err => {
+            console.log(err);
+            res.send("Failed to update");
         });
     });
 
