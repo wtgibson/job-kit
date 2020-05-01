@@ -9,6 +9,7 @@ function renderApplications(applications, res, partial) {
     if (!Array.isArray(applications)) {
         newApplications = [applications];
     }
+
     var arrOfObjs = newApplications.map(element => ({
         id: element.dataValues.id,
         title: element.dataValues.title,

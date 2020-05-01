@@ -17,6 +17,8 @@ $(function () {
         var language = $("#prof-lang").val().trim()
         var github = $("#prof-gh-name").val().trim()
 
+        sessionStorage.setItem('clid', language);
+
         var userUpdate = {
             name: name,
             jobTitle: job,

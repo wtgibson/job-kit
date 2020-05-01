@@ -1,19 +1,20 @@
 $(function () {
     let globalUserID = sessionStorage.getItem('uuid');
+    let codingLanguage = sessionStorage.getItem('clid');
     
     $(document).on("submit","#search-form", function () {
         event.preventDefault();
         var locationCity = $(".job-search-bar").val().trim();
-        console.log(`the city location is ${locationCity}`)
-        $.ajax(`/api/jobs/${locationCity}`, {
+        $.ajax(`/api/jobs/${codingLanguage}/${locationCity}`, {
             type: "GET"
         }).then(function (resp) {
-            $("#github-jobs").append(resp)
+            $("#github-jobs").empty()
+            $("#github-jobs").prepend(resp)
         })
     
     });
 
-    $.ajax(`/api/jobs/""`, {
+    $.ajax(`/api/jobs/${codingLanguage}`, {
         type: "GET"
     }).then(function (resp) {
         $("#github-jobs").append(resp)
