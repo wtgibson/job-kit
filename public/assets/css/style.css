@@ -18,6 +18,10 @@
 	/* height: 10%; */
 }
 
+.jobkit-blue-color {
+	color:#1565c0 !important;
+}
+
 textarea {
 	font-size: 1.25rem;
 }
