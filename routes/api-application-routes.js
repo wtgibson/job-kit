@@ -9,6 +9,7 @@ function renderApplications(applications, res, partial) {
     if (!Array.isArray(applications)) {
         newApplications = [applications];
     }
+
     var arrOfObjs = newApplications.map(element => ({
         id: element.dataValues.id,
         title: element.dataValues.title,
@@ -94,6 +95,7 @@ module.exports = function (app) {
             attributes: [req.params.field]
         }).then(applications => {
             res.json(applications);
+            console.log("api/user/:userId/application ===================================")
             console.log(applications);
         }).catch(err => {
             console.log(err);
