@@ -6,10 +6,10 @@
         <div class="uk-card-header">
             <div class="uk-grid uk-grid-small uk-text-small" data-uk-grid>
                 <div class="uk-width-expand">
-                    <span class="cat-txt">Job Application {{id}}</span>
+                    <span class="cat-txt uk-text-left">Job Application {{id}}</span>
                 </div>
                 <div class="uk-width-auto uk-text-right uk-text-muted">
-                    <span data-uk-icon="icon:clock; ratio: 0.8"></span> Date Applied: {{dateApplied}}
+                    <span data-uk-icon="icon:clock; ratio: 0.8"></span> {{dateApplied}}
                 </div>
             </div>
         </div>
@@ -18,12 +18,19 @@
             <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyName}}</h4>
             <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{zipCode}}</h5>
             <p class="uk-text-small uk-text-muted">{{description}}</p>
-            <p class="uk-text-small uk-text-muted uk-text-bold">{{salaryRange}}</p>
+            <p class="uk-text-small uk-text-muted uk-text-bold">${{salaryRange}}</p>
             <!-- Model Button -->
-            <button class="edit-app" uk-icon="pencil" data-appid={{id}} type="button"></button>
-            <button class="delete-app" uk-icon="trash" data-appid={{id}} type="button"></button>
-            <a data-id={{id}} class="details-link-modal uk-button uk-button-default uk-border-rounded" href="#modal-center-{{id}}" uk-toggle>Details</a>
-
+            <div class="uk-grid-small uk-align-center" uk-grid>
+                <div class="uk-width-auto">
+                    <button class="edit-app" uk-icon="pencil" data-appid={{id}} type="button"></button>
+                </div>
+                <div class="uk-width-auto">
+                    <a data-id={{id}} class="details-link-modal uk-button uk-button-default uk-border-rounded" href="#modal-center-{{id}}" uk-toggle>Details</a>                
+                </div>
+                <div class="uk-width-auto">
+                    <button class="delete-app" uk-icon="trash" data-appid={{id}} type="button"></button>
+                </div>
+            </div>
             <!-- Modal Info -->
             <div id="modal-center-{{id}}" class="uk-flex-top" uk-modal>
                 <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
@@ -143,13 +150,13 @@
         <div class="uk-card-footer">
             <div class="uk-grid uk-grid-small uk-grid-divider uk-flex uk-flex-middle" data-uk-grid>
                 <div class="uk-width-expand uk-text-small">
-                    User Rating: {{rating}}
+                    Interest Level {{rating}}
                 </div>
                 <div class="uk-width-expand uk-text-small">
                     Current Stage
                 </div>
                 <div class="uk-width-expand uk-text-small">
-                    <a href="#">Job Posting</a>
+                    <a href="{{#}}">Job Posting</a>
                 </div>
             </div>
         </div>

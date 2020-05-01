@@ -31,10 +31,15 @@
                             <div class="uk-width-1-3">
                                 <input class="uk-input uk-border-pill" required placeholder="Job Title" type="text" id="app-title">
                             </div>
-                            <div class="uk-width-1-3">
-                                <label for="Job Type"><input class="uk-radio" placeholder="Job Type" type="radio" id="app-type"> FTE</label>
-                                <label for="Job Type"><input class="uk-radio" placeholder="Job Type" type="radio" id="app-type"> Part-Time</label>
-                                <label for="Job Type"><input class="uk-radio" placeholder="Job Type" type="radio" id="app-type"> Contract</label>
+                            <div class="uk-width-1-3">                                    
+                                <div class="uk-border-pill" id="app-rating">
+                                        <p>Job Type:
+                                            <label><input class="uk-radio" type="radio" name="radio2" value="FTE"> FTE </label>
+                                            <label><input class="uk-radio" type="radio" name="radio2" value="Part-Time"> Part-Time </label>
+                                            <label><input class="uk-radio" type="radio" name="radio2" value="Contract"> Contract </label>
+                                            <label><input class="uk-radio" type="radio" name="radio2" value="Internship"> Internship </label>
+                                        </p>
+                                </div>
                             </div>
                             <div class="uk-width-1-3">
                                 <input class="uk-input uk-border-pill" placeholder="Salary" type="text" id="app-salary">
@@ -58,7 +63,15 @@
                             </div>
 
                             <div class="uk-width-1-3">
-                                <input class="uk-input uk-border-pill" placeholder="Rating" type="text" id="app-rating">
+                                        <div class="uk-border-pill" id="app-rating">
+                                            <p>Interest Level :
+                                                <label><input class="uk-radio" type="radio" name="radio1" value="1"> 😕 </label>
+                                                <label><input class="uk-radio" type="radio" name="radio1" value="2"> 😶 </label>
+                                                <label><input class="uk-radio" type="radio" name="radio1" value="3"> 😊 </label>
+                                                <label><input class="uk-radio" type="radio" name="radio1" value="4"> 😃 </label>
+                                                <label><input class="uk-radio" type="radio" name="radio1" value="5"> 🚀 </label>
+                                            </p>
+                                        </div>
                             </div>
 
                         </div>
@@ -77,7 +90,7 @@
                             </div>
 
                             <div class="uk-width-1-3">
-                                <input class="uk-input uk-border-pill" placeholder="Zipcode" type="text" id="comp-zipCode">
+                                <input class="uk-input uk-border-pill" placeholder="Location" type="text" id="comp-zipCode">
                             </div>
 
                             <div class="uk-width-1-3">
@@ -176,8 +189,8 @@
                 </div>
 
                 <div class="uk-width-1-2 uk-align-center">
-                    <button type="submit" id="app-edit" class="uk-button uk-button-primary uk-border-pill uk-width-1-1 uk-margin">SAVE EDITS
-                    </button>
+                    <a href="/applications"><button type="submit" id="app-edit" class="uk-button uk-button-primary uk-border-pill uk-width-1-1 uk-margin">SAVE EDITS
+                    </button></a>
                     <hr>
                     <a type="submit" id="app-back" class="uk-button uk-button-primary uk-border-pill uk-width-1-4" href="/applications">BACK
                     </a>
