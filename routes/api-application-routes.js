@@ -1,46 +1,6 @@
 var db = require("../models");
+var renderApps = require("./api-application-render.js");
 
-function renderApplications(applications, res, partial) {
-    if (partial === undefined) {
-        return res.json(applications);
-    }
-    var newApplications = applications;
-    // If a single object add to an array
-    if (!Array.isArray(applications)) {
-        newApplications = [applications];
-    }
-
-    var arrOfObjs = newApplications.map(element => ({
-        id: element.dataValues.id,
-        title: element.dataValues.title,
-        type: element.dataValues.type,
-        industry: element.dataValues.industry,
-        zipCode: element.dataValues.zipCode,
-        description: element.dataValues.description,
-        salaryRange: element.dataValues.salaryRange,
-        dateApplied: element.dataValues.dateApplied,
-        rating: element.dataValues.rating,
-        // createdAt: element.dataValues.createdAt,
-        // updatedAt: element.dataValues.updatesAt,
-        // companyName: element.dataValues.Company.dataValues.name,
-        // companyObj: element.dataValues.Company.dataValues,
-        contactObj: element.dataValues.Contacts,
-        stageObj: element.dataValues.Stages,
-        sourceObj: element.dataValues.Sources
-    })
-    );
-
-    // console.log(arrOfObjs)
-    var hbsObj = {
-        layout: false,
-        applications: arrOfObjs
-    }
-
-    // Partial: "partials/jobs/application-block"
-    res.render(partial, hbsObj);
-    // res.json(arrOfObjs);
-
-}
 
 module.exports = function (app) {
 
@@ -57,7 +17,7 @@ module.exports = function (app) {
                 { model: db.Source },
             ]
         }).then(applications => {
-            renderApplications(applications, res, "partials/jobs/application-block");
+            renderApps(applications, res, "partials/jobs/application-block");
         }).catch(err => {
             console.log(err);
             res.send("No data found");
@@ -80,7 +40,7 @@ module.exports = function (app) {
         }).then(application => {
             // Change partial to use different block
             res.json(application)
-            // renderApplications(application, res, "partials/jobs/application-block");
+            // renderApps(application, res, "partials/jobs/application-block");
         }).catch(err => {
             console.log(err);
             res.send("No data found");
