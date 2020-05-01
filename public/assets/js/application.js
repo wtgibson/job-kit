@@ -2,19 +2,19 @@ $(function () {
     // import { userObj } from 'userId.js'
     let globalUserID = sessionStorage.getItem('uuid')
     let field;
-    console.log(`loading using the object id: ${globalUserID} `)
    
     $.ajax(`/api/user/${globalUserID}/application/all`, {
         type: "GET"
     }).then(function (res) {
         // console.log(res)
+
         $("#app-append").append(res)
         // $(document).html(res)
     });
 
     $(document).on("click", ".edit-app", function(event){
         event.preventDefault();
-        var id = $(".edit-app").data("appid");
+        var id = $(this).data("appid");
         sessionStorage.setItem('caid', id);
         window.location.replace("/edit")
         
