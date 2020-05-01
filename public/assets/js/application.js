@@ -41,27 +41,27 @@ $(function () {
         $("#filter").empty();
 
         // Filter on Application Field
-        if (field === "title" || "zipCode" || "rating") {
+        if (field === "title" || field === "zipCode" || field === "rating") {
             $.ajax(`/api/user/${globalUserID}/application/${field}`, {
                 type: "GET"
             }).then(function (res) {
                 $("#filter").append(res);
             })
         }
-        // else if (field === "source" || "resumeVersion") {
-        //     $.ajax(`/api/source/all/${field}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //         $("#filter").append(res);
-        //     })
-        // }
-        // if (field === "currentStage") {
-        //     $.ajax(`/api/source/all/${field}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //         $("#filter-container").append(res);
-        //     })
-        // }
+        else if (field === "source" || field === "resumeVersion") {
+            $.ajax(`/api/source/all/${field}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#filter").append(res);
+            })
+        }
+        else if (field === "currentStage") {
+            $.ajax(`/api/stage/all/${field}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#filter").append(res);
+            })
+        }
 
     });
 
