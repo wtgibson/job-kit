@@ -1,11 +1,13 @@
 $(function () {
     let globalUserID = sessionStorage.getItem('uuid');
 
-    
-    $("#app-add").on("click", function (event) {
-        event.preventDefault();
 
-        console.log("clicked to submit app")
+    $("#app-add").on("submit", function (event) {
+        event.preventDefault();
+        $("#add-data-form").empty()
+        $("#add-data-form").append(`<h2> Your application has been submitted </h2>
+        <a class="uk-button-large uk-button-secondary uk-border-rounded" href="/applications">Return to Applications Page</a>`)
+       
 
         var newApp = {
             title: $("#app-title").val(),
@@ -19,7 +21,6 @@ $(function () {
             UserId: globalUserID
         }
 
-        console.log(`Trying to apply with the following object ${JSON.stringify(newApp)}`)
         $.ajax("/api/application", {
             type: "POST",
             data: newApp,
@@ -38,54 +39,53 @@ $(function () {
                 data: newCompany,
             }).then(function (res2) {
                 // receives back the company id
-                var newContact = {
-                    name: $("#cont-name").val(),
-                    email: $("#cont-email").val(),
-                    phone: $("#cont-phone").val(),
-                    type: $("#cont-type").val(),
+                // var newContact = {
+                //     name: $("#cont-name").val(),
+                //     email: $("#cont-email").val(),
+                //     phone: $("#cont-phone").val(),
+                //     type: $("#cont-type").val(),
+                //     ApplicationId: res1,
+                //     CompanyId: res2
+                // }
+                // $.ajax("/api/contact/new", {
+                //     type: "POST",
+                //     data: newContact,
+                // }).then(function (res3) {
+                //     console.log(res3)
+                //     // receives back the company id
+                var newSource = {
+                    source: $("#src-source").val(),
+                    linkToPosting: $("#src-posting").val(),
+                    jobID: " ",
+                    applyType: $("#src-applyType").val(),
+                    resumeVersion: $("#src-resume").val(),
                     ApplicationId: res1,
-                    CompanyId: res2
                 }
-                $.ajax("/api/contact/new", {
+                $.ajax("/api/source/new", {
                     type: "POST",
-                    data: newContact,
-                }).then(function (res3) {
-                    console.log(res3)
-                    // receives back the company id
-                    var newSource = {
-                        source: $("#src-source").val(),
-                        linkToPosting: $("#src-posting").val(),
-                        jobID: " ",
-                        applyType: $("#src-applyType").val(),
-                        resumeVersion: $("#src-resume").val(),
-                        ApplicationId: res1,
-                    }
-                    $.ajax("/api/source/new", {
-                        type: "POST",
-                        data: newSource,
-                    }).then(function (res4) {
-                        console.log(res4)
-                    })
-
-                    var newStage = {
-                        currentStage: $("#stgs-current").val(),
-                        dateCurrentStage: $("#stgs-dateOfStage").val(),
-                        nextStep: $("#stgs-nextStep").val(),
-                        notes: $("#stgs-notes").val(),
-                        ApplicationId: res1,
-                    }
-                    $.ajax("/api/stage/new", {
-                        type: "POST",
-                        data: newStage,
-                    }).then(function (res5) {
-                        console.log(res5)
-                    })
-
+                    data: newSource,
+                }).then(function (res4) {
+                    console.log(res4)
                 })
-            });
-        })
 
-        $("#add-data-form").append(`<h2> Your application has been submitted </h2>`)
+                // var newStage = {
+                //     currentStage: $("#stgs-current").val(),
+                //     dateCurrentStage: $("#stgs-dateOfStage").val(),
+                //     nextStep: $("#stgs-nextStep").val(),
+                //     notes: $("#stgs-notes").val(),
+                //     ApplicationId: res1,
+                // }
+                // $.ajax("/api/stage/new", {
+                //     type: "POST",
+                //     data: newStage,
+                // }).then(function (res5) {
+                //     console.log(res5)
+                // })
 
+            })
+        });
     })
+
+   
+
 })

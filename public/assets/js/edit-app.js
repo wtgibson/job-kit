@@ -7,13 +7,22 @@ $(function () {
         type: "GET"
     }).then(function (res) {
         $("#app-title").val(res.title);
-        // $("#app-type").value(res.type);
         $("#app-desc").val(res.description);
         $("#app-industry").val(res.industry);
         $("#app-zipCode").val(res.zipCode);
         $("#app-salary").val(res.salaryRange);
         $("#app-applied").val(res.dateApplied);
         $("#app-rating").val(res.rating);
+
+        console.log(`the job type is: ${res.type}`)
+        // if(res.type === "FTE" ){
+        //     $("#app-type").attr("checked", "checked");
+        // }
+        // if(res.type === "Part-Time" ){
+        //     $("#app-type").attr("checked", "checked");
+        // }
+        
+
     })
 
     $.ajax(`/api/company/${appID}`, {
@@ -36,6 +45,7 @@ $(function () {
 
     $("#app-edit").on("click", function (event) {
         event.preventDefault();
+    
 
         // ------- Update App ---------
         var updateApp = {
