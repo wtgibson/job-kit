@@ -32,12 +32,6 @@ $(function () {
     });
 
 
-
-
-
-
-
-
     $("#filter").on("change", function(event) {
         const field = event.target.value;
         // $("#filter-container").empty();

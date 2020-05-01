@@ -10,13 +10,13 @@ function renderCompanies(companies, res, partial) {
     if (!Array.isArray(companies)) {
         newCompany = [companies];
     }
-    var arrOfObjs = newCompany.map(({dataValues: {id, name, zipCode, URL, Contacts}}) => ({
+    var arrOfObjs = newCompany.map(({ dataValues: { id, name, zipCode, URL, Contacts } }) => ({
         id,
         name,
         zipCode,
         URL,
         contacts: Contacts,
-        
+
     }));
 
     // console.log(arrOfObjs)
@@ -96,4 +96,36 @@ module.exports = function (app) {
         });
     });
 
+    // _____ Ana added routes ------
+
+    app.get("/api/company/:appId", (req, res) => {
+        db.Company.findAll({
+            where: {
+                ApplicationId: req.params.appId,
+            },
+        }).then(companies => {
+            res.json(companies);
+            // console.log(companies);
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+    });
+
+
+    app.put("/api/company/:appId", (req, res) => {
+        db.Company.update(req.body, {
+            where: {
+                ApplicationId: req.params.appId
+            },
+        }).then(() => {
+            res.json("Completed");
+        }).catch(err => {
+            console.log(err);
+            res.send("Failed to update");
+        });
+    });
 }
+
+
+
