@@ -41,13 +41,13 @@
                     <p>Job Application ID: {{id}}</p>
                     <p>Company Field: {{industry}}</p>
                     <p>Internal Contacts: </p>
-                    <p>{{contactObj}}</p>
+                    
                     <ul>
                         {{#each contactObj}}
-                            <li>{{name}}</li>
-                            <li>{{type}}</li>
-                            <li>{{email}}</li>
-                            <li>{{phone}}</li>
+                            <li>{{dataValues.name}}</li>
+                            <li>{{dataValues.type}}</li>
+                            <li>{{dataValues.email}}</li>
+                            <li>{{dataValues.phone}}</li>
                         {{/each}}
                     </ul>
                     
@@ -59,16 +59,25 @@
                     <p>Next Steps: </p>
                     <ul>
                         {{#each stageObj}}
-                            <li>{{currentStage}}</li>
-                            <li>{{dateCurrentStage}}</li>
-                            <li>{{nextStep}}</li>
-                            <li>{{notes}}</li> 
+                            <li>{{dataValues.currentStage}}</li>
+                            <li>{{dataValues.dateCurrentStage}}</li>
+                            <li>{{dataValues.nextStep}}</li>
+                            <li>{{dataValues.notes}}</li> 
                         {{/each}}
                     </ul>
 
                     <hr>
 
                     <p>User Notes: </p>
+                    <ul>
+                        {{#each sourceObj}}
+                            <li>{{dataValues.source}}</li>
+                            <li>{{dataValues.linkToPosting}}</li>
+                            <li>{{dataValues.jobID}}</li>
+                            <li>{{dataValues.applyType}}</li> 
+                            <li>{{dataValues.resumeVersion}}</li> 
+                        {{/each}}
+                    </ul>
                 </div>
             </div>
 
