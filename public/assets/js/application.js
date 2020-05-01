@@ -32,7 +32,6 @@ $(function () {
     });
   
 
-
     $("#field").on("change", function(event) {
         const field = event.target.value;
         if (field === "0") {
