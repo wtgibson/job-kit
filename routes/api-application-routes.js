@@ -40,7 +40,7 @@ module.exports = function (app) {
         }).then(application => {
             // Change partial to use different block
             res.json(application)
-            // renderApps(application, res, "partials/jobs/application-block");
+            // renderApps(application, res, "partials/jobs/details-block");
         }).catch(err => {
             console.log(err);
             res.send("No data found");
