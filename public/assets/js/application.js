@@ -11,11 +11,13 @@ $(function () {
         // $(document).html(resp)
     })
 
-    $(document).on("click", ".edit-app", function(){
+    $(document).on("click", ".edit-app", function(event){
         event.preventDefault();
-        window.location.replace("/applications");
-    })
+        // window.location.replace("/applications");
+        var id = $(".edit-app").data("appId");
+        console.log(`the application that you selected is: ${id}`)
 
+    })
 
 
 })

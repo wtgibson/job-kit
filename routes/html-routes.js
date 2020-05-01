@@ -12,6 +12,10 @@ module.exports = function (app) {
         res.render("add-app")
     });
 
+    app.get("/edit", (req, res) => {
+        res.render("edit-app")
+    });
+
     app.get("/login", (req, res) => {
         res.render("login");
     });
