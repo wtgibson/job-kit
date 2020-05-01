@@ -4,11 +4,9 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
         },
+        // we are expecting to receive all types of text now under location
         zipCode: {
             type: DataTypes.STRING,
-            validate: {
-                len:[5,5]
-            }
         },
         URL: {
             type: DataTypes.STRING
