@@ -1,6 +1,6 @@
 <!-- card -->
 {{#each applications}}
-				
+
 <div class="application-card" id="application{{id}}">
     <div class="uk-card uk-card-small uk-card-secondary uk-border-rounded">
         <div class="uk-card-header">
@@ -22,12 +22,12 @@
             <!-- Model Button -->
             <button class="edit-app" uk-icon="pencil" data-appid={{id}} type="button"></button>
             <button class="delete-app" uk-icon="trash" data-appid={{id}} type="button"></button>
-            <a class="uk-button uk-button-default uk-border-rounded" href="#modal-center" uk-toggle>Details</a>
+            <a data-id={{id}} class="details-link-modal uk-button uk-button-default uk-border-rounded" href="#modal-center-{{id}}" uk-toggle>Details</a>
 
             <!-- Modal Info -->
-            <div id="modal-center" class="uk-flex-top" uk-modal>
+            <div id="modal-center-{{id}}" class="uk-flex-top" uk-modal>
                 <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-            
+
 
                     <button class="uk-modal-close-default" type="button" uk-close></button>
 
@@ -42,12 +42,39 @@
                     <div class="uk-overflow-auto">
                         <p class="uk-text-small uk-text-muted">{{description}}</p>
                     </div>
-                    
+
                     <hr>
-                    
+
                     <div class="uk-overflow-auto">
-                        <h4>Internal Contacts:</h4>
-                    
+                        <h4>Internal Contacts <span><a href="" uk-icon="plus-circle" class="add-contact" data-appid="{{id}}"></a> </span></h4>
+                        <form class="add-contact-form uk-section-muted uk-hidden add-form" id="add-form-{{id}}" >
+                            <table class="uk-table">
+                                <caption></caption>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input id="add-contact-name-{{id}}" class="uk-input uk-border-pill" type="text">
+                                        </td>
+                                        <td><input id="add-contact-type-{{id}}" class="uk-input uk-border-pill" type="text">
+                                        </td>
+                                        <td><input id="add-contact-email-{{id}}" class="uk-input uk-border-pill" type="text">
+                                        </td>
+                                        <td><input id="add-contact-phone-{{id}}" class="uk-input uk-border-pill" type="text">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button
+                                class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-norder-rounded contact-save" id="save-contact-{{id}}">Save</button>
+                        </form>
+
                         <table class="uk-table uk-table-striped">
                             <thead>
                                 <tr>
@@ -58,16 +85,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            {{#each contactObj}}
+                                {{#each contactObj}}
                                 {{> contacts/contact-block}}
-                            {{/each}}
-                        
+                                {{/each}}
+
                             </tbody>
                         </table>
                     </div>
-                    
+
                     <hr>
-                    
+
                     <div class="uk-overflow-auto">
                         <h4>Application Stages:</h4>
                         <table class="uk-table uk-table-striped">
@@ -80,10 +107,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            {{#each stageObj}}
+                                {{#each stageObj}}
                                 {{> stages/stage-block}}
-                            {{/each}}
-                        
+                                {{/each}}
+
                             </tbody>
                         </table>
                     </div>
@@ -101,10 +128,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            {{#each sourceObj}}
+                                {{#each sourceObj}}
                                 {{> sources/source-block}}
-                            {{/each}}
-                        
+                                {{/each}}
+
                             </tbody>
                         </table>
                     </div>
@@ -122,14 +149,14 @@
                     Current Stage
                 </div>
                 <div class="uk-width-expand uk-text-small">
-                    <a href="#">Job Posting</a> 
+                    <a href="#">Job Posting</a>
                 </div>
             </div>
         </div>
     </div>
     <br>
-	<hr>
-	<br>
+    <hr>
+    <br>
 </div>
 <!-- /card -->
 {{/each}}
