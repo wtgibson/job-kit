@@ -30,7 +30,7 @@ $(function () {
         
     });
   
-
+    // Change Field - title, zipcode, etc.
     $("#field").on("change", function(event) {
         field = event.target.value;
         if (field === "0") {
@@ -63,6 +63,7 @@ $(function () {
 
     });
 
+    // Change Filter - "Engineer", "Front-end Developer", etc.
     $("#filter").on("change", function(event) {
         const filter = event.target.value;
         console.log(filter);
@@ -116,4 +117,14 @@ $(function () {
         }
     });
 
-})
+    // Click Reset Filter Button
+    $("#reset-btn").on("click", function(event) {
+        event.preventDefault();
+        $.ajax(`/api/user/${globalUserID}/application/all`, {
+            type: "GET"
+        }).then(function (res) {
+            $("#app-append").append(res);
+        });
+    });
+
+}); 
