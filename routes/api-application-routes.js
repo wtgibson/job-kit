@@ -22,8 +22,8 @@ function renderApplications(applications, res, partial) {
         rating: element.dataValues.rating,
         // createdAt: element.dataValues.createdAt,
         // updatedAt: element.dataValues.updatesAt,
-        companyName: element.dataValues.Company.dataValues.name,
-        companyObj: element.dataValues.Company.dataValues,
+        // companyName: element.dataValues.Company.dataValues.name,
+        // companyObj: element.dataValues.Company.dataValues,
         contactObj: element.dataValues.Contacts,
         stageObj: element.dataValues.Stages,
         sourceObj: element.dataValues.Sources
@@ -79,7 +79,8 @@ module.exports = function (app) {
             ]
         }).then(application => {
             // Change partial to use different block
-            renderApplications(application, res, "partials/jobs/application-block");
+            res.json(application)
+            // renderApplications(application, res, "partials/jobs/application-block");
         }).catch(err => {
             console.log(err);
             res.send("No data found");

@@ -13,10 +13,27 @@ $(function () {
 
     $(document).on("click", ".edit-app", function(event){
         event.preventDefault();
-        window.location.replace("/applications");
+        var id = $(".edit-app").data("appid");
+        sessionStorage.setItem('caid', id);
+        window.location.replace("/edit")
+        
     });
 
+  $(document).on("click", ".delete-app", function(event){
+        event.preventDefault();
+        var id = $(".delete-app").data("appid");
+
+        $.ajax(`/api/application/${id}`, {
+            type: "DELETE"
+        }).then(function (resp){
+            window.location.reload()
+        })
+        
+    });
+  
+
     $("#field").on("change", function(event) {
+      
         const field = event.target.value;
         if (field === "0") {
             return

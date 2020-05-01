@@ -1,0 +1,197 @@
+<script src="../assets/js/edit-app.js"></script>
+
+
+<div class="background uk-height-viewport uk-light">
+    <!-- overlay -->
+    <div class="uk-position-cover uk-overlay-primary"></div>
+    
+    <div class="uk-panel uk-dark uk-text-center uk-position-center">
+        <div class="uk-width-2xlarge uk-padding-small uk-position-z-index uk-position-relative" uk-scrollspy="cls: uk-animation-fade">
+
+        <img id="add-logo" class="uk-center" src="https://dewey.tailorbrands.com/production/brand_version_mockup_image/852/2922780852_17e18edb-4281-4a6c-8a36-9f026bf29cf2.png?cb=1588108119" alt="jobkit-logo">
+
+        <br>
+
+        
+        <!-- add-application -->
+        <form class="toggle-class create-form">
+            <fieldset class="uk-fieldset">
+                <!-- <legend class="uk-legend uk-text-small">Fill In Job Application Info Below</legend>
+
+                <hr> -->
+
+                <div class="form-group uk-margin-small">
+
+                    <div class="uk-margin-small-top uk-margin-small-bottom">
+                        <legend class="uk-legend uk-text-small">Application Info</legend>
+                        
+                        <br>
+                        
+                        <div class="uk-grid-small uk-child-width-expand@s uk-vertical-align" id="app-qs" uk-grid>
+                            <div class="uk-width-1-3">
+                                <input class="uk-input uk-border-pill" required placeholder="Job Title" type="text" id="app-title">
+                            </div>
+                            <div class="uk-width-1-3">
+                                <label for="Job Type"><input class="uk-radio" placeholder="Job Type" type="radio" id="app-type"> FTE</label>
+                                <label for="Job Type"><input class="uk-radio" placeholder="Job Type" type="radio" id="app-type"> Part-Time</label>
+                                <label for="Job Type"><input class="uk-radio" placeholder="Job Type" type="radio" id="app-type"> Contract</label>
+                            </div>
+                            <div class="uk-width-1-3">
+                                <input class="uk-input uk-border-pill" placeholder="Salary" type="text" id="app-salary">
+                            </div>
+                            <div class="uk-width-2-3">
+                                <input class="uk-input uk-border-pill" placeholder="Job Description" type="text" id="app-desc">
+                            </div>
+
+                            <div class="uk-width-1-3">
+                                <input class="uk-input uk-border-pill" placeholder="Industry" type="text" id="app-industry">
+                            </div>
+
+                            <div class="uk-width-1-3">
+                                <input class="uk-input uk-border-pill" placeholder="Zipcode" type="text" id="app-zipCode">
+                            </div>
+
+                            
+
+                            <div class="uk-width-1-3">
+                                <input class="uk-input uk-border-pill uk-form" placeholder="Date Applied" type="text" id="app-applied" data-uk-datepicker="{format:'DD.MM.YYYY'}">
+                            </div>
+
+                            <div class="uk-width-1-3">
+                                <input class="uk-input uk-border-pill" placeholder="Rating" type="text" id="app-rating">
+                            </div>
+
+                        </div>
+
+                            <br>
+
+                            <!-- <hr> -->
+
+                            <legend class="uk-legend uk-text-small">Company Info</legend>
+
+                            <br>
+
+                        <div class="uk-grid-small uk-child-width-expand@s uk-vertical-align" id="company-qs" uk-grid>
+                            <div class="uk-width-1-3">
+                                <input class="uk-input uk-border-pill" placeholder="Company Name" type="text" id="comp-name">
+                            </div>
+
+                            <div class="uk-width-1-3">
+                                <input class="uk-input uk-border-pill" placeholder="Zipcode" type="text" id="comp-zipCode">
+                            </div>
+
+                            <div class="uk-width-1-3">
+                                <input class="uk-input uk-border-pill" placeholder="Company Website" type="text" id="comp-link">
+                            </div>
+                            
+                        </div>
+
+                        <br>
+
+                            <!-- <hr> -->
+
+                            <legend class="uk-legend uk-text-small">Contact Info</legend>
+
+                            <br>
+
+                        <div class="uk-grid-small uk-child-width-expand@s uk-vertical-align" id="contact-qs" uk-grid>
+                            <div class="uk-width-1-4">
+                                <input class="uk-input uk-border-pill" placeholder="Contact Name" type="text" id="cont-name">
+                            </div>
+
+                            <div class="uk-width-1-4">
+                                <input class="uk-input uk-border-pill" placeholder="Contact Email" type="text" id="cont-email">
+                            </div>
+
+                            <div class="uk-width-1-4">
+                                <input class="uk-input uk-border-pill" placeholder="Contact Phone" type="text" id="cont-phone">
+                            </div>
+
+                            <div class="uk-width-1-4">
+                                <input class="uk-input uk-border-pill" placeholder="Contact Type" type="text" id="cont-type">
+                            </div>
+                            
+                        </div>
+
+                            <br>
+                            
+                            <!-- <hr> -->
+
+                            <legend class="uk-legend uk-text-small">Source Info</legend>
+
+                            <br>
+
+                        <div class="uk-grid-small uk-child-width-expand@s uk-vertical-align" id="source-qs" uk-grid>
+                            <!-- Dropdown? -->
+                            <div class="uk-width-1-4">
+                                <input class="uk-input uk-border-pill" placeholder="Source" type="text" id="src-source">
+                            </div>
+
+                            <!-- Dropdown? -->
+                            <div class="uk-width-1-4">
+                                <input class="uk-input uk-border-pill" placeholder="Apply Type" type="text" id="src-applyType">
+                            </div>
+
+                            <div class="uk-width-1-4">
+                                <input class="uk-input uk-border-pill" placeholder="Link to Posting" type="text" id="src-posting">
+                            </div>
+                            <!-- Dropdown? -->
+                            <div class="uk-width-1-4">
+                                <input class="uk-input uk-border-pill" placeholder="Resume Version" type="text" id="src-resume">
+                            </div>
+                                    
+                        </div>
+
+                            <br>
+
+                            <!-- <hr> -->
+
+                            <legend class="uk-legend uk-text-small">Stage Info</legend>
+
+                            <br>
+
+                        <div class="uk-grid-small uk-child-width-expand@s uk-vertical-align" id="stages-qs" uk-grid>
+                            <!-- Dropdown -->
+                            <div class="uk-width-1-2">
+                                <input class="uk-input uk-border-pill" placeholder="Current Stage" type="text" id="stgs-current">
+                            </div>
+                            
+                            <!-- Date -->
+                            <div class="uk-width-1-2">
+                                <input class="uk-input uk-border-pill uk-form" placeholder="Date of Current Stage" type="text" id="stgs-dateOfStage" data-uk-datepicker="{format:'DD.MM.YYYY'}">
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="uk-width-1-2">
+                                <input class="uk-input uk-border-pill" placeholder="Next Steps" type="text" id="stgs-nextStep">
+                            </div>
+
+                            <div class="uk-width-1-2">
+                                <input class="uk-input uk-border-pill" placeholder="Notes" type="text" id="stgs-notes">
+                            </div>																				
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="uk-width-1-2 uk-align-center">
+                    <button type="submit" id="app-add" class="uk-button uk-button-primary uk-border-pill uk-width-1-1">ADD APPLICATION</button>
+                </div>
+                
+            </fieldset>
+        </form>
+        <!-- /add-application -->
+        
+        <!-- <hr> -->
+
+        <!-- FOOTER-->
+        <!-- <footer id="site-foot" class="uk-section uk-section-preserve uk-section-xsmall uk-position-z-index">
+            <div class="uk-container uk-text-small uk-text-center">
+                Made with ❤️ by JobKit
+            </div>
+        </footer> -->
+        <!--/FOOTER -->
+    </div>
+    
+</div>
