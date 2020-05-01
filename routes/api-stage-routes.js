@@ -61,6 +61,20 @@ module.exports = function (app) {
         });
     });
 
+    // Get All Stage - Applied, Behavioral Interview, etc.
+    //  * Need to add by User
+    app.get("/api/source/all/:field", (req, res) => {
+        db.Source.findAll({
+            attributes: [req.params.field]
+        }).then(sources => {
+            res.json(sources);
+            console.log(sources);
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+    });
+
     // Create New Stage
     app.post("/api/stage/new", (req, res) => {
         // ApplicationId sent from client
