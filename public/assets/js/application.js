@@ -33,6 +33,22 @@ $(function () {
 
     });
 
+    $(document).on("click", "#details-btn", function(event){
+        // event.preventDefault();
+        var id = event.target.value;;
+        console.log(id)
+
+        $.ajax(`/api/application/${id}`, {
+            type: "GET"
+        }).then(function (res){
+            console.log(res);
+            // window.location.reload()
+            $("#details-modal").append(res);
+        })
+        
+    });
+  
+
     $(document).on("click", ".add-contact", function (event) {
         event.preventDefault();
         var id = $(".add-contact").data("appid")
@@ -89,20 +105,26 @@ $(function () {
                 $("#filter").append(res);
             })
         }
-        else if (field === "source" || field === "resumeVersion") {
-            $.ajax(`/api/source/all/${field}`, {
-                type: "GET"
-            }).then(function (res) {
-                $("#filter").append(res);
-            })
-        }
-        else if (field === "currentStage") {
-            $.ajax(`/api/stage/all/${field}`, {
-                type: "GET"
-            }).then(function (res) {
-                $("#filter").append(res);
-            })
-        }
+        // else if (field === "source" || field === "resumeVersion") {
+        //     $.ajax(`/api/user/${globalUserID}/application/${field}`, {
+        //         type: "GET"
+        //     }).then(function (res) {
+        //        console.log(res)
+        //     })
+
+        //     $.ajax(`/api/source/all/${field}`, {
+        //         type: "GET"
+        //     }).then(function (res) {
+        //         $("#filter").append(res);
+        //     })
+        // }
+        // else if (field === "currentStage") {
+        //     $.ajax(`/api/stage/all/${field}`, {
+        //         type: "GET"
+        //     }).then(function (res) {
+        //         $("#filter").append(res);
+        //     })
+        // }
 
     });
 
@@ -117,8 +139,6 @@ $(function () {
             $.ajax(`/api/user/${globalUserID}/application/filter/title/${filter}`, {
                 type: "GET"
             }).then(function (res) {
-                console.log("======================")
-                console.log(res);
                 $("#app-append").append(res)
             })
         }
@@ -136,27 +156,27 @@ $(function () {
                 $("#app-append").append(res)
             })
         }
-        else if (field === "source") {
-            $.ajax(`/api/source/filter/sourceType/${filter}`, {
-                type: "GET"
-            }).then(function (res) {
-                $("#app-append").append(res)
-            })
-        }
-        else if (field === "resumeVersion") {
-            $.ajax(`/api/user/:userId/source/filter/resumeVersion/${filter}`, {
-                type: "GET"
-            }).then(function (res) {
-                $("#app-append").append(res)
-            })
-        }
-        else if (field === "currentStage") {
-            $.ajax(`/api/stage/filter/currentStage/${filter}`, {
-                type: "GET"
-            }).then(function (res) {
-                $("#app-append").append(res)
-            })
-        }
+        // else if (field === "source") {
+        //     $.ajax(`/api/source/filter/sourceType/${filter}`, {
+        //         type: "GET"
+        //     }).then(function (res) {
+        //         $("#app-append").append(res)
+        //     })
+        // }
+        // else if (field === "resumeVersion") {
+        //     $.ajax(`/api/user/:userId/source/filter/resumeVersion/${filter}`, {
+        //         type: "GET"
+        //     }).then(function (res) {
+        //         $("#app-append").append(res)
+        //     })
+        // }
+        // else if (field === "currentStage") {
+        //     $.ajax(`/api/stage/filter/currentStage/${filter}`, {
+        //         type: "GET"
+        //     }).then(function (res) {
+        //         $("#app-append").append(res)
+        //     })
+        // }
     });
 
     // Click Reset Filter Button
