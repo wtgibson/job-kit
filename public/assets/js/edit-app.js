@@ -1,5 +1,38 @@
 $(function () {
     let globalUserID = sessionStorage.getItem('uuid');
+    let appID = sessionStorage.getItem('caid');
+    
+
+    $.ajax(`/api/application/${appID}`,{
+        type: "GET"
+    }).then (function(res){
+        $("#app-title").val(res.title);
+        // $("#app-type").value(res.type);
+        $("#app-desc").val(res.description);
+        $("#app-industry").val(res.industry);
+        $("#app-zipCode").val(res.zipCode);
+        $("#app-salary").val(res.salaryRange);
+        $("#app-applied").val(res.dateApplied);
+        $("#app-rating").val(res.rating);
+        // name: $("#comp-name").val(),
+        //         zipCode: $("#comp-zipCode").val(),
+        //         URL: $("#comp-link").val(),
+        //         name: $("#cont-name").val(),
+        //             email: $("#cont-email").val(),
+        //             phone: $("#cont-phone").val(),
+        //             type: $("#cont-type").val(),
+        //             source: $("#src-source").val(),
+        //             linkToPosting: $("#src-posting").val(),
+        //             jobID: " ",
+        //             applyType: $("#src-applyType").val(),
+        //             resumeVersion: $("#src-resume").val(),
+        //             currentStage: $("#stgs-current").val(),
+        //             dateCurrentStage: $("#stgs-dateOfStage").val(),
+        //             nextStep: $("#stgs-nextStep").val(),
+        //             notes: $("#stgs-notes").val(),
+        //             ApplicationId: res1,
+
+    })
 
     
     $("#app-add").on("click", function (event) {

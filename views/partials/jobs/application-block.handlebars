@@ -20,7 +20,10 @@
             <p class="uk-text-small uk-text-muted">{{description}}</p>
             <p class="uk-text-small uk-text-muted uk-text-bold">{{salaryRange}}</p>
             <!-- Model Button -->
+            <button class="edit-app" uk-icon="pencil" data-appid={{id}} type="button"></button>
+            <button class="delete-app" uk-icon="trash" data-appid={{id}} type="button"></button>
             <a class="uk-button uk-button-default uk-border-rounded" href="#modal-center" uk-toggle>Details</a>
+
             <!-- Modal Info -->
             <div id="modal-center" class="uk-flex-top" uk-modal>
                 <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
@@ -28,7 +31,7 @@
 
                     <button class="uk-modal-close-default" type="button" uk-close></button>
 
-                    <button class="edit-app" uk-icon="pencil" type="button"></button>
+                    <button class="edit-app" data-appId={{id}} uk-icon="pencil" type="button"></button>
 
                     <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
                     <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyName}}</h4>
@@ -38,7 +41,7 @@
                     
                     <hr>
 
-                    <p>Job Application ID: {{this.id}}</p>
+                    <p>Job Application ID: {{id}}</p>
                     <p>Company Field: {{industry}}</p>
                     <p>Internal Contacts: </p>
                     
