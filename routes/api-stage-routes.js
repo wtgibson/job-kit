@@ -63,12 +63,17 @@ module.exports = function (app) {
 
     // Get All Stage - Applied, Behavioral Interview, etc.
     //  * Need to add by User
-    app.get("/api/source/all/:field", (req, res) => {
-        db.Source.findAll({
+    app.get("/api/stage/all/:field", (req, res) => {
+        db.Stage.findAll({
             attributes: [req.params.field]
-        }).then(sources => {
-            res.json(sources);
-            console.log(sources);
+        }).then(fieldList => {
+            const fieldArray = fieldList.map(app => Object.values(app.dataValues))
+
+            var hbsObj = {
+                layout: false,
+                fieldList: fieldArray
+            }
+            res.render("partials/commonUI/filter-block", hbsObj);
         }).catch(err => {
             console.log(err);
             res.send("No data found");

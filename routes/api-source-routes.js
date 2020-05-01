@@ -70,9 +70,14 @@ module.exports = function (app) {
     app.get("/api/source/all/:field", (req, res) => {
         db.Source.findAll({
             attributes: [req.params.field]
-        }).then(sources => {
-            res.json(sources);
-            console.log(sources);
+        }).then(fieldList => {
+            const fieldArray = fieldList.map(app => Object.values(app.dataValues))
+
+            var hbsObj = {
+                layout: false,
+                fieldList: fieldArray
+            }
+            res.render("partials/commonUI/filter-block", hbsObj);
         }).catch(err => {
             console.log(err);
             res.send("No data found");
