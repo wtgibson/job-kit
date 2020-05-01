@@ -22,21 +22,22 @@ function renderApplications(applications, res, partial) {
         rating: element.dataValues.rating,
         // createdAt: element.dataValues.createdAt,
         // updatedAt: element.dataValues.updatesAt,
-        companyName: element.dataValues.Company.name,
-        companyObj: element.dataValues.Company,
+        // companyName: element.dataValues.Company.dataValues.name,
+        // companyObj: element.dataValues.Company.dataValues,
         contactObj: element.dataValues.Contacts,
         stageObj: element.dataValues.Stages,
         sourceObj: element.dataValues.Sources
-    }))
+    })
+    );
 
     // console.log(arrOfObjs)
-    var x = {
+    var hbsObj = {
         layout: false,
         applications: arrOfObjs
     }
 
     // Partial: "partials/jobs/application-block"
-    res.render(partial, x);
+    res.render(partial, hbsObj);
     // res.json(arrOfObjs);
 
 }
@@ -78,7 +79,8 @@ module.exports = function (app) {
             ]
         }).then(application => {
             // Change partial to use different block
-            renderApplications(application, res, "partials/jobs/application-block");
+            res.json(application)
+            // renderApplications(application, res, "partials/jobs/application-block");
         }).catch(err => {
             console.log(err);
             res.send("No data found");
@@ -93,10 +95,15 @@ module.exports = function (app) {
                 UserId: req.params.userId
             },
             attributes: [req.params.field]
-        }).then(applications => {
-            res.json(applications);
-            console.log("api/user/:userId/application ===================================")
-            console.log(applications);
+        }).then(fieldList => {
+            // console.log(fieldList.dataValues)
+            const fieldArray = fieldList.map(app => Object.values(app.dataValues))
+            // console.log(fieldArray);
+            var hbsObj = {
+                layout: false,
+                fieldList: fieldArray
+            }
+            res.render("partials/commonUI/filter-block", hbsObj);
         }).catch(err => {
             console.log(err);
             res.send("No data found");
@@ -106,7 +113,7 @@ module.exports = function (app) {
     // Create Application
     app.post("/api/application", (req, res) => {
         db.Application.create(req.body, {
-        }).then( application => {
+        }).then(application => {
             res.json(application.dataValues.id)
             // res.send(`Application for ${application.dataValues.title}, has been created`)
         }).catch(err => {

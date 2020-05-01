@@ -20,7 +20,10 @@
             <p class="uk-text-small uk-text-muted">{{description}}</p>
             <p class="uk-text-small uk-text-muted uk-text-bold">{{salaryRange}}</p>
             <!-- Model Button -->
+            <button class="edit-app" uk-icon="pencil" data-appid={{id}} type="button"></button>
+            <button class="delete-app" uk-icon="trash" data-appid={{id}} type="button"></button>
             <a class="uk-button uk-button-default uk-border-rounded" href="#modal-center" uk-toggle>Details</a>
+
             <!-- Modal Info -->
             <div id="modal-center" class="uk-flex-top" uk-modal>
                 <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
@@ -28,7 +31,7 @@
 
                     <button class="uk-modal-close-default" type="button" uk-close></button>
 
-                    <button class="edit-app" data-appId={{this.id}} uk-icon="pencil" type="button"></button>
+                    <button class="edit-app" data-appId={{id}} uk-icon="pencil" type="button"></button>
 
                     <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
                     <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyName}}</h4>
@@ -38,16 +41,16 @@
                     
                     <hr>
 
-                    <p>Job Application ID: {{this.id}}</p>
+                    <p>Job Application ID: {{id}}</p>
                     <p>Company Field: {{industry}}</p>
                     <p>Internal Contacts: </p>
-                    <p>{{contactObj}}</p>
+                    
                     <ul>
                         {{#each contactObj}}
-                            <li>{{name}}</li>
-                            <li>{{type}}</li>
-                            <li>{{email}}</li>
-                            <li>{{phone}}</li>
+                            <li>{{dataValues.name}}</li>
+                            <li>{{dataValues.type}}</li>
+                            <li>{{dataValues.email}}</li>
+                            <li>{{dataValues.phone}}</li>
                         {{/each}}
                     </ul>
                     
@@ -59,16 +62,25 @@
                     <p>Next Steps: </p>
                     <ul>
                         {{#each stageObj}}
-                            <li>{{currentStage}}</li>
-                            <li>{{dateCurrentStage}}</li>
-                            <li>{{nextStep}}</li>
-                            <li>{{notes}}</li> 
+                            <li>{{dataValues.currentStage}}</li>
+                            <li>{{dataValues.dateCurrentStage}}</li>
+                            <li>{{dataValues.nextStep}}</li>
+                            <li>{{dataValues.notes}}</li> 
                         {{/each}}
                     </ul>
 
                     <hr>
 
                     <p>User Notes: </p>
+                    <ul>
+                        {{#each sourceObj}}
+                            <li>{{dataValues.source}}</li>
+                            <li>{{dataValues.linkToPosting}}</li>
+                            <li>{{dataValues.jobID}}</li>
+                            <li>{{dataValues.applyType}}</li> 
+                            <li>{{dataValues.resumeVersion}}</li> 
+                        {{/each}}
+                    </ul>
                 </div>
             </div>
             <!-- END OF MODAL -->
