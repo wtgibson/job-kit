@@ -68,8 +68,6 @@ $(function () {
             phone: $(`#add-contact-phone-${appID}`).val(),
             ApplicationId: appID,
         }
-        console.log("You tried to add an app!")
-        console.log(newContact)
         $.ajax("/api/contact/new", {
             type: "POST",
             data: newContact,
@@ -97,8 +95,6 @@ $(function () {
             notes: $(`#add-stage-notes-${appID}`).val(),
             ApplicationId: appID,
         }
-        console.log("You tried to add a stage!")
-        console.log(newStage)
         $.ajax("/api/stage/new", {
             type: "POST",
             data: newStage,
@@ -111,7 +107,6 @@ $(function () {
     $(document).on("click", ".details-link-modal", function (event) {
         event.preventDefault();
         var applicationID = $(this).data("id")
-        console.log(`this is our application ID ${applicationID}`)
         sessionStorage.setItem('caid', applicationID);
         appID = sessionStorage.getItem('caid');
 
