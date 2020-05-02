@@ -164,7 +164,7 @@ $(function () {
                 $("#filter").append(res);
             });
         }
-        else if (field === "source" || field === "resumeVersion") {
+        else if (field === "source" || field === "resumeVersion" || field === "applyType") {
             $.ajax(`/api/user/${globalUserID}/application/join/source/${field}`, {
                 type: "GET"
             }).then(function (res) {

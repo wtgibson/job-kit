@@ -56,20 +56,96 @@ module.exports = function (app) {
             },
             attributes: [req.params.field]
         }).then(fieldList => {
-            // Return array of ids
-            if (req.params.field === "id") {
-                res.json(fieldList);
-                return;
-            }
-
             // Map field list
             const fieldArray = fieldList.map(app => Object.values(app.dataValues));
+            
+            var hbsObj = {
+                layout: false,
+                fieldList: fieldArray
+            }
+            
+            res.render("partials/commonUI/filter-block", hbsObj);
+
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+    });
+
+    // Get All Application - Source, ResumeVersion 
+    app.get("/api/user/:userId/application/join/source/:field", (req, res) => {
+        db.Application.findAll({
+            where: {
+                UserId: req.params.userId
+            },
+            include: {
+                model: db.Source,
+                as: "Sources",
+                required: true
+            }
+        }).then(fieldList => {
+            let field = req.params.field;
+            let sourceArray = [];
+            let fieldArray = [];
+
+            fieldList.forEach(application => {
+                sourceArray.push(application.Sources);
+            });
+
+            sourceArray.forEach(source => {
+                if (field === "source") {
+                    fieldArray.push(source[0].dataValues.source)
+                }
+                else if (field === "resumeVersion") {
+                    fieldArray.push(source[0].dataValues.resumeVersion)
+                }
+                else if (field === "applyType") {
+                    fieldArray.push(source[0].dataValues.applyType)
+                }
+            });
+
+            var hbsObj = {
+                layout: false,
+                fieldList: fieldArray
+            }
+
+            res.render("partials/commonUI/filter-block", hbsObj);
+
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+    });
+
+    // Get All Application - CurrentStage
+    app.get("/api/user/:userId/application/join/stage/:field", (req, res) => {
+        db.Application.findAll({
+            where: {
+                UserId: req.params.userId
+            },
+            include: {
+                model: db.Stage,
+                as: "Stages",
+                required: true
+            }
+        }).then(fieldList => {
+            let stageArray = [];
+            let fieldArray = [];
+
+            fieldList.forEach(application => {
+                stageArray.push(application.Stages);
+            });
+
+            stageArray.forEach(stage => {
+                fieldArray.push(stage[0].dataValues.currentStage);
+            });
 
             var hbsObj = {
                 layout: false,
                 fieldList: fieldArray
             }
             res.render("partials/commonUI/filter-block", hbsObj);
+
         }).catch(err => {
             console.log(err);
             res.send("No data found");
