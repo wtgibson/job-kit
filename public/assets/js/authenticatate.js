@@ -65,7 +65,7 @@ $("#login-button").on("click", function (event) {
         })
           // User email/password did not match or is not in firebase
           .catch(function (error) {
-            console.log(error.code);
+            console.log("line 68" + error.code);
             if (error.code === "auth/user-not-found") {
               location.assign('/signup');
             } else {
@@ -73,12 +73,20 @@ $("#login-button").on("click", function (event) {
               alert(error.message);
              }
           });
+      }).catch(function (error) {
+        console.log("line 68" + error.code);
+        if (error.code === "auth/user-not-found") {
+          location.assign('/signup');
+        } else {
+          // future window.open to create the popup
+          alert(error.message);
+        }
       });
   }
 });
 
 // Event listener from Firebase that checks with user auth state changes
-firebanjse.auth().onAuthStateChanged(function (user) {
+firebase.auth().onAuthStateChanged(function (user) {
   // if user is authenticated then...
   if (user) {
     // grantAccess
