@@ -19,9 +19,11 @@
 			{{!-- <p class="uk-text-small uk-text-muted"id="desc-${{id}}">Description: {{description}}</p> --}}
 			{{!-- <p class="uk-text-small uk-text-muted uk-text-bold">Salary Range</p> --}}
 			<!-- Model Button -->
-			<a class="uk-button uk-button-default uk-border-rounded" href="#modal-center" uk-toggle>Details</a>
-			<!-- Modal Info -->
-			<div id="modal-center" class="uk-flex-top" uk-modal>
+
+			<a class="details-link-modal uk-button uk-button-default uk-border-rounded" href="#modal-center-{{id}}" uk-toggle>Details</a>
+
+            <!-- Modal Info -->
+            <div id="modal-center-{{id}}" class="uk-flex-top" uk-modal>
 				<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 
 					<button class="uk-modal-close-default" type="button" uk-close></button>
