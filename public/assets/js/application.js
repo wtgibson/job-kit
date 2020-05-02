@@ -81,8 +81,8 @@ $(function () {
                 console.log(res2)
                 $("#contacts-append-table").append(res2)
                 // receives back the contact id
-                
-    
+
+
             })
 
         })
@@ -121,7 +121,7 @@ $(function () {
             type: "POST",
             data: newStage,
         }).then(function (res5) {
-            
+
             console.log(res5)
         })
     })
@@ -162,35 +162,25 @@ $(function () {
             }).then(function (res) {
                 console.log(res)
                 $("#filter").append(res);
-            })
+            });
         }
-        else if (field === "source" || field === "resumeVersion" || field === "currentStage") {
-            // Get All Application IDs
-            $.ajax(`/api/user/${globalUserID}/application/id`, {
+        else if (field === "source" || field === "resumeVersion") {
+            $.ajax(`/api/user/${globalUserID}/application/join/source/${field}`, {
                 type: "GET"
             }).then(function (res) {
-                let idList = res;
-               console.log(idList);
-               idList.forEach(idObj => {
-                   // Get all app ids
-                   console.log(idObj.id)
-               });
-            //    $("#filter").append(res);
-            })
+                console.log(res);
+                $("#filter").append(res);
+            });
 
-            // $.ajax(`/api/source/all/${field}`, {
-            //     type: "GET"
-            // }).then(function (res) {
-            //     $("#filter").append(res);
-            // })
         }
-        // else if (field === "currentStage") {
-        //     $.ajax(`/api/stage/all/${field}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //         $("#filter").append(res);
-        //     })
-        // }
+        else if (field === "currentStage") {
+            $.ajax(`/api/user/${globalUserID}/application/join/stage/${field}`, {
+                type: "GET"
+            }).then(function (res) {
+                console.log(res);
+                $("#filter").append(res);
+            });
+        }
 
     });
 
