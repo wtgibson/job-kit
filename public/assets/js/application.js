@@ -102,22 +102,30 @@ $(function () {
             $.ajax(`/api/user/${globalUserID}/application/${field}`, {
                 type: "GET"
             }).then(function (res) {
+                console.log(res)
                 $("#filter").append(res);
             })
         }
-        // else if (field === "source" || field === "resumeVersion") {
-        //     $.ajax(`/api/user/${globalUserID}/application/${field}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //        console.log(res)
-        //     })
+        else if (field === "source" || field === "resumeVersion" || field === "currentStage") {
+            // Get All Application IDs
+            $.ajax(`/api/user/${globalUserID}/application/id`, {
+                type: "GET"
+            }).then(function (res) {
+                let idList = res;
+               console.log(idList);
+               idList.forEach(idObj => {
+                   // Get all app ids
+                   console.log(idObj.id)
+               });
+            //    $("#filter").append(res);
+            })
 
-        //     $.ajax(`/api/source/all/${field}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //         $("#filter").append(res);
-        //     })
-        // }
+            // $.ajax(`/api/source/all/${field}`, {
+            //     type: "GET"
+            // }).then(function (res) {
+            //     $("#filter").append(res);
+            // })
+        }
         // else if (field === "currentStage") {
         //     $.ajax(`/api/stage/all/${field}`, {
         //         type: "GET"
@@ -181,12 +189,13 @@ $(function () {
 
     // Click Reset Filter Button
     $("#reset-btn").on("click", function (event) {
-        event.preventDefault();
-        $.ajax(`/api/user/${globalUserID}/application/all`, {
-            type: "GET"
-        }).then(function (res) {
-            $("#app-append").append(res);
-        });
+        // event.preventDefault();
+        window.location.reload()
+        // $.ajax(`/api/user/${globalUserID}/application/all`, {
+        //     type: "GET"
+        // }).then(function (res) {
+        //     $("#app-append").append(res);
+        // });
     });
 
 }); 
