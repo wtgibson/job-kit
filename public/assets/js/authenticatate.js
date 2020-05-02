@@ -117,3 +117,8 @@ $("#login-button").on("click", function (event) {
     }
   
   });
+
+  $('#signup').on('click', (event) => {
+    event.preventDefault();
+    window.location.assign("/signup");
+  });
