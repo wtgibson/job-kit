@@ -56,9 +56,15 @@ module.exports = function (app) {
             },
             attributes: [req.params.field]
         }).then(fieldList => {
-            // console.log(fieldList.dataValues)
-            const fieldArray = fieldList.map(app => Object.values(app.dataValues))
-            // console.log(fieldArray);
+            // Return array of ids
+            if (req.params.field === "id") {
+                res.json(fieldList);
+                return;
+            }
+
+            // Map field list
+            const fieldArray = fieldList.map(app => Object.values(app.dataValues));
+
             var hbsObj = {
                 layout: false,
                 fieldList: fieldArray
