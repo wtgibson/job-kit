@@ -59,4 +59,126 @@ module.exports = function (app) {
         });
 
     });
+
+    // Filter application with source
+    app.get("/api/user/:userId/application/filter/source/:filter", (req, res) => {
+        db.Application.findAll({
+            where: {
+                UserId: req.params.userId,
+            },
+            include: [
+                {
+                    model: db.Source,
+                    as: "Sources".Sources,
+                    required: true,
+                    where : {
+                        source: req.params.filter
+                    }
+                },
+                {model: db.Company},
+                {model: db.Contact},
+                {model: db.Source},
+                {model: db.Stage}
+
+            ]
+        }).then(applications => {
+            console.log(res)
+            renderApps(applications, res, "partials/jobs/application-block")
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+
+    });
+
+    // Filter application with applyType
+    app.get("/api/user/:userId/application/filter/applyType/:filter", (req, res) => {
+        db.Application.findAll({
+            where: {
+                UserId: req.params.userId,
+            },
+            include: [
+                {
+                    model: db.Source,
+                    as: "Sources".Sources,
+                    required: true,
+                    where : {
+                        applyType: req.params.filter
+                    }
+                },
+                {model: db.Company},
+                {model: db.Contact},
+                {model: db.Source},
+                {model: db.Stage}
+
+            ]
+        }).then(applications => {
+            console.log(res)
+            renderApps(applications, res, "partials/jobs/application-block")
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+
+    });
+
+    // Filter application with resumeVersion
+    app.get("/api/user/:userId/application/filter/resumeVersion/:filter", (req, res) => {
+        db.Application.findAll({
+            where: {
+                UserId: req.params.userId,
+            },
+            include: [
+                {
+                    model: db.Source,
+                    as: "Sources".Sources,
+                    required: true,
+                    where : {
+                        resumeVersion: req.params.filter
+                    }
+                },
+                {model: db.Company},
+                {model: db.Contact},
+                {model: db.Source},
+                {model: db.Stage}
+
+            ]
+        }).then(applications => {
+            renderApps(applications, res, "partials/jobs/application-block");
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+
+    });
+
+    // Filter application with currentStage
+    app.get("/api/user/:userId/application/filter/currentStage/:filter", (req, res) => {
+        db.Application.findAll({
+            where: {
+                UserId: req.params.userId,
+            },
+            include: [
+                {
+                    model: db.Stage,
+                    as: "Stages".Stages,
+                    required: true,
+                    where : {
+                        currentStage: req.params.filter
+                    }
+                },
+                {model: db.Company},
+                {model: db.Contact},
+                {model: db.Source},
+                {model: db.Source}
+
+            ]
+        }).then(applications => {
+            renderApps(applications, res, "partials/jobs/application-block");
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+
+    });
 }
