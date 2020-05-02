@@ -8,8 +8,7 @@
         <div class="uk-width-2xlarge uk-padding-small uk-position-z-index uk-position-relative"
             uk-scrollspy="cls: uk-animation-fade">
 
-            <img id="add-logo" class="uk-center"
-                href="/"
+            <img id="add-logo" class="uk-center" href="/"
                 src="https://dewey.tailorbrands.com/production/brand_version_mockup_image/852/2922780852_17e18edb-4281-4a6c-8a36-9f026bf29cf2.png?cb=1588108119"
                 alt="jobkit-logo">
 
@@ -37,14 +36,21 @@
                                     <input class="uk-input uk-border-pill" required placeholder="Job Title" type="text"
                                         id="app-title">
                                 </div>
-                                <div class="uk-width-1-3">                                    
-                                    <div class="uk-border-pill" id="app-rating">
-                                            <p>Job Type:
-                                                <label><input class="uk-radio" type="radio" name="radio2" value="FTE"> FTE </label>
-                                                <label><input class="uk-radio" type="radio" name="radio2" value="Part-Time"> Part-Time </label>
-                                                <label><input class="uk-radio" type="radio" name="radio2" value="Contract"> Contract </label>
-                                                <label><input class="uk-radio" type="radio" name="radio2" value="Internship"> Internship </label>
-                                            </p>
+                                <div class="uk-width-1-3">
+                                    <div class="uk-border-pill" >
+                                        <p>Job Type:
+                                            <div class="uk-form-controls">
+                                            <label><input class="uk-radio app-type" type="radio" name="radio2" value="FTE"> FTE
+                                            </label>
+                                            <label><input class="uk-radio app-type" type="radio" name="radio2" value="Part-Time">
+                                                Part-Time </label>
+                                            <label><input class="uk-radio app-type" type="radio" name="radio2" value="Contract">
+                                                Contract </label>
+                                            <label><input class="uk-radio app-type" type="radio" name="radio2"
+                                                    value="Internship"> Internship </label>
+
+                                            </div>
+                                        </p>
                                     </div>
 
                                 </div>
@@ -75,15 +81,23 @@
                                 </div>
 
                                 <div class="uk-width-1-3">
-                                        <div class="uk-border-pill" id="app-rating">
-                                            <p>Interest Level :
-                                                <label><input class="uk-radio" type="radio" name="radio1" value="1"> 😕 </label>
-                                                <label><input class="uk-radio" type="radio" name="radio1" value="2"> 😶 </label>
-                                                <label><input class="uk-radio" type="radio" name="radio1" value="3"> 😊 </label>
-                                                <label><input class="uk-radio" type="radio" name="radio1" value="4"> 😃 </label>
-                                                <label><input class="uk-radio" type="radio" name="radio1" value="5"> 🚀 </label>
-                                            </p>
-                                        </div>
+                                    <div class="uk-border-pill" id="app-rating">
+                                        <p>Interest Level :
+                                            <div class="uk-form-controls">
+                                                <label><input class="uk-radio role-interest" type="radio" name="radio1" value="1"> 😕
+                                                </label>
+                                                <label><input class="uk-radio role-interest" type="radio" name="radio1" value="2"> 😶
+                                                </label>
+                                                <label><input class="uk-radio role-interest" type="radio" name="radio1" value="3"> 😊
+                                                </label>
+                                                <label><input class="uk-radio role-interest" type="radio" name="radio1" value="4"> 😃
+                                                </label>
+                                                <label><input class="uk-radio role-interest" type="radio" name="radio1" value="5"> 🚀
+                                                </label>
+                                            </div>
+
+                                        </p>
+                                    </div>
                                 </div>
 
                             </div>
@@ -204,17 +218,19 @@
 
                     </div>
 
-                </div>
+        </div>
 
-                <div class="uk-width-1-2 uk-align-center">
-                    <button type="submit" id="app-add" class="uk-button uk-button-primary uk-border-pill uk-width-1-1 uk-margin">ADD APPLICATION
-                    </button>
-                    <hr>
-                    <a type="submit" id="app-back" class="uk-button uk-button-primary uk-border-pill uk-width-1-4" href="/applications">BACK
-                    </a>
-                </div>
+        <div class="uk-width-1-2 uk-align-center">
+            <button type="submit" id="app-add"
+                class="uk-button uk-button-primary uk-border-pill uk-width-1-1 uk-margin">ADD APPLICATION
+            </button>
+            <hr>
+            <a type="submit" id="app-back" class="uk-button uk-button-primary uk-border-pill uk-width-1-4"
+                href="/applications">BACK
+            </a>
+        </div>
 
-            </fieldset>
+        </fieldset>
         </form>
         <!-- /add-application -->
 
