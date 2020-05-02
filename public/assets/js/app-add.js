@@ -1,6 +1,9 @@
 $(function () {
     let globalUserID = sessionStorage.getItem('uuid');
+    var input = document.querySelectorAll(input)
 
+    // input.forEach(element => $(element).attr("background-color", "red"))
+    // console.log(input)
 
     $("#app-add").on("click", function (event) {
         event.preventDefault();
@@ -22,6 +25,10 @@ $(function () {
             // rating: $("#app-rating").val(),
             UserId: globalUserID
         }
+
+        
+
+        console.log(`this is the job type = ${newApp.type}`)
 
         $.ajax("/api/application", {
             type: "POST",
