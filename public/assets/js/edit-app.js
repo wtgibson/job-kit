@@ -50,18 +50,32 @@ $(function () {
 
     $("#app-edit").on("click", function (event) {
         event.preventDefault();
-    
+        var roleType;
+        var interest;
+        elements = document.getElementsByClassName("app-type");
+        for (let i = 0; i < elements.length; i++) {
+            if ($(elements[i]).prop("checked")) {
+                roleType = ($(elements[i]).val())
+            }
+        }
+
+        elements = document.getElementsByClassName("role-interest");
+        for (let i = 0; i < elements.length; i++) {
+            if ($(elements[i]).prop("checked")) {
+                interest = ($(elements[i]).val())
+            }
+        }
 
         // ------- Update App ---------
         var updateApp = {
             title: $("#app-title").val(),
-            type: $("#app-type").val(),
+            type: roleType,
             description: $("#app-desc").val(),
             industry: $("#app-industry").val(),
             zipCode: $("#app-zipCode").val(),
             salaryRange: $("#app-salary").val(),
             dateApplied: $("#app-applied").val(),
-            rating: $("#app-rating").val(),
+            rating: interest,
             UserId: globalUserID
         }
 
