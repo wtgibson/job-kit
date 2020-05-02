@@ -69,7 +69,7 @@ module.exports = function (app) {
             },
         }).then(contacts => {
             // Add Partial as third argument
-            renderContact(contacts, res);
+            renderContact(contacts, res, "partials/contacts/contact-block");
         }).catch(err => {
             console.log(err);
             res.send(false);
@@ -81,7 +81,7 @@ module.exports = function (app) {
         db.Contact.create(req.body, {
             // ApplicationId and CompanyId sent from client
         }).then(contact => {
-            res.send(`Contact ${contact.dataValues.type}, has been created`)
+            res.json(contact.dataValues.id)
         }).catch(err => {
             console.log(err);
             res.send(`Contact ${contact.dataValues.type}, was NOT created`)
