@@ -104,7 +104,7 @@
                                 id="save-contact-{{id}}">Save</button>
                         </form>
 
-                        <table class="uk-table uk-table-striped">
+                        <table class="uk-table uk-table-striped" id="contacts-append-table">
                             <thead>
                                 <tr>
                                     <th>Contact Name</th>
@@ -159,7 +159,7 @@
                                 id="save-stage-{{id}}">Save</button>
                         </form>
 
-                        <table class="uk-table uk-table-striped">
+                        <table class="uk-table uk-table-striped" id="stages-table-body">
                             <thead>
                                 <tr>
                                     <th>Stage</th>
@@ -168,7 +168,7 @@
                                     <th>Notes</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody >
                                 {{#each stageObj}}
                                 {{> stages/stage-block}}
                                 {{/each}}

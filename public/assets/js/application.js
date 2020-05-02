@@ -71,9 +71,19 @@ $(function () {
         $.ajax("/api/contact/new", {
             type: "POST",
             data: newContact,
-        }).then(function (res3) {
-            window.location.reload()
-            // receives back the company id
+        }).then(function (res1) {
+            console.log(res1)
+            let id = res1
+            // receives back the contact id
+            $.ajax(`/api/contact/${id}`, {
+                type: "GET",
+            }).then(function (res2) {
+                console.log(res2)
+                $("#contacts-append-table").append(res2)
+                // receives back the contact id
+                
+    
+            })
 
         })
     })
@@ -111,6 +121,7 @@ $(function () {
             type: "POST",
             data: newStage,
         }).then(function (res5) {
+            
             console.log(res5)
         })
     })
