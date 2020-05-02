@@ -16,10 +16,6 @@ module.exports = function (app) {
         res.render("edit-app")
     });
 
-    app.get("/logout", (req, res) => {
-        res.render("logout");
-    });
-
     app.get("/login", (req, res) => {
         res.render("login");
     });

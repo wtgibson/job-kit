@@ -95,6 +95,12 @@ module.exports = function (app) {
         });
     })
 
+    // Get route to logout
+    app.get("/logout", (req, res) => {
+        firebase.auth().signOut();;
+        res.render("login");
+    });
+
     // Create a new authenticated user "Signup"
     app.post("/api/signup", (req, res) => {
         console.log(req.body);

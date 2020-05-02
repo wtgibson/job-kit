@@ -1,9 +1,0 @@
-<script>
-sessionStorage.removeItem('caid');
-sessionStorage.removeItem('uuid');
-firebase.auth().signOut().then(() => {
-            window.location.replace('/');
-          }, function (error) {
-            window.location.replace('/login');
-          });
-</script>
