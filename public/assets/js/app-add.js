@@ -57,19 +57,7 @@ $(function () {
                     console.log(res4)
                 })
 
-                // var newStage = {
-                //     currentStage: $("#stgs-current").val(),
-                //     dateCurrentStage: $("#stgs-dateOfStage").val(),
-                //     nextStep: $("#stgs-nextStep").val(),
-                //     notes: $("#stgs-notes").val(),
-                //     ApplicationId: res1,
-                // }
-                // $.ajax("/api/stage/new", {
-                //     type: "POST",
-                //     data: newStage,
-                // }).then(function (res5) {
-                //     console.log(res5)
-                // })
+               
 
             })
         });
