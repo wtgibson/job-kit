@@ -20,7 +20,7 @@ module.exports = function renderApplications(applications, res, partial) {
         rating: element.dataValues.rating,
         // createdAt: element.dataValues.createdAt,
         // updatedAt: element.dataValues.updatesAt,
-        companyName: element.dataValues.Company.dataValues.name,
+        // companyName: element.dataValues.Company.dataValues.name,
         companyObj: element.dataValues.Company.dataValues,
         contactObj: element.dataValues.Contacts,
         stageObj: element.dataValues.Stages,
