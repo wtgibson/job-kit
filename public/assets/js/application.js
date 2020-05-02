@@ -78,6 +78,18 @@ $(function () {
         })
     })
 
+    $(document).on("click", ".contact-delete", function (event) {
+        event.preventDefault();
+        var id = $(this).data("contactid");
+        console.log(id)
+        $.ajax(`/api/contact/${id}`, {
+            type: "DELETE",
+        }).then(function (res3) {
+            console.log(res3)
+            $(`#contact-${id}`).remove()
+        })
+    })
+
     $(document).on("click", ".add-stage", function (event) {
         event.preventDefault();
         var id = $(".add-stage").data("appid")
@@ -100,6 +112,17 @@ $(function () {
             data: newStage,
         }).then(function (res5) {
             console.log(res5)
+        })
+    })
+
+    $(document).on("click", ".stage-delete", function (event) {
+        event.preventDefault();
+        var id = $(this).data("stageid");
+        $.ajax(`/api/stage/${id}`, {
+            type: "DELETE",
+        }).then(function (res3) {
+            console.log(res3)
+            $(`#stage-${id}`).remove()
         })
     })
 
