@@ -9,9 +9,7 @@ var firebaseConfig = {
   measurementId: "G-TKMGLB01WM"
 };
 // Initialize Firebase
-
 firebase.initializeApp(firebaseConfig);
-// var database = firebase.database();
 
 // event listener for login screen
 $("#login-button").on("click", function (event) {
@@ -20,7 +18,6 @@ $("#login-button").on("click", function (event) {
   var password = $("#password");
 
   // validate the email/password credentials
-
   // email field input validation
   if (email.val().length < 1) { // cannot be empty
     // change the email input's placeholder and set focus
@@ -33,19 +30,16 @@ $("#login-button").on("click", function (event) {
     // change password input's placeholder and set focus
     password.attr("placeholder", "Password must be at least 6 characters!")
     password.focus();
-  }
-
-  // if all validations check out
-  else {
-    // use firebase to sign in
+  } else {
+    // authenticate with Firebase signin
     firebase.auth().signInWithEmailAndPassword(email.val(), password.val())
       // after user is signed in
       .then(function (data) {
-        // console log the returned data
+        // console log the returned data NEEDS TO BE COMMENTED OUT ON DEPLOY
         console.log(`authentiated user: ${data.user.email}`);
         console.log(data);
 
-        // let's clear the input fields
+        // Clear the input fields
         email.val("");
         password.val("");
         password.attr("placeholder", "");
@@ -58,62 +52,76 @@ $("#login-button").on("click", function (event) {
           data: loginData,
         }).then(res => {
           // if user profile is incomplete, send the user to the profile page to complete
-          if(res.codLang === undefined || res.codLang === null) {
-            window.location.assign('/profile')
-          }else {
-          // stores the user id to the globalUserID
-          sessionStorage.setItem('uuid', res.user);
-          sessionStorage.setItem('clid', res.codLang);
-          
-          // reroutes the user to the applications page once they have been authenticated
-          window.location.replace("/applications");
-        }
-        });
+          if (res.codLang === undefined || res.codLang === null) {
+            window.location.assign('/profile');
+          } else {
+            // stores the user id to the globalUserID
+            sessionStorage.setItem('uuid', res.user);
+            sessionStorage.setItem('clid', res.codLang);
 
-      })
-      // User email/password did not match or is not in firebase
-      .catch(function (error) {
-        console.log(error.code);
+            // reroutes the user to the applications page once they have been authenticated
+            window.location.assign("/applications");
+          }
+        })
+          // User email/password did not match or is not in firebase
+          .catch(function (error) {
+            console.log("line 68" + error.code);
+            if (error.code === "auth/user-not-found") {
+              location.assign('/signup');
+            } else {
+              // future window.open to create the popup
+              alert(error.message);
+             }
+          });
+      }).catch(function (error) {
+        console.log("line 68" + error.code);
         if (error.code === "auth/user-not-found") {
           location.assign('/signup');
+        } else {
+          // future window.open to create the popup
+          alert(error.message);
         }
-      })
-    }
+      });
+  }
+});
 
-    // Event listener from Firebase that checks with user auth state changes
-    firebase.auth().onAuthStateChanged(function (user) {
-      // if user is authenticated then...
-      if (user) {
-        // grantAccess
-        grantAccess();
-      } else {
-        // run the removeAccess function
-        removeAccess();
-      }
-    })
+// Event listener from Firebase that checks with user auth state changes
+firebase.auth().onAuthStateChanged(function (user) {
+  // if user is authenticated then...
+  if (user) {
+    // grantAccess
+    grantAccess();
+  } else {
+    // run the removeAccess function
+    removeAccess();
+  }
+})
 
-    // function to manipulate dom after user is authenticated
-    function grantAccess() {
-      // get currentUser information from firebase
-      var user = firebase.auth().currentUser;
-      // save that information to sessionStorage
-      sessionStorage.setItem("user", JSON.stringify(user))
+// function to manipulate dom after user is authenticated
+function grantAccess() {
+  // get currentUser information from firebase
+  var user = firebase.auth().currentUser;
+  // save that information to sessionStorage
+  sessionStorage.setItem("user", JSON.stringify(user))
 
-      // retrieve user info saved in database
-      // getUserInfo(user.uid)
+  // retrieve user info saved in database
+  // getUserInfo(user.uid)
 
-      // manipulate the dom
+  // manipulate the dom
 
-    }
+}
 
-    // function to manipulate dom after user is no longer authenticated
-    function removeAccess() {
-      // remove user from sessionStorage
-      sessionStorage.removeItem("user");
+// function to manipulate dom after user is no longer authenticated
+function removeAccess() {
+  // remove user from sessionStorage
+  sessionStorage.removeItem("user");
 
-      // manipulate the dom
-      // $("#setProfile").addClass("d-none");
-      // $("#signIn").removeClass("d-none");
-    }
-  
-  });
+  // manipulate the dom
+  // $("#setProfile").addClass("d-none");
+  // $("#signIn").removeClass("d-none");
+}
+
+$('#signup').on('click', (event) => {
+  event.preventDefault();
+  window.location.assign("/signup");
+});

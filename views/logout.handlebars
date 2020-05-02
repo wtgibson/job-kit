@@ -6,7 +6,7 @@
     // sign out of firebase
     firebase.auth().signOut().then(() => {
         window.location.replace('/');
-    }, function (error) {
+    }).catch( (error) => {
         window.location.assign('/login');
     });
 </script>
