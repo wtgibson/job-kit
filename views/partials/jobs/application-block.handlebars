@@ -96,7 +96,34 @@
                     <hr>
 
                     <div class="uk-overflow-auto">
-                        <h4>Application Stages:</h4>
+                        <h4>Application Stages:<span><a href="" uk-icon="plus-circle" class="add-stage" data-appid="{{id}}"></a> </span></h4>
+                        <form class="add-stage-form uk-section-muted uk-hidden add-form" id="add-stage-{{id}}" >
+                            <table class="uk-table">
+                                <caption></caption>
+                                <thead>
+                                    <tr>
+                                        <th>Stage</th>
+                                        <th>Date</th>
+                                        <th>Next Step</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input id="add-stage-stage-{{id}}" class="uk-input uk-border-pill" type="text">
+                                        </td>
+                                        <td><input id="add-stage-date-{{id}}" class="uk-input uk-border-pill" type="text">
+                                        </td>
+                                        <td><input id="add-stage-next-{{id}}" class="uk-input uk-border-pill" type="text">
+                                        </td>
+                                        <td><input id="add-stage-notes-{{id}}" class="uk-input uk-border-pill" type="text">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                             <button
+                                class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-norder-rounded stage-save" id="save-stage-{{id}}">Save</button>
+                        </form>
                         <table class="uk-table uk-table-striped">
                             <thead>
                                 <tr>

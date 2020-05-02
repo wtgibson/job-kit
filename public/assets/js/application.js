@@ -33,33 +33,34 @@ $(function () {
 
     });
 
-    $(document).on("click", "#details-btn", function(event){
+    $(document).on("click", "#details-btn", function (event) {
         // event.preventDefault();
         var id = event.target.value;;
         console.log(id)
 
         $.ajax(`/api/application/${id}`, {
             type: "GET"
-        }).then(function (res){
+        }).then(function (res) {
             console.log(res);
             // window.location.reload()
             $("#details-modal").append(res);
         })
-        
+
     });
-  
+
 
     $(document).on("click", ".add-contact", function (event) {
         event.preventDefault();
         var id = $(".add-contact").data("appid")
-        console.log(`I clicke don id #add-form-${appID}`)
         $(`#add-form-${appID}`).removeClass("uk-hidden")
     })
+
+
 
     $(document).on("click", ".contact-save", function (event) {
         event.preventDefault();
         $(`#add-form-${appID}`).addClass("uk-hidden")
-        
+
         var newContact = {
             name: $(`#add-contact-name-${appID}`).val(),
             type: $(`#add-contact-type-${appID}`).val(),
@@ -79,7 +80,35 @@ $(function () {
         })
     })
 
-    $(document).on("click", ".details-link-modal", function(event){
+    $(document).on("click", ".add-stage", function (event) {
+        event.preventDefault();
+        var id = $(".add-stage").data("appid")
+        $(`#add-stage-${appID}`).removeClass("uk-hidden")
+    })
+
+    $(document).on("click", ".stage-save", function (event) {
+        event.preventDefault();
+        $(`#add-stage-${appID}`).addClass("uk-hidden")
+
+        var newStage = {
+            currentStage: $(`#add-stage-stage-${appID}`).val(),
+            dateCurrentStage: $(`#add-stage-date-${appID}`).val(),
+            nextStep: $(`#add-stage-next-${appID}`).val(),
+            notes: $(`#add-stage-notes-${appID}`).val(),
+            ApplicationId: appID,
+        }
+        console.log("You tried to add a stage!")
+        console.log(newStage)
+        $.ajax("/api/stage/new", {
+            type: "POST",
+            data: newStage,
+        }).then(function (res5) {
+            console.log(res5)
+        })
+    })
+
+
+    $(document).on("click", ".details-link-modal", function (event) {
         event.preventDefault();
         var applicationID = $(this).data("id")
         console.log(`this is our application ID ${applicationID}`)
