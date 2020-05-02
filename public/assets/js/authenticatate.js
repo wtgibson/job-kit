@@ -115,17 +115,5 @@ $("#login-button").on("click", function (event) {
       // $("#setProfile").addClass("d-none");
       // $("#signIn").removeClass("d-none");
     }
-
-    // Event listener for Sign Out button
-    $(document).on("click", ".signout", function(event) {
-      event.preventDefault();
-      // clear local session
-      sessionStorage.setItem('ccid',"");
-      sessionStorage.setItem('uuid',"");
-      
-      // sign out of firebase
-      firebase.auth().signOut();
-      
-    });
   
   });
