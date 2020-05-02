@@ -81,8 +81,8 @@ $(function () {
                 console.log(res2)
                 $("#contacts-append-table").append(res2)
                 // receives back the contact id
-                
-    
+
+
             })
 
         })
@@ -121,7 +121,7 @@ $(function () {
             type: "POST",
             data: newStage,
         }).then(function (res5) {
-            
+
             console.log(res5)
         })
     })
@@ -160,29 +160,27 @@ $(function () {
             $.ajax(`/api/user/${globalUserID}/application/${field}`, {
                 type: "GET"
             }).then(function (res) {
+                console.log(res)
                 $("#filter").append(res);
-            })
+            });
         }
-        // else if (field === "source" || field === "resumeVersion") {
-        //     $.ajax(`/api/user/${globalUserID}/application/${field}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //        console.log(res)
-        //     })
+        else if (field === "source" || field === "resumeVersion" || field === "applyType") {
+            $.ajax(`/api/user/${globalUserID}/application/join/source/${field}`, {
+                type: "GET"
+            }).then(function (res) {
+                console.log(res);
+                $("#filter").append(res);
+            });
 
-        //     $.ajax(`/api/source/all/${field}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //         $("#filter").append(res);
-        //     })
-        // }
-        // else if (field === "currentStage") {
-        //     $.ajax(`/api/stage/all/${field}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //         $("#filter").append(res);
-        //     })
-        // }
+        }
+        else if (field === "currentStage") {
+            $.ajax(`/api/user/${globalUserID}/application/join/stage/${field}`, {
+                type: "GET"
+            }).then(function (res) {
+                console.log(res);
+                $("#filter").append(res);
+            });
+        }
 
     });
 
@@ -214,37 +212,45 @@ $(function () {
                 $("#app-append").append(res)
             })
         }
-        // else if (field === "source") {
-        //     $.ajax(`/api/source/filter/sourceType/${filter}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //         $("#app-append").append(res)
-        //     })
-        // }
-        // else if (field === "resumeVersion") {
-        //     $.ajax(`/api/user/:userId/source/filter/resumeVersion/${filter}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //         $("#app-append").append(res)
-        //     })
-        // }
-        // else if (field === "currentStage") {
-        //     $.ajax(`/api/stage/filter/currentStage/${filter}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //         $("#app-append").append(res)
-        //     })
-        // }
+        else if (field === "source") {
+            $.ajax(`/api/user/${globalUserID}/application/filter/source/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
+        else if (field === "applyType") {
+            $.ajax(`/api/user/${globalUserID}/application/filter/applyType/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
+        else if (field === "resumeVersion") {
+            $.ajax(`/api/user/${globalUserID}/application/filter/resumeVersion/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
+        else if (field === "currentStage") {
+            $.ajax(`/api/user/${globalUserID}/application/filter/currentStage/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
     });
 
     // Click Reset Filter Button
     $("#reset-btn").on("click", function (event) {
-        event.preventDefault();
-        $.ajax(`/api/user/${globalUserID}/application/all`, {
-            type: "GET"
-        }).then(function (res) {
-            $("#app-append").append(res);
-        });
+        // event.preventDefault();
+        window.location.reload()
+        // $.ajax(`/api/user/${globalUserID}/application/all`, {
+        //     type: "GET"
+        // }).then(function (res) {
+        //     $("#app-append").append(res);
+        // });
     });
 
 }); 

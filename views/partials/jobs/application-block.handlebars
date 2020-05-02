@@ -15,7 +15,7 @@
         </div>
         <div class="uk-card-body">
             <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
-            <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyName}}</h4>
+            <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyObj.name}}</h4>
             <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{zipCode}}</h5>
             <p class="uk-text-small uk-text-muted uk-text-bold"> {{type}}</p>
 
@@ -39,7 +39,7 @@
 
                     <p class="uk-float-right uk-text-center">Interest: {{rating}} <span uk-icon="star"></span></p>
                     <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
-                    <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyName}}</h4>
+                    <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyObj.name}}</h4>
                     <p class="uk-margin-small-bottom uk-margin-remove-adjacent">{{industry}}</p>
                     <p class="uk-text-small uk-text-muted uk-text-bold">{{zipCode}}</p>
                     <p class="uk-text-small uk-text-muted uk-text-bold">{{type}}</p>
@@ -60,7 +60,7 @@
                             </thead>
                             <tbody>
                                 {{#each sourceObj}}
-                                {{> sources/source-block}}
+                                    {{> sources/source-block}}
                                 {{/each}}
 
                             </tbody>
@@ -115,7 +115,7 @@
                             </thead>
                             <tbody>
                                 {{#each contactObj}}
-                                {{> contacts/contact-block}}
+                                    {{> contacts/contact-block}}
                                 {{/each}}
                             </tbody>
                         </table>
@@ -170,7 +170,7 @@
                             </thead>
                             <tbody >
                                 {{#each stageObj}}
-                                {{> stages/stage-block}}
+                                    {{> stages/stage-block}}
                                 {{/each}}
 
                             </tbody>
