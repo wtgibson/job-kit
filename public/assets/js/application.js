@@ -33,33 +33,34 @@ $(function () {
 
     });
 
-    $(document).on("click", "#details-btn", function(event){
+    $(document).on("click", "#details-btn", function (event) {
         // event.preventDefault();
         var id = event.target.value;;
         console.log(id)
 
         $.ajax(`/api/application/${id}`, {
             type: "GET"
-        }).then(function (res){
+        }).then(function (res) {
             console.log(res);
             // window.location.reload()
             $("#details-modal").append(res);
         })
-        
+
     });
-  
+
 
     $(document).on("click", ".add-contact", function (event) {
         event.preventDefault();
         var id = $(".add-contact").data("appid")
-        console.log(`I clicke don id #add-form-${appID}`)
         $(`#add-form-${appID}`).removeClass("uk-hidden")
     })
+
+
 
     $(document).on("click", ".contact-save", function (event) {
         event.preventDefault();
         $(`#add-form-${appID}`).addClass("uk-hidden")
-        
+
         var newContact = {
             name: $(`#add-contact-name-${appID}`).val(),
             type: $(`#add-contact-type-${appID}`).val(),
@@ -67,22 +68,79 @@ $(function () {
             phone: $(`#add-contact-phone-${appID}`).val(),
             ApplicationId: appID,
         }
-        console.log("You tried to add an app!")
-        console.log(newContact)
         $.ajax("/api/contact/new", {
             type: "POST",
             data: newContact,
-        }).then(function (res3) {
-            window.location.reload()
-            // receives back the company id
+        }).then(function (res1) {
+            console.log(res1)
+            let id = res1
+            // receives back the contact id
+            $.ajax(`/api/contact/${id}`, {
+                type: "GET",
+            }).then(function (res2) {
+                console.log(res2)
+                $("#contacts-append-table").append(res2)
+                // receives back the contact id
+                
+    
+            })
 
         })
     })
 
-    $(document).on("click", ".details-link-modal", function(event){
+    $(document).on("click", ".contact-delete", function (event) {
+        event.preventDefault();
+        var id = $(this).data("contactid");
+        console.log(id)
+        $.ajax(`/api/contact/${id}`, {
+            type: "DELETE",
+        }).then(function (res3) {
+            console.log(res3)
+            $(`#contact-${id}`).remove()
+        })
+    })
+
+    $(document).on("click", ".add-stage", function (event) {
+        event.preventDefault();
+        var id = $(".add-stage").data("appid")
+        $(`#add-stage-${appID}`).removeClass("uk-hidden")
+    })
+
+    $(document).on("click", ".stage-save", function (event) {
+        event.preventDefault();
+        $(`#add-stage-${appID}`).addClass("uk-hidden")
+
+        var newStage = {
+            currentStage: $(`#add-stage-stage-${appID}`).val(),
+            dateCurrentStage: $(`#add-stage-date-${appID}`).val(),
+            nextStep: $(`#add-stage-next-${appID}`).val(),
+            notes: $(`#add-stage-notes-${appID}`).val(),
+            ApplicationId: appID,
+        }
+        $.ajax("/api/stage/new", {
+            type: "POST",
+            data: newStage,
+        }).then(function (res5) {
+            
+            console.log(res5)
+        })
+    })
+
+    $(document).on("click", ".stage-delete", function (event) {
+        event.preventDefault();
+        var id = $(this).data("stageid");
+        $.ajax(`/api/stage/${id}`, {
+            type: "DELETE",
+        }).then(function (res3) {
+            console.log(res3)
+            $(`#stage-${id}`).remove()
+        })
+    })
+
+
+    $(document).on("click", ".details-link-modal", function (event) {
         event.preventDefault();
         var applicationID = $(this).data("id")
-        console.log(`this is our application ID ${applicationID}`)
         sessionStorage.setItem('caid', applicationID);
         appID = sessionStorage.getItem('caid');
 

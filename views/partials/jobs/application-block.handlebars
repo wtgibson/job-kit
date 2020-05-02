@@ -17,12 +17,15 @@
             <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
             <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyName}}</h4>
             <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{zipCode}}</h5>
-            <p class="uk-text-small uk-text-muted">{{description}}</p>
-            <p class="uk-text-small uk-text-muted uk-text-bold">{{salaryRange}}</p>
+            <p class="uk-text-small uk-text-muted uk-text-bold"> {{type}}</p>
+
+            {{!-- <p class="uk-text-small uk-text-muted">{{description}}</p> --}}
+            <p class="uk-text-small uk-text-muted uk-text-bold">Salary Range: {{salaryRange}}</p>
             <!-- Model Button -->
             <button class="edit-app" uk-icon="pencil" data-appid={{id}} type="button"></button>
             <button class="delete-app" uk-icon="trash" data-appid={{id}} type="button"></button>
-            <a data-id={{id}} class="details-link-modal uk-button uk-button-default uk-border-rounded" href="#modal-center-{{id}}" uk-toggle>Details</a>
+            <a data-id={{id}} class="details-link-modal uk-button uk-button-default uk-border-rounded"
+                href="#modal-center-{{id}}" uk-toggle>Details</a>
 
             <!-- Modal Info -->
             <div id="modal-center-{{id}}" class="uk-flex-top" uk-modal>
@@ -31,94 +34,22 @@
 
                     <button class="uk-modal-close-default" type="button" uk-close></button>
 
-                    <button class="edit-app" data-appId={{id}} uk-icon="pencil" type="button"></button>
                     <p>Job Application ID: {{id}}</p>
-                    <p class="uk-float-right uk-text-center">Rating: {{rating}} <span uk-icon="star"></span></p>
+                    <button class="edit-app uk-float-right" data-appId={{id}} uk-icon="pencil" type="button"></button>
+
+                    <p class="uk-float-right uk-text-center">Interest: {{rating}} <span uk-icon="star"></span></p>
                     <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
                     <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyName}}</h4>
-                    <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{industry}}</h4>
-                    <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{zipCode}}</h5>
+                    <p class="uk-margin-small-bottom uk-margin-remove-adjacent">{{industry}}</p>
+                    <p class="uk-text-small uk-text-muted uk-text-bold">{{zipCode}}</p>
+                    <p class="uk-text-small uk-text-muted uk-text-bold">{{type}}</p>
                     <p class="uk-text-small uk-text-muted uk-text-bold">Salary Range: {{salaryRange}}</p>
                     <div class="uk-overflow-auto">
                         <p class="uk-text-small uk-text-muted">{{description}}</p>
                     </div>
 
-                    <hr>
-
                     <div class="uk-overflow-auto">
-                        <h4>Internal Contacts <span><a href="" uk-icon="plus-circle" class="add-contact" data-appid="{{id}}"></a> </span></h4>
-                        <form class="add-contact-form uk-section-muted uk-hidden add-form" id="add-form-{{id}}" >
-                            <table class="uk-table">
-                                <caption></caption>
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Type</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><input id="add-contact-name-{{id}}" class="uk-input uk-border-pill" type="text">
-                                        </td>
-                                        <td><input id="add-contact-type-{{id}}" class="uk-input uk-border-pill" type="text">
-                                        </td>
-                                        <td><input id="add-contact-email-{{id}}" class="uk-input uk-border-pill" type="text">
-                                        </td>
-                                        <td><input id="add-contact-phone-{{id}}" class="uk-input uk-border-pill" type="text">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <button
-                                class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-norder-rounded contact-save" id="save-contact-{{id}}">Save</button>
-                        </form>
-
-                        <table class="uk-table uk-table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Contact Name</th>
-                                    <th>Contact Type</th>
-                                    <th>Contact Email</th>
-                                    <th>Contact Phone</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{#each contactObj}}
-                                {{> contacts/contact-block}}
-                                {{/each}}
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <hr>
-
-                    <div class="uk-overflow-auto">
-                        <h4>Application Stages:</h4>
-                        <table class="uk-table uk-table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Stage</th>
-                                    <th>Date</th>
-                                    <th>Next Step</th>
-                                    <th>Notes</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{#each stageObj}}
-                                {{> stages/stage-block}}
-                                {{/each}}
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <hr>
-
-                    <div class="uk-overflow-auto">
-                        <h4>Sources:</h4>
+                        {{!-- <h4>Sources:</h4> --}}
                         <table class="uk-table uk-table-striped">
                             <thead>
                                 <tr>
@@ -135,6 +66,119 @@
                             </tbody>
                         </table>
                     </div>
+
+
+                    <hr>
+
+                    <div class="uk-overflow-auto">
+                        <h4>Internal Contacts <span><a href="" uk-icon="plus-circle" class="add-contact" data-appid="{{id}}"></a> </span></h4>
+                        <form class="add-contact-form uk-section-muted uk-hidden add-form" id="add-form-{{id}}" >
+                            <table class="uk-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input id="add-contact-name-{{id}}" class="uk-input uk-border-pill"
+                                                type="text">
+                                        </td>
+                                        <td><input id="add-contact-type-{{id}}" class="uk-input uk-border-pill"
+                                                type="text">
+                                        </td>
+                                        <td><input id="add-contact-email-{{id}}" class="uk-input uk-border-pill"
+                                                type="text">
+                                        </td>
+                                        <td><input id="add-contact-phone-{{id}}" class="uk-input uk-border-pill"
+                                                type="text">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button
+                                class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-norder-rounded contact-save"
+                                id="save-contact-{{id}}">Save</button>
+                        </form>
+
+                        <table class="uk-table uk-table-striped" id="contacts-append-table">
+                            <thead>
+                                <tr>
+                                    <th>Contact Name</th>
+                                    <th>Contact Type</th>
+                                    <th>Contact Email</th>
+                                    <th colspan="3">Contact Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each contactObj}}
+                                {{> contacts/contact-block}}
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr>
+
+                    <div class="uk-overflow-auto">
+                        <h4>Application Stages:<span><a href="" uk-icon="plus-circle" class="add-stage"
+                                    data-appid="{{id}}"></a> </span></h4>
+                        <form class="add-stage-form uk-section-muted uk-hidden add-form" id="add-stage-{{id}}">
+                            <table class="uk-table">
+                                <caption></caption>
+                                <thead>
+                                    <tr>
+                                        <th>Stage</th>
+                                        <th>Date</th>
+                                        <th>Next Step</th>
+                                        <th colspan="3">Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input id="add-stage-stage-{{id}}" class="uk-input uk-border-pill"
+                                                type="text">
+                                        </td>
+                                        <td><input id="add-stage-date-{{id}}" class="uk-input uk-border-pill"
+                                                type="text">
+                                        </td>
+                                        <td><input id="add-stage-next-{{id}}" class="uk-input uk-border-pill"
+                                                type="text">
+                                        </td>
+                                        <td><input id="add-stage-notes-{{id}}" class="uk-input uk-border-pill"
+                                                type="text">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button
+                                class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-norder-rounded stage-save"
+                                id="save-stage-{{id}}">Save</button>
+                        </form>
+
+                        <table class="uk-table uk-table-striped" id="stages-table-body">
+                            <thead>
+                                <tr>
+                                    <th>Stage</th>
+                                    <th>Date</th>
+                                    <th>Next Step</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                {{#each stageObj}}
+                                {{> stages/stage-block}}
+                                {{/each}}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <hr>
+
                 </div>
             </div>
             <!-- END OF MODAL -->
@@ -143,13 +187,13 @@
         <div class="uk-card-footer">
             <div class="uk-grid uk-grid-small uk-grid-divider uk-flex uk-flex-middle" data-uk-grid>
                 <div class="uk-width-expand uk-text-small">
-                    User Rating: {{rating}}
+                    Interest Level: {{rating}}
                 </div>
                 <div class="uk-width-expand uk-text-small">
-                    Current Stage
+                    Stage: {{stageObj.[0].dataValues.currentStage}}
                 </div>
                 <div class="uk-width-expand uk-text-small">
-                    <a href="#">Job Posting</a>
+                    <a href="{{sourceObj.[0].dataValues.linkToPosting}}" target="_blank">Job Posting</a>
                 </div>
             </div>
         </div>

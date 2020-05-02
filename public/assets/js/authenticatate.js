@@ -57,12 +57,17 @@ $("#login-button").on("click", function (event) {
           type: "PUT",
           data: loginData,
         }).then(res => {
+          // if user profile is incomplete, send the user to the profile page to complete
+          if(res.codLang === undefined || res.codLang === null) {
+            window.location.assign('/profile')
+          }else {
           // stores the user id to the globalUserID
           sessionStorage.setItem('uuid', res.user);
           sessionStorage.setItem('clid', res.codLang);
           
           // reroutes the user to the applications page once they have been authenticated
           window.location.replace("/applications");
+        }
         });
 
       })
@@ -110,13 +115,5 @@ $("#login-button").on("click", function (event) {
       // $("#setProfile").addClass("d-none");
       // $("#signIn").removeClass("d-none");
     }
-
-    // Event listener for Sign Out button
-    $("#signout").on("click", function (event) {
-      event.preventDefault();
-
-      // sign out of firebase
-      firebase.auth().signOut();
-    })
   
   });

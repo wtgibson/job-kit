@@ -1,8 +1,8 @@
 $(function () {
     let globalUserID = sessionStorage.getItem('uuid');
     let codingLanguage = sessionStorage.getItem('clid');
-    
-    $(document).on("submit","#search-form", function () {
+
+    $(document).on("submit", "#search-form", function () {
         event.preventDefault();
         var locationCity = $(".job-search-bar").val().trim();
         $.ajax(`/api/jobs/${codingLanguage}/${locationCity}`, {
@@ -11,7 +11,7 @@ $(function () {
             $("#github-jobs").empty()
             $("#github-jobs").prepend(resp)
         })
-    
+
     });
 
     $.ajax(`/api/jobs/${codingLanguage}`, {
@@ -22,67 +22,51 @@ $(function () {
 
 
     $(document).on("click", ".link-to-ext", function () {
-        // event.preventDefault();
+        event.preventDefault();
 
+        // extract data from the html
         var id = $(this).data("jobid");
         var title = $(`#title-${id}`).text();
         var desc = $(`#desc-${id}`).text();
         var company = $(`#company-${id}`).text();
-        var link = $(`#company-${id}`).attr("href");
-        var location = $(`#location-${id}`).text();
-        
+        var compLink = $(`#company-${id}`).attr("href");
+        var location = $(`#loc-${id}`).text();
+        var type = $(`#type-${id}`).text();
+        var postLink = $(`#url-${id}`).attr("href");
+
 
         var newApp = {
             title: title,
-            type: "",
+            type: type,
             description: desc,
-            industry: "None",
-            zipCode: "94114",
-            salaryRange: "0",
-            rating: 0,
-            dataApplied: Date.now(),
-            UserId: globalUserID
+            UserId: globalUserID,
         }
 
         $.ajax("/api/application", {
             type: "POST",
             data: newApp,
-        }).then(function (res1) {
-            // receives back the user id
-            console.log(res1)
-            var newCompany = {
-                name: company,
-                zipCode: "",
-                URL: "",
-                ApplicationId: res1,
-                UserId: globalUserID
-            }
-            $.ajax("/api/company", {
-                type: "POST",
-                data: newCompany,
-            }).then(function (res2) {
-                // receives back the company id
-                var newContact = {
-                    name: "",
-                    email: "",
-                    phone: "",
-                    type: "",
+        })
+            .then(function (res1) {
+                // receives back the user id
+                console.log(res1)
+                var newCompany = {
+                    name: company,
+                    zipCode: location,
+                    URL: compLink,
                     ApplicationId: res1,
-                    CompanyId: res2
+                    UserId: globalUserID
                 }
-                $.ajax("/api/contact/new", {
+                $.ajax("/api/company", {
                     type: "POST",
-                    data: newContact,
+                    data: newCompany,
                 }).then(function (res3) {
                     console.log(res3)
                     // receives back the company id
                     var newSource = {
-                        source: "GitHub",
-                        linkToPosting: link,
-                        jobID: "",
-                        applyType: "",
-                        resumeVersion: "",
-                        ApplicationId: res1,
+                        source: "GitHub Jobs API",
+                        linkToPosting: postLink,
+                        jobID: id,
+                        ApplicationId: res1
                     }
                     $.ajax("/api/source/new", {
                         type: "POST",
@@ -91,24 +75,8 @@ $(function () {
                         console.log(res4)
                     })
 
-                    var newStage = {
-                        currentStage: "Application",
-                        dateCurrentStage: "",
-                        nextStep: "",
-                        notes: "",
-                        ApplicationId: res1,
-                    }
-                    $.ajax("/api/stage/new", {
-                        type: "POST",
-                        data: newStage,
-                    }).then(function (res5) {
-                        console.log(res5)
-                    })
-
                 })
-            });
-
-        })
+            })
 
     })
 

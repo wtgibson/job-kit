@@ -13,24 +13,30 @@
 			</div>
 		</div>
 		<div class="uk-card-body">
+			<img data-src="{{company_logo}}" width="20px" height="" alt="" uk-img>
 			<h3 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="title-{{id}}"> {{title}}</h3>
 			<h4 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="company-{{id}}" href="{{company_url}}">{{company}}</h4>
 			<h5 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="loc-{{id}}">{{location}}</h5>
 			{{!-- <p class="uk-text-small uk-text-muted"id="desc-${{id}}">Description: {{description}}</p> --}}
 			{{!-- <p class="uk-text-small uk-text-muted uk-text-bold">Salary Range</p> --}}
 			<!-- Model Button -->
-			<a class="uk-button uk-button-default uk-border-rounded" href="#modal-center" uk-toggle>Details</a>
-			<!-- Modal Info -->
-			<div id="modal-center" class="uk-flex-top" uk-modal>
+
+			<a class="details-link-modal uk-button uk-button-default uk-border-rounded" href="#modal-center-{{id}}" uk-toggle>Details</a>
+
+            <!-- Modal Info -->
+            <div id="modal-center-{{id}}" class="uk-flex-top" uk-modal>
 				<div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
 
 					<button class="uk-modal-close-default" type="button" uk-close></button>
 
 					<h3 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="title-{{id}}">{{title}}</h3>
 					<h4 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="company-{{id}}" href="{{company_url}}">{{company}}</h4>
-					{{!-- <img src="{{company_logo}}" alt="company logo" /> --}}
-					<h5 class="uk-margin-small-bottom uk-margin-remove-adjacent"id="loc-{{id}}">Location: {{location}}</h5>
-					<p class="uk-text-small uk-text-muted"id="desc-{{id}}">Description: {{{description}}}</p>
+					<h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">Time Type:<span id="type-{{id}}">{{type}}</span> </h5>
+					<h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">Location:<span id="loc-{{id}}">{{location}}</span></h5>
+					
+					{{!-- <p class="uk-text-small uk-text-muted">Description: <span id="desc-{{id}}">{{{how_to_apply}}}</span></p> --}}
+
+					<p class="uk-text-small uk-text-muted">Description: <span id="desc-{{id}}">{{{description}}}</span></p>
 
 				</div>
 			</div>
@@ -42,7 +48,7 @@
 					<a class="link-to-ext" target="_blank" data-jobId="{{id}}">Add Application </a> 
 				</div>
 				<div class="uk-width-expand uk-text-small">
-					<a href="{{url}}" target="_blank" data-jobId="{{id}}">Link to Role </a> 
+					<a href="{{url}}" id="url-{{id}}" target="_blank" data-jobId="{{id}}">Link to Role </a> 
 				</div>
 			</div>
 		</div>

@@ -2,6 +2,9 @@ $(function () {
     let globalUserID = sessionStorage.getItem('uuid');
     let appID = sessionStorage.getItem('caid');
 
+    var roleType;
+    var interest;
+
     $.ajax(`/api/application/${appID}`, {
         type: "GET"
     }).then(function (res) {
@@ -11,18 +14,17 @@ $(function () {
         $("#app-zipCode").val(res.zipCode);
         $("#app-salary").val(res.salaryRange);
         $("#app-applied").val(res.dateApplied);
-        $("#app-rating").val(res.rating);
+        var el1 = document.getElementsByClassName("role-interest");
+        $(el1[res.rating - 1]).attr("checked", "checked")
 
-
-        console.log(`the job type is: ${res.type}`)
-        // if(res.type === "FTE" ){
-        //     $("#app-type").attr("checked", "checked");
-        // }
-        // if(res.type === "Part-Time" ){
-        //     $("#app-type").attr("checked", "checked");
-        // }
-        
-
+        var el2 = document.getElementsByClassName("app-type");
+        for (let i = 0; i < el2.length; i++) {
+            if ($(elements[i]).val() == res.type) {
+                $(elements[i]).attr("checked", "checked")
+            }
+        }
+        // var el2 = document.getElementsByClassName("app-type");
+        // $(el2[res.rating]).attr("checked", "checked")
     })
 
     console.log(`/api/company/${appID}`)
@@ -50,18 +52,31 @@ $(function () {
 
     $("#app-edit").on("click", function (event) {
         event.preventDefault();
-    
+
+        elements = document.getElementsByClassName("app-type");
+        for (let i = 0; i < elements.length; i++) {
+            if ($(elements[i]).prop("checked")) {
+                roleType = ($(elements[i]).val())
+            }
+        }
+
+        elements = document.getElementsByClassName("role-interest");
+        for (let i = 0; i < elements.length; i++) {
+            if ($(elements[i]).prop("checked")) {
+                interest = ($(elements[i]).val())
+            }
+        }
 
         // ------- Update App ---------
         var updateApp = {
             title: $("#app-title").val(),
-            type: $("#app-type").val(),
+            type: roleType,
             description: $("#app-desc").val(),
             industry: $("#app-industry").val(),
             zipCode: $("#app-zipCode").val(),
             salaryRange: $("#app-salary").val(),
             dateApplied: $("#app-applied").val(),
-            rating: $("#app-rating").val(),
+            rating: interest,
             UserId: globalUserID
         }
 
@@ -105,12 +120,12 @@ $(function () {
             console.log(res)
         })
 
-        
+
         $("#add-data-form").append(`<h2> Your form was submitted </h2>`)
 
 
     })
 
-    
+
 
 })

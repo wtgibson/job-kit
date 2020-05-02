@@ -1,27 +1,38 @@
 $(function () {
     let globalUserID = sessionStorage.getItem('uuid');
 
-
     $("#app-add").on("click", function (event) {
-        event.preventDefault();
-        window.location.replace("/applications")
-        // $("#add-data-form").empty()
-        // $("#add-data-form").append(`<h2> Your application has been submitted </h2>
-        // <a class="uk-button-large uk-button-secondary uk-border-rounded" href="/applications">Return to Applications Page</a>`)
-       
+        event.preventDefault(event);
+        // window.location.replace("/applications")
+        var roleType;
+        var interest;
+        elements = document.getElementsByClassName("app-type");
+        for (let i = 0; i < elements.length; i++) {
+            if ($(elements[i]).prop("checked")) {
+                roleType = ($(elements[i]).val())
+            }
+        }
 
+        elements = document.getElementsByClassName("role-interest");
+        for (let i = 0; i < elements.length; i++) {
+            if ($(elements[i]).prop("checked")) {
+                interest = ($(elements[i]).val())
+            }
+        }
         var newApp = {
             title: $("#app-title").val(),
-            type: $("#app-type").val(),
+            type: roleType,
             description: $("#app-desc").val(),
             industry: $("#app-industry").val(),
             zipCode: $("#app-zipCode").val(),
             salaryRange: $("#app-salary").val(),
             dateApplied: $("#app-applied").val(),
-            rating: 0,
-            // rating: $("#app-rating").val(),
+            rating: interest,
             UserId: globalUserID
         }
+
+
+        
 
         $.ajax("/api/application", {
             type: "POST",
@@ -41,7 +52,7 @@ $(function () {
                 data: newCompany,
             }).then(function (res2) {
                 console.log(res2)
-            
+
                 var newSource = {
                     source: $("#src-source").val(),
                     linkToPosting: $("#src-posting").val(),
@@ -57,24 +68,9 @@ $(function () {
                     console.log(res4)
                 })
 
-                // var newStage = {
-                //     currentStage: $("#stgs-current").val(),
-                //     dateCurrentStage: $("#stgs-dateOfStage").val(),
-                //     nextStep: $("#stgs-nextStep").val(),
-                //     notes: $("#stgs-notes").val(),
-                //     ApplicationId: res1,
-                // }
-                // $.ajax("/api/stage/new", {
-                //     type: "POST",
-                //     data: newStage,
-                // }).then(function (res5) {
-                //     console.log(res5)
-                // })
+
 
             })
         });
     })
-
-   
-
 })

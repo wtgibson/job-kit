@@ -1,6 +1,8 @@
-<tr>
+<tr id="contact-{{dataValues.id}}">
     <td>{{dataValues.name}}</td>
     <td>{{dataValues.type}}</td>
     <td>{{dataValues.email}}</td>
     <td>{{dataValues.phone}}</td>
+    <td><button class="contact-delete" data-contactId={{dataValues.id}}> 🗑</button></td>
+    <td><button  class="contact-edit" data-contactId={{dataValues.id}}>🧰</button></td>
 </tr>
