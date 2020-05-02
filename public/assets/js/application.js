@@ -212,27 +212,34 @@ $(function () {
                 $("#app-append").append(res)
             })
         }
-        // else if (field === "source") {
-        //     $.ajax(`/api/source/filter/sourceType/${filter}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //         $("#app-append").append(res)
-        //     })
-        // }
-        // else if (field === "resumeVersion") {
-        //     $.ajax(`/api/user/:userId/source/filter/resumeVersion/${filter}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //         $("#app-append").append(res)
-        //     })
-        // }
-        // else if (field === "currentStage") {
-        //     $.ajax(`/api/stage/filter/currentStage/${filter}`, {
-        //         type: "GET"
-        //     }).then(function (res) {
-        //         $("#app-append").append(res)
-        //     })
-        // }
+        else if (field === "source") {
+            $.ajax(`/api/user/${globalUserID}/application/filter/source/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
+        else if (field === "applyType") {
+            $.ajax(`/api/user/${globalUserID}/application/filter/applyType/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
+        else if (field === "resumeVersion") {
+            $.ajax(`/api/user/${globalUserID}/application/filter/resumeVersion/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
+        else if (field === "currentStage") {
+            $.ajax(`/api/user/${globalUserID}/application/filter/currentStage/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
     });
 
     // Click Reset Filter Button
