@@ -9,9 +9,7 @@ var firebaseConfig = {
   measurementId: "G-TKMGLB01WM"
 };
 // Initialize Firebase
-
 firebase.initializeApp(firebaseConfig);
-// var database = firebase.database();
 
 // event listener for login screen
 $("#login-button").on("click", function (event) {
@@ -20,7 +18,6 @@ $("#login-button").on("click", function (event) {
   var password = $("#password");
 
   // validate the email/password credentials
-
   // email field input validation
   if (email.val().length < 1) { // cannot be empty
     // change the email input's placeholder and set focus
@@ -33,19 +30,16 @@ $("#login-button").on("click", function (event) {
     // change password input's placeholder and set focus
     password.attr("placeholder", "Password must be at least 6 characters!")
     password.focus();
-  }
-
-  // if all validations check out
-  else {
-    // use firebase to sign in
+  } else {
+    // authenticate with Firebase signin
     firebase.auth().signInWithEmailAndPassword(email.val(), password.val())
       // after user is signed in
       .then(function (data) {
-        // console log the returned data
+        // console log the returned data NEEDS TO BE COMMENTED OUT ON DEPLOY
         console.log(`authentiated user: ${data.user.email}`);
         console.log(data);
 
-        // let's clear the input fields
+        // Clear the input fields
         email.val("");
         password.val("");
         password.attr("placeholder", "");
@@ -59,7 +53,7 @@ $("#login-button").on("click", function (event) {
         }).then(res => {
           // if user profile is incomplete, send the user to the profile page to complete
           if (res.codLang === undefined || res.codLang === null) {
-            window.location.assign('/profile')
+            window.location.assign('/profile');
           } else {
             // stores the user id to the globalUserID
             sessionStorage.setItem('uuid', res.user);
@@ -74,7 +68,10 @@ $("#login-button").on("click", function (event) {
             console.log(error.code);
             if (error.code === "auth/user-not-found") {
               location.assign('/signup');
-            }
+            } else {
+              // future window.open to create the popup
+              alert(error.message);
+             }
           });
       });
   }
