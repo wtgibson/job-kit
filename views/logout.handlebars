@@ -1,12 +1,11 @@
-<script>
-    // clear local session
-    sessionStorage.setItem('ccid', "");
-    sessionStorage.setItem('uuid', "");
 
-    // sign out of firebase
+<script>
+$(function() { 
+    sessionStorage.removeItem('uuid');
+    sessionStorage.removeItem('caid');
+    sessionStorage.removeItem('clid');
     firebase.auth().signOut().then(() => {
         window.location.replace('/');
-    }, function (error) {
-        window.location.assign('/login');
     });
+})();    
 </script>
