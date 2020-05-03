@@ -36,8 +36,8 @@ $("#login-button").on("click", function (event) {
       // after user is signed in
       .then(function (data) {
         // console log the returned data NEEDS TO BE COMMENTED OUT ON DEPLOY
-        console.log(`authentiated user: ${data.user.email}`);
-        console.log(data);
+        // console.log(`authentiated user: ${data.user.email}`);
+        // console.log(data);
 
         // Clear the input fields
         email.val("");
@@ -63,18 +63,9 @@ $("#login-button").on("click", function (event) {
             window.location.assign("/applications");
           }
         })
-          // User email/password did not match or is not in firebase
-          // .catch(function (error) {
-          //   console.log("line 68" + error.code);
-          //   if (error.code === "auth/user-not-found") {
-          //     location.assign('/signup');
-          //   } else {
-          //     // future window.open to create the popup
-          //     alert(error.message);
-          //    }
-          // });
+        // User email/password did not match or is not in firebase
       }).catch(function(error) {
-        console.log("line 68" + error.code);
+        // console.log("line 68" + error.code);
         if (error.code === "auth/user-not-found") {
           location.assign('/signup');
         } else {
@@ -105,8 +96,6 @@ function grantAccess() {
   sessionStorage.setItem("user", JSON.stringify(user))
 
   // retrieve user info saved in database
-  // getUserInfo(user.uid)
-
   // manipulate the dom
 
 }
@@ -117,8 +106,6 @@ function removeAccess() {
   sessionStorage.removeItem("user");
 
   // manipulate the dom
-  // $("#setProfile").addClass("d-none");
-  // $("#signIn").removeClass("d-none");
 }
 
 $('#signup').on('click', (event) => {
