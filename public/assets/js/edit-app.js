@@ -19,8 +19,8 @@ $(function () {
 
         var el2 = document.getElementsByClassName("app-type");
         for (let i = 0; i < el2.length; i++) {
-            if ($(elements[i]).val() == res.type) {
-                $(elements[i]).attr("checked", "checked")
+            if ($(el2[i]).val() == res.type) {
+                $(el2[i]).attr("checked", "checked")
             }
         }
         // var el2 = document.getElementsByClassName("app-type");
@@ -33,7 +33,7 @@ $(function () {
     $.ajax(`/api/company/${appID}`, {
         type: "GET"
     }).then(function (res2) {
-        let company = res2[0];
+        let company = res2;
         $("#comp-name").val(company.name);
         $("#comp-zipCode").val(company.zipCode);
         $("#comp-link").val(company.URL)

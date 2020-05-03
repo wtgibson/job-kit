@@ -22,7 +22,7 @@ module.exports = function renderApplications(applications, res, partial) {
         // createdAt: element.dataValues.createdAt,
         // updatedAt: element.dataValues.updatesAt,
         // companyName: element.dataValues.Company.dataValues.name,
-        companyObj: element.dataValues.Company.dataValues,
+        companyObj: element.dataValues.Company,
         contactObj: element.dataValues.Contacts,
         stageObj: element.dataValues.Stages,
         sourceObj: element.dataValues.Sources
