@@ -4,14 +4,14 @@ $(function () {
     let appID = sessionStorage.getItem('caid');
     let field;
 
-    console.log("global User ID",globalUserID)
+    // on page load, there is an api call made to applications and the response is appended to the page
     $.ajax(`/api/user/${globalUserID}/application/all`, {
         type: "GET"
     }).then(function (res) {
-        console.log(res)
         $("#app-append").append(res)
     });
 
+    // Edit and Delete Application, Contact and Source
     $(document).on("click", ".edit-app", function (event) {
         event.preventDefault();
         var id = $(this).data("appid");
@@ -32,10 +32,10 @@ $(function () {
 
     });
 
+    // does this still in use?
     $(document).on("click", "#details-btn", function (event) {
         // event.preventDefault();
         var id = event.target.value;;
-        console.log(id)
 
         $.ajax(`/api/application/${id}`, {
             type: "GET"
@@ -46,15 +46,16 @@ $(function () {
 
     });
 
+    // --------------------  add, edit, save, delete Contact Code  -------------------- 
 
+    // unhides add contact form with one button click
     $(document).on("click", ".add-contact", function (event) {
         event.preventDefault();
         var id = $(".add-contact").data("appid")
         $(`#add-form-${appID}`).removeClass("uk-hidden")
     })
 
-
-
+    // contact save that makes ajax call to POST contact
     $(document).on("click", ".contact-save", function (event) {
         event.preventDefault();
         $(`#add-form-${appID}`).addClass("uk-hidden")
@@ -70,9 +71,8 @@ $(function () {
             type: "POST",
             data: newContact,
         }).then(function (res1) {
-            console.log(res1)
+            // receives back the contact id to make a second call for rendered data
             let id = res1
-            // receives back the contact id
             $.ajax(`/api/contact/${id}`, {
                 type: "GET",
             }).then(function (res2) {
@@ -82,17 +82,21 @@ $(function () {
         })
     })
 
+    // deletes contact
     $(document).on("click", ".contact-delete", function (event) {
         event.preventDefault();
         var id = $(this).data("contactid");
-        console.log(id)
+        $(`#contact-${id}`).remove()
         $.ajax(`/api/contact/${id}`, {
             type: "DELETE",
         }).then(function (res3) {
-            console.log(res3)
-            $(`#contact-${id}`).remove()
+            
         })
     })
+
+
+    // --------------------  add, edit, save, delete stage Code  -------------------- 
+
 
     $(document).on("click", ".add-stage", function (event) {
         event.preventDefault();
