@@ -4,6 +4,7 @@
 // Constructs the User model
 module.exports = function (sequelize, DataTypes) {
     var User = sequelize.define("User", {
+        // User Email - used as username
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -19,11 +20,14 @@ module.exports = function (sequelize, DataTypes) {
         //         len: [6]
         //     }
         // },
+
+        // First and Last Name
         name: {
             type: DataTypes.STRING,
             allowNull: true,
         },
-
+        // User Current Zipcode -
+        // used to locate new job opportunities 
         zipCode: {
             type: DataTypes.STRING,
             allowNull: true,
@@ -31,16 +35,17 @@ module.exports = function (sequelize, DataTypes) {
                 len:[5,5]
             }
         },
+        // Currently seeking jobs with this jobTitle
         jobTitle: {
             type: DataTypes.STRING,
             allowNull: true,
         },
-
+        // GitHub Username - populates user image
         github: {
             type: DataTypes.STRING,
             allowNull: true,
         },
-
+        // Currently seeking jobs in this language
         codingLanguage: {
             type: DataTypes.STRING,
             allowNull: true,
