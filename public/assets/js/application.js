@@ -75,11 +75,7 @@ $(function () {
             $.ajax(`/api/contact/${id}`, {
                 type: "GET",
             }).then(function (res2) {
-                console.log(res2)
-              
-   
-                $("#contacts-append-table").append(res2)
-                // receives back the contact id
+                $(`#contacts-append-table-${appID}`).append(res2)
             })
 
         })

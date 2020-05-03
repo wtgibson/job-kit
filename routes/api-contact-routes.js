@@ -68,8 +68,20 @@ module.exports = function (app) {
                 id: req.params.contactId
             },
         }).then(contacts => {
+            console.log(`contacts are : ${contacts.dataValues.id}`)
+            console.log(`contacts are : ${contacts.dataValues.name}`)
+            var x = {layout: false,
+                dataValues: {
+                    id: contacts.id,
+                    name: contacts.name,
+                    email: contacts.email,
+                    phone: contacts.phone,
+                    type: contacts.type
+                }
+
+            }
             // Add Partial as third argument
-            renderContact(contacts, res, "partials/contacts/contact-block");
+            res.render("partials/contacts/contact-block", x);
         }).catch(err => {
             console.log(err);
             res.send(false);
