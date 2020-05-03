@@ -27,7 +27,7 @@
 					<li><a id="nav-jobs" href="/jobs">Jobs</a></li>
 					<li><a id="nav-profile" href="/profile">Profile</a></li>
 					<li></li>
-					<li><a id="nav-signout" class="uk-text-bold uk-text-danger" id="signout" href="/">Logout</a></li>
+					<li><a id="nav-signout" class="uk-text-bold uk-text-danger signout" href="/logout">Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -41,11 +41,14 @@
 				{{!-- Don't filter on 0 --}}
 				<option value="0">Filter</option>
 				<option value="title">Title</option>
+				<option value="industry">Industry</option>
 				<option value="zipCode">Zipcode</option>
 				<option value="rating">Rating</option>
-				{{!-- <option value="source">Source</option>
+				<option value="company">Company</option>
+				<option value="source">Source</option>
+				<option value="applyType">Apply Type</option>
 				<option value="resumeVersion">Resume Version</option>
-				<option value="currentStage">Current Stage</option> --}}
+				<option value="currentStage">Current Stage</option>
 			</select>
 			<span class="uk-link">
 				<span uk-icon="icon: settings"></span>
@@ -56,8 +59,7 @@
 	<div class="uk-margin">
 		<div uk-form-custom="target: > * > span:last-child">
 			<select id="filter">
-				{{!-- Don't filter on 0 --}}
-				<option value="0">Filter</option>
+				{{!-- Left blank until filter type is known --}}
 			</select>
 			<span class="uk-link">
 				<span uk-icon="icon: chevron-down"></span>

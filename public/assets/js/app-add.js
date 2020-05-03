@@ -1,27 +1,54 @@
 $(function () {
     let globalUserID = sessionStorage.getItem('uuid');
 
-
     $("#app-add").on("click", function (event) {
-        event.preventDefault();
+        event.preventDefault(event);
         window.location.replace("/applications")
-        // $("#add-data-form").empty()
-        // $("#add-data-form").append(`<h2> Your application has been submitted </h2>
-        // <a class="uk-button-large uk-button-secondary uk-border-rounded" href="/applications">Return to Applications Page</a>`)
-       
+        var roleType;
+        var interest;
+        elements = document.getElementsByClassName("app-type");
+        for (let i = 0; i < elements.length; i++) {
+            if ($(elements[i]).prop("checked")) {
+                roleType = ($(elements[i]).val())
+            }
+            else{
+                interest = ""
+            }
+        }
+
+        elements = document.getElementsByClassName("role-interest");
+        for (let i = 0; i < elements.length; i++) {
+            if ($(elements[i]).prop("checked")) {
+                interest = ($(elements[i]).val())
+            }
+            else{
+                interest = ""
+            }
+        }
+
+        // need to check length of zipCode before Submitting
+        
+        let appZip;
+        if($("#app-zipCode").val()==""){
+            appZip = "     "
+        }
+        else{
+            appZip = $("#app-zipCode").val()
+        }
+
 
         var newApp = {
             title: $("#app-title").val(),
-            type: $("#app-type").val(),
+            type: roleType,
             description: $("#app-desc").val(),
             industry: $("#app-industry").val(),
-            zipCode: $("#app-zipCode").val(),
+            zipCode: appZip,
             salaryRange: $("#app-salary").val(),
             dateApplied: $("#app-applied").val(),
-            rating: 0,
-            // rating: $("#app-rating").val(),
+            rating: interest,
             UserId: globalUserID
         }
+
 
         $.ajax("/api/application", {
             type: "POST",
@@ -41,7 +68,7 @@ $(function () {
                 data: newCompany,
             }).then(function (res2) {
                 console.log(res2)
-            
+
                 var newSource = {
                     source: $("#src-source").val(),
                     linkToPosting: $("#src-posting").val(),
@@ -53,28 +80,14 @@ $(function () {
                 $.ajax("/api/source/new", {
                     type: "POST",
                     data: newSource,
-                }).then(function (res4) {
-                    console.log(res4)
+                }).then(function (res3) {        
                 })
 
-                // var newStage = {
-                //     currentStage: $("#stgs-current").val(),
-                //     dateCurrentStage: $("#stgs-dateOfStage").val(),
-                //     nextStep: $("#stgs-nextStep").val(),
-                //     notes: $("#stgs-notes").val(),
-                //     ApplicationId: res1,
-                // }
-                // $.ajax("/api/stage/new", {
-                //     type: "POST",
-                //     data: newStage,
-                // }).then(function (res5) {
-                //     console.log(res5)
-                // })
+                
+
+
 
             })
         });
     })
-
-   
-
 })

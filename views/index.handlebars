@@ -32,7 +32,7 @@
     <div class="uk-container">
 
         <div class="uk-panel uk-dark uk-text-center">
-            <img id="index-logo" class="uk-center"
+            <img id="index-logo" class="uk-center uk-overlay-default"
                 src="https://dewey.tailorbrands.com/production/brand_version_mockup_image/852/2922780852_17e18edb-4281-4a6c-8a36-9f026bf29cf2.png?cb=1588108119"
                 alt="jobkit-logo">
 
@@ -60,22 +60,34 @@
 <section class="uk-preserve-color uk-margin-bottom">
     <div class="uk-section">
         <div class="uk-container">
+
+            <!-- Modal Info -->
+            <div id="home-page-modal" class="uk-flex-top" uk-modal>
+                <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+
+                    Place to hold image
+
+
+                    <button class="uk-modal-close-default" type="button" uk-close></button>
+                </div>
+            </div>
             <div class="uk-grid-match uk-child-width-expand@m" uk-grid>
                 <div>
                     <div class="uk-card uk-card-secondary uk-card-body uk-border-rounded">
+
                         <div class="uk-width-1-2 uk-align-center">
-                            <a type="submit" id="app-add" href="/applications"
-                                class="uk-button uk-button-primary uk-border-rounded uk-width-1-1">Applications<a
-                                    href="/applications"></a>
+                             <a type="submit" href="/applications"
+                                class="uk-button uk-button-primary uk-border-rounded uk-width-1-1 home-page-app">Applications
                             </a>
                         </div>
-                        <h2 class="uk-text-center">Tracked Job Applications</h2>
+                        <h2  class="uk-text-center" id="">Tracked Job Applications</h2>
                     </div>
                 </div>
+
                 <div>
                     <div class="uk-card uk-card-secondary uk-card-body uk-border-rounded">
                         <div class="uk-width-1-2 uk-align-center">
-                            <a type="submit" id="app-add" href="/jobs"
+                            <a type="submit" id="home-page-jobs" href="/jobs"
                                 class="uk-button uk-button-primary uk-border-rounded uk-width-1-1">Jobs
                             </a>
                         </div>

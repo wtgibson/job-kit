@@ -88,7 +88,17 @@ module.exports = function (app) {
                 ApplicationId: req.body.applicationId
             }
         }).then(stage => {
-            res.send(`Stage, ${stage.currentStage}, has been created`)
+            var x = {layout: false,
+                dataValues: {
+                    id: stage.id,
+                    currentStage: stage.currentStage,
+                    dateCurrentStage: stage.dateCurrentStage,
+                    nextStep: stage.nextStep,
+                    notes: stage.notes
+                }
+            }
+            // Add Partial as third argument
+            res.render("partials/stages/stage-block", x);
         }).catch(err => {
             console.log(err);
             res.send(`Stage, ${stage.currentStage}, was NOT created`)

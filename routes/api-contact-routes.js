@@ -68,10 +68,20 @@ module.exports = function (app) {
                 id: req.params.contactId
             },
         }).then(contacts => {
+            // AMF: created partial render page the old fashioned way
+
+            var x = {layout: false,
+                dataValues: {
+                    id: contacts.id,
+                    name: contacts.name,
+                    email: contacts.email,
+                    phone: contacts.phone,
+                    type: contacts.type
+                }
+            }
             // Add Partial as third argument
-            renderContact(contacts, res);
+            res.render("partials/contacts/contact-block", x);
         }).catch(err => {
-            console.log(err);
             res.send(false);
         });  
     });
@@ -81,7 +91,7 @@ module.exports = function (app) {
         db.Contact.create(req.body, {
             // ApplicationId and CompanyId sent from client
         }).then(contact => {
-            res.send(`Contact ${contact.dataValues.type}, has been created`)
+            res.json(contact.dataValues.id)
         }).catch(err => {
             console.log(err);
             res.send(`Contact ${contact.dataValues.type}, was NOT created`)

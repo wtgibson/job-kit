@@ -1,0 +1,11 @@
+
+<script>
+$(function() { 
+    sessionStorage.removeItem('uuid');
+    sessionStorage.removeItem('caid');
+    sessionStorage.removeItem('clid');
+    firebase.auth().signOut().then(() => {
+        window.location.replace('/');
+    });
+})();    
+</script>

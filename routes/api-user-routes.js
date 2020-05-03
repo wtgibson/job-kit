@@ -43,13 +43,13 @@ module.exports = function (app) {
             // res.json(user)
             // res render is calling on the jobs profile partial and returning html with the information provided
             // renderUser(user, res, "partials/jobs/profile-block");
-            var languages = [{ name: 'JavaScript' }, { name: 'ABAP'}, { name: 'Assembly' }, { name: 'C' }, { name: 'C#' }, { name: 'C++' }, { name: 'Clojure' }, { name: 'CoffeeScript' }, { name: 'Coq' }, { name: 'Dart' }, { name: 'DM' }, { name: 'Elixir' }, { name: 'Elm' }, { name: 'EmacsLisp' }, { name: 'Erlang' }, { name: 'F#' }, { name: 'Fortran' }, { name: 'FreeMarker' }, { name: 'Go' }, { name: 'Groovy' }, { name: 'Haskell' }, { name: 'Java' }, { name: 'Jsonnet' }, { name: 'Julia' }, { name: 'Kotlin' }, { name: 'Lua' }, { name: 'MATLAB' }, { name: 'Nix' }, { name: 'Objective-C' }, { name: 'Objective-C++' }, { name: 'OCaml' }, { name: 'Perl' }, { name: 'PHP' }, { name: 'PowerShell' }, { name: 'Puppet' }, { name: 'Python' }, { name: 'QML' }, { name: 'R' }, { name: 'Ruby' }, { name: 'Rust' }, { name: 'Scala' }, { name: 'Shell' }, { name: 'Swift' }, { name: 'SystemVerilog' }, { name: 'TSQL' }, { name: 'TypeScript' }, { name: 'Vala' }, { name: 'Vimscript' }, { name: 'VisualBasic.NET' }, { name: 'WebAssembly' }]
+            var languages = [{ name: 'JavaScript' }, { name: 'ABAP' }, { name: 'Assembly' }, { name: 'C' }, { name: 'C#' }, { name: 'C++' }, { name: 'Clojure' }, { name: 'CoffeeScript' }, { name: 'Coq' }, { name: 'Dart' }, { name: 'DM' }, { name: 'Elixir' }, { name: 'Elm' }, { name: 'EmacsLisp' }, { name: 'Erlang' }, { name: 'F#' }, { name: 'Fortran' }, { name: 'FreeMarker' }, { name: 'Go' }, { name: 'Groovy' }, { name: 'Haskell' }, { name: 'Java' }, { name: 'Jsonnet' }, { name: 'Julia' }, { name: 'Kotlin' }, { name: 'Lua' }, { name: 'MATLAB' }, { name: 'Nix' }, { name: 'Objective-C' }, { name: 'Objective-C++' }, { name: 'OCaml' }, { name: 'Perl' }, { name: 'PHP' }, { name: 'PowerShell' }, { name: 'Puppet' }, { name: 'Python' }, { name: 'QML' }, { name: 'R' }, { name: 'Ruby' }, { name: 'Rust' }, { name: 'Scala' }, { name: 'Shell' }, { name: 'Swift' }, { name: 'SystemVerilog' }, { name: 'TSQL' }, { name: 'TypeScript' }, { name: 'Vala' }, { name: 'Vimscript' }, { name: 'VisualBasic.NET' }, { name: 'WebAssembly' }]
 
             languages.forEach(element => {
-                if(element.name === user.codingLanguage){
+                if (element.name === user.codingLanguage) {
                     element["selected"] = true;
                 }
-                else{
+                else {
                     element["selected"] = false;
                 }
             })
@@ -57,8 +57,25 @@ module.exports = function (app) {
             var queryURL = `https://api.github.com/users/${user.github}`;
 
             axios.get(queryURL)
-                .then(function (val,err) {
-                    if (err) {
+                .then(function (val) {
+                    var imgUrl = val.data.avatar_url
+                    res.render("partials/jobs/profile-block", {
+                        layout: false,
+                        createdAt: user.createdAt,
+                        id: user.id,
+                        name: user.name,
+                        zipCode: user.zipCode,
+                        jobTitle: user.jobTitle,
+                        github: user.github,
+                        current_lang: user.codingLanguage,
+                        languages: languages,
+                        image: imgUrl
+                    })
+                })
+
+                // prevents an error from the api call from leading the page to not load
+                .catch((error) => {
+                    if (error.response) {
                         res.render("partials/jobs/profile-block", {
                             layout: false,
                             createdAt: user.createdAt,
@@ -72,31 +89,11 @@ module.exports = function (app) {
                             image: "#"
                         });
                     }
-                    else {
-                        var imgUrl = val.data.avatar_url
-                        res.render("partials/jobs/profile-block", {
-                            layout: false,
-                            createdAt: user.createdAt,
-                            id: user.id,
-                            name: user.name,
-                            zipCode: user.zipCode,
-                            jobTitle: user.jobTitle,
-                            github: user.github,
-                            current_lang: user.codingLanguage,
-                            languages: languages,
-                            image: imgUrl
-                        })
+                })
 
-                }
-            });
-        })
-    });
 
-    // Get route to logout
-    app.get("/logout", (req, res) => {
-        firebase.auth().signOut();;
-        res.render("login");
-    });
+        });
+    })
 
     // Create a new authenticated user "Signup"
     app.post("/api/signup", (req, res) => {
@@ -105,7 +102,7 @@ module.exports = function (app) {
         })
             .then(user => {
                 // res.json(user.dataValues.id);
-                res.json({user: user.dataValues.id, codLang: user.dataValues.codingLanguage})
+                res.json({ user: user.dataValues.id, codLang: user.dataValues.codingLanguage })
             }).catch(err => {
                 console.log(err)
                 res.status(401).json(err);
@@ -120,7 +117,7 @@ module.exports = function (app) {
         }).then(user => {
             // send user id back to client
             // res.render('applications');
-            var newUser = {user: user.dataValues.id, codLang: user.dataValues.codingLanguage}
+            var newUser = { user: user.dataValues.id, codLang: user.dataValues.codingLanguage }
 
             // console.log(newUser);
             res.json(newUser);

@@ -8,6 +8,7 @@ module.exports = function renderApplications(applications, res, partial) {
         newApplications = [applications];
     }
 
+
     var arrOfObjs = newApplications.map(element => ({
         id: element.dataValues.id,
         title: element.dataValues.title,
@@ -21,10 +22,11 @@ module.exports = function renderApplications(applications, res, partial) {
         // createdAt: element.dataValues.createdAt,
         // updatedAt: element.dataValues.updatesAt,
         // companyName: element.dataValues.Company.dataValues.name,
-        // companyObj: element.dataValues.Company.dataValues,
+        companyObj: element.dataValues.Company,
         contactObj: element.dataValues.Contacts,
         stageObj: element.dataValues.Stages,
         sourceObj: element.dataValues.Sources
+
     }));
 
     var hbsObj = {
