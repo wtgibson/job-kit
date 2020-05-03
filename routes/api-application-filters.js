@@ -204,7 +204,7 @@ module.exports = function (app) {
             include: [
                 {
                     model: db.Company,
-                    as: "Companies".Companies,
+                    as: "Company".Company,
                     required: true,
                     where: {
                         name: req.params.filter
