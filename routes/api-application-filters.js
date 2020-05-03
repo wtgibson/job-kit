@@ -7,12 +7,12 @@ module.exports = function (app) {
     app.get("/api/user/:userId/application/filter/title/:title", (req, res) => {
         db.Application.findAll({
             where: { userId: req.params.userId, title: req.params.title },
-            include: {
-                model: db.Company,
-                model: db.Contact,
-                model: db.Source,
-                model: db.Stage
-            },
+            include: [
+                { model: db.Company },
+                { model: db.Contact },
+                { model: db.Stage },
+                { model: db.Source }
+            ]
         }).then(applications => {
             renderApps(applications, res, "partials/jobs/application-block");
         }).catch(err => {
@@ -26,12 +26,12 @@ module.exports = function (app) {
     app.get("/api/user/:userId/application/filter/zipCode/:zipCode", (req, res) => {
         db.Application.findAll({
             where: { userId: req.params.userId, zipCode: req.params.zipCode },
-            include: {
-                model: db.Company,
-                model: db.Contact,
-                model: db.Source,
-                model: db.Stage
-            },
+            include: [
+                { model: db.Company },
+                { model: db.Contact },
+                { model: db.Stage },
+                { model: db.Source }
+            ]
         }).then(applications => {
             renderApps(applications, res, "partials/jobs/application-block");
         }).catch(err => {
@@ -45,12 +45,12 @@ module.exports = function (app) {
     app.get("/api/user/:userId/application/filter/rating/:rating", (req, res) => {
         db.Application.findAll({
             where: { userId: req.params.userId, rating: req.params.rating },
-            include: {
-                model: db.Company,
-                model: db.Contact,
-                model: db.Source,
-                model: db.Stage
-            },
+            include: [
+                { model: db.Company },
+                { model: db.Contact },
+                { model: db.Stage },
+                { model: db.Source }
+            ]
         }).then(applications => {
             renderApps(applications, res, "partials/jobs/application-block");
         }).catch(err => {
@@ -71,18 +71,17 @@ module.exports = function (app) {
                     model: db.Source,
                     as: "Sources".Sources,
                     required: true,
-                    where : {
+                    where: {
                         source: req.params.filter
                     }
                 },
-                {model: db.Company},
-                {model: db.Contact},
-                {model: db.Source},
-                {model: db.Stage}
+                { model: db.Company },
+                { model: db.Contact },
+                { model: db.Source },
+                { model: db.Stage }
 
             ]
         }).then(applications => {
-            console.log(res)
             renderApps(applications, res, "partials/jobs/application-block")
         }).catch(err => {
             console.log(err);
@@ -102,18 +101,17 @@ module.exports = function (app) {
                     model: db.Source,
                     as: "Sources".Sources,
                     required: true,
-                    where : {
+                    where: {
                         applyType: req.params.filter
                     }
                 },
-                {model: db.Company},
-                {model: db.Contact},
-                {model: db.Source},
-                {model: db.Stage}
+                { model: db.Company },
+                { model: db.Contact },
+                { model: db.Source },
+                { model: db.Stage }
 
             ]
         }).then(applications => {
-            console.log(res)
             renderApps(applications, res, "partials/jobs/application-block")
         }).catch(err => {
             console.log(err);
@@ -133,14 +131,14 @@ module.exports = function (app) {
                     model: db.Source,
                     as: "Sources".Sources,
                     required: true,
-                    where : {
+                    where: {
                         resumeVersion: req.params.filter
                     }
                 },
-                {model: db.Company},
-                {model: db.Contact},
-                {model: db.Source},
-                {model: db.Stage}
+                { model: db.Company },
+                { model: db.Contact },
+                { model: db.Source },
+                { model: db.Stage }
 
             ]
         }).then(applications => {
@@ -163,14 +161,14 @@ module.exports = function (app) {
                     model: db.Stage,
                     as: "Stages".Stages,
                     required: true,
-                    where : {
+                    where: {
                         currentStage: req.params.filter
                     }
                 },
-                {model: db.Company},
-                {model: db.Contact},
-                {model: db.Source},
-                {model: db.Source}
+                { model: db.Company },
+                { model: db.Contact },
+                { model: db.Source },
+                { model: db.Source }
 
             ]
         }).then(applications => {
