@@ -19,8 +19,8 @@ $(function () {
 
         var el2 = document.getElementsByClassName("app-type");
         for (let i = 0; i < el2.length; i++) {
-            if ($(elements[i]).val() == res.type) {
-                $(elements[i]).attr("checked", "checked")
+            if ($(el2[i]).val() == res.type) {
+                $(el2[i]).attr("checked", "checked")
             }
         }
         // var el2 = document.getElementsByClassName("app-type");
@@ -33,7 +33,7 @@ $(function () {
     $.ajax(`/api/company/${appID}`, {
         type: "GET"
     }).then(function (res2) {
-        let company = res2[0];
+        let company = res2;
         $("#comp-name").val(company.name);
         $("#comp-zipCode").val(company.zipCode);
         $("#comp-link").val(company.URL)
@@ -67,13 +67,21 @@ $(function () {
             }
         }
 
+        let appZip;
+        if($("#app-zipCode").val()==""){
+            appZip = "     "
+        }
+        else{
+            appZip = $("#app-zipCode").val()
+        }
+
         // ------- Update App ---------
         var updateApp = {
             title: $("#app-title").val(),
             type: roleType,
             description: $("#app-desc").val(),
             industry: $("#app-industry").val(),
-            zipCode: $("#app-zipCode").val(),
+            zipCode: appZip,
             salaryRange: $("#app-salary").val(),
             dateApplied: $("#app-applied").val(),
             rating: interest,

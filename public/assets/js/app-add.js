@@ -3,13 +3,16 @@ $(function () {
 
     $("#app-add").on("click", function (event) {
         event.preventDefault(event);
-        // window.location.replace("/applications")
+        window.location.replace("/applications")
         var roleType;
         var interest;
         elements = document.getElementsByClassName("app-type");
         for (let i = 0; i < elements.length; i++) {
             if ($(elements[i]).prop("checked")) {
                 roleType = ($(elements[i]).val())
+            }
+            else{
+                interest = ""
             }
         }
 
@@ -18,21 +21,34 @@ $(function () {
             if ($(elements[i]).prop("checked")) {
                 interest = ($(elements[i]).val())
             }
+            else{
+                interest = ""
+            }
         }
+
+        // need to check length of zipCode before Submitting
+        
+        let appZip;
+        if($("#app-zipCode").val()==""){
+            appZip = "     "
+        }
+        else{
+            appZip = $("#app-zipCode").val()
+        }
+
+
         var newApp = {
             title: $("#app-title").val(),
             type: roleType,
             description: $("#app-desc").val(),
             industry: $("#app-industry").val(),
-            zipCode: $("#app-zipCode").val(),
+            zipCode: appZip,
             salaryRange: $("#app-salary").val(),
             dateApplied: $("#app-applied").val(),
             rating: interest,
             UserId: globalUserID
         }
 
-
-        
 
         $.ajax("/api/application", {
             type: "POST",
@@ -64,9 +80,10 @@ $(function () {
                 $.ajax("/api/source/new", {
                     type: "POST",
                     data: newSource,
-                }).then(function (res4) {
-                    console.log(res4)
+                }).then(function (res3) {        
                 })
+
+                
 
 
 
