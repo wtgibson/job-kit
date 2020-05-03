@@ -58,9 +58,17 @@ module.exports = function (app) {
         }).then(fieldList => {
             // Map field list
             const fieldArr = fieldList.map(app => Object.values(app.dataValues));
+            let nonNestedArray = []
+            fieldArr.forEach((element) => {
+                nonNestedArray.push(element[0])
+            })
+            const uniqueSet = new Set(nonNestedArray);
+            const arraySet = [...uniqueSet];
+
+            
             var hbsObj = {
                 layout: false,
-                fieldList: fieldArr
+                fieldList: arraySet
             }
 
             if (req.params.field === "rating") {
@@ -109,10 +117,13 @@ module.exports = function (app) {
                     fieldArray.push(source[0].dataValues.applyType)
                 }
             });
+        
+            const uniqueSet = new Set(fieldArray);
+            const arraySet = [...uniqueSet];
 
             var hbsObj = {
                 layout: false,
-                fieldList: fieldArray
+                fieldList: arraySet
             }
 
             res.render("partials/commonUI/filter-block", hbsObj);
@@ -145,11 +156,15 @@ module.exports = function (app) {
             stageArray.forEach(stage => {
                 fieldArray.push(stage[0].dataValues.currentStage);
             });
+        
+            const uniqueSet = new Set(fieldArray);
+            const arraySet = [...uniqueSet];
 
             var hbsObj = {
                 layout: false,
-                fieldList: fieldArray
+                fieldList: arraySet
             }
+
             res.render("partials/commonUI/filter-block", hbsObj);
 
         }).catch(err => {
