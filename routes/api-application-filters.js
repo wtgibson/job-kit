@@ -14,8 +14,6 @@ module.exports = function (app) {
                 { model: db.Source }
             ]
         }).then(applications => {
-            console.log("=============")
-            console.log(applications)
             renderApps(applications, res, "partials/jobs/application-block");
         }).catch(err => {
             console.log(err);
@@ -84,7 +82,6 @@ module.exports = function (app) {
 
             ]
         }).then(applications => {
-            console.log(res)
             renderApps(applications, res, "partials/jobs/application-block")
         }).catch(err => {
             console.log(err);
@@ -115,7 +112,6 @@ module.exports = function (app) {
 
             ]
         }).then(applications => {
-            console.log(res)
             renderApps(applications, res, "partials/jobs/application-block")
         }).catch(err => {
             console.log(err);
