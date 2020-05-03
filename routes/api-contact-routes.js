@@ -68,10 +68,20 @@ module.exports = function (app) {
                 id: req.params.contactId
             },
         }).then(contacts => {
+            // AMF: created partial render page the old fashioned way
+
+            var x = {layout: false,
+                dataValues: {
+                    id: contacts.id,
+                    name: contacts.name,
+                    email: contacts.email,
+                    phone: contacts.phone,
+                    type: contacts.type
+                }
+            }
             // Add Partial as third argument
-            renderContact(contacts, res, "partials/contacts/contact-block");
+            res.render("partials/contacts/contact-block", x);
         }).catch(err => {
-            console.log(err);
             res.send(false);
         });  
     });
