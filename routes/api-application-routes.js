@@ -57,14 +57,20 @@ module.exports = function (app) {
             attributes: [req.params.field]
         }).then(fieldList => {
             // Map field list
-            const fieldArray = fieldList.map(app => Object.values(app.dataValues));
-            
+            const fieldArr = fieldList.map(app => Object.values(app.dataValues));
             var hbsObj = {
                 layout: false,
-                fieldList: fieldArray
+                fieldList: fieldArr
             }
-            
-            res.render("partials/commonUI/filter-block", hbsObj);
+
+            if (req.params.field === "rating") {
+    
+                res.render("partials/commonUI/filter-emoji-block", hbsObj);
+            }
+            else {
+                
+                res.render("partials/commonUI/filter-block", hbsObj);
+            }
 
         }).catch(err => {
             console.log(err);
