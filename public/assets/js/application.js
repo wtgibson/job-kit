@@ -154,7 +154,7 @@ $(function () {
         $("#filter").empty();
 
         // Filter on Application Field
-        if (field === "title" || field === "zipCode" || field === "rating") {
+        if (field === "title" || field === "zipCode" || field === "rating" || field === "industry") {
             $.ajax(`/api/user/${globalUserID}/application/${field}`, {
                 type: "GET"
             }).then(function (res) {
@@ -162,6 +162,17 @@ $(function () {
                 $("#filter").append(res);
             });
         }
+        // Filter on Company - name
+        else if (field === "company") {
+            $.ajax(`/api/user/${globalUserID}/application/join/company/${field}`, {
+                type: "GET"
+            }).then(function (res) {
+                console.log(res);
+                $("#filter").append(res);
+            });
+
+        }
+        // Filter on Source Field
         else if (field === "source" || field === "resumeVersion" || field === "applyType") {
             $.ajax(`/api/user/${globalUserID}/application/join/source/${field}`, {
                 type: "GET"
@@ -171,6 +182,7 @@ $(function () {
             });
 
         }
+        // Filter on Stage - currentStage
         else if (field === "currentStage") {
             $.ajax(`/api/user/${globalUserID}/application/join/stage/${field}`, {
                 type: "GET"
@@ -182,6 +194,7 @@ $(function () {
 
     });
 
+    // User selects the filter
     // Change Filter - "Engineer", "Front-end Developer", etc.
     $("#filter").on("change", function (event) {
         const filter = event.target.value;
@@ -203,8 +216,22 @@ $(function () {
                 $("#app-append").append(res)
             })
         }
+        else if (field === "industry") {
+            $.ajax(`/api/user/${globalUserID}/application/filter/industry/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
         else if (field === "rating") {
             $.ajax(`/api/user/${globalUserID}/application/filter/rating/${filter}`, {
+                type: "GET"
+            }).then(function (res) {
+                $("#app-append").append(res)
+            })
+        }
+        else if (field === "company") {
+            $.ajax(`/api/user/${globalUserID}/application/filter/companyName/${filter}`, {
                 type: "GET"
             }).then(function (res) {
                 $("#app-append").append(res)
@@ -242,13 +269,7 @@ $(function () {
 
     // Click Reset Filter Button
     $("#reset-btn").on("click", function (event) {
-        // event.preventDefault();
         window.location.reload()
-        // $.ajax(`/api/user/${globalUserID}/application/all`, {
-        //     type: "GET"
-        // }).then(function (res) {
-        //     $("#app-append").append(res);
-        // });
     });
 
 }); 
