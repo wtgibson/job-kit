@@ -114,7 +114,7 @@ $(function () {
             type: "POST",
             data: newStage,
         }).then(function (res5) {
-
+            $(`#stages-append-table-${appID}`).append(res5)
             console.log(res5)
         })
     })

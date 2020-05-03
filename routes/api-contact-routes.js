@@ -68,8 +68,8 @@ module.exports = function (app) {
                 id: req.params.contactId
             },
         }).then(contacts => {
-            console.log(`contacts are : ${contacts.dataValues.id}`)
-            console.log(`contacts are : ${contacts.dataValues.name}`)
+            // AMF: created partial render page the old fashioned way
+
             var x = {layout: false,
                 dataValues: {
                     id: contacts.id,
@@ -78,12 +78,10 @@ module.exports = function (app) {
                     phone: contacts.phone,
                     type: contacts.type
                 }
-
             }
             // Add Partial as third argument
             res.render("partials/contacts/contact-block", x);
         }).catch(err => {
-            console.log(err);
             res.send(false);
         });  
     });
