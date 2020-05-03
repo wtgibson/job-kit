@@ -7,10 +7,7 @@ $(function () {
     $.ajax(`/api/user/${globalUserID}/application/all`, {
         type: "GET"
     }).then(function (res) {
-        // console.log(res)
-
         $("#app-append").append(res)
-        // $(document).html(res)
     });
 
     $(document).on("click", ".edit-app", function (event) {
@@ -79,10 +76,10 @@ $(function () {
                 type: "GET",
             }).then(function (res2) {
                 console.log(res2)
+              
+   
                 $("#contacts-append-table").append(res2)
                 // receives back the contact id
-
-
             })
 
         })
