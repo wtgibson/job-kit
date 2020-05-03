@@ -64,16 +64,16 @@ $("#login-button").on("click", function (event) {
           }
         })
           // User email/password did not match or is not in firebase
-          .catch(function (error) {
-            console.log("line 68" + error.code);
-            if (error.code === "auth/user-not-found") {
-              location.assign('/signup');
-            } else {
-              // future window.open to create the popup
-              alert(error.message);
-             }
-          });
-      }).catch(function (error) {
+          // .catch(function (error) {
+          //   console.log("line 68" + error.code);
+          //   if (error.code === "auth/user-not-found") {
+          //     location.assign('/signup');
+          //   } else {
+          //     // future window.open to create the popup
+          //     alert(error.message);
+          //    }
+          // });
+      }).catch(function(error) {
         console.log("line 68" + error.code);
         if (error.code === "auth/user-not-found") {
           location.assign('/signup');
