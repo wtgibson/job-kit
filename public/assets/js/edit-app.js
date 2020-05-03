@@ -67,13 +67,21 @@ $(function () {
             }
         }
 
+        let appZip;
+        if($("#app-zipCode").val()==""){
+            appZip = "     "
+        }
+        else{
+            appZip = $("#app-zipCode").val()
+        }
+
         // ------- Update App ---------
         var updateApp = {
             title: $("#app-title").val(),
             type: roleType,
             description: $("#app-desc").val(),
             industry: $("#app-industry").val(),
-            zipCode: $("#app-zipCode").val(),
+            zipCode: appZip,
             salaryRange: $("#app-salary").val(),
             dateApplied: $("#app-applied").val(),
             rating: interest,

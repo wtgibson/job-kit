@@ -4,9 +4,11 @@ $(function () {
     let appID = sessionStorage.getItem('caid');
     let field;
 
+    console.log("global User ID",globalUserID)
     $.ajax(`/api/user/${globalUserID}/application/all`, {
         type: "GET"
     }).then(function (res) {
+        console.log(res)
         $("#app-append").append(res)
     });
 
@@ -38,7 +40,6 @@ $(function () {
         $.ajax(`/api/application/${id}`, {
             type: "GET"
         }).then(function (res) {
-            console.log(res);
             // window.location.reload()
             $("#details-modal").append(res);
         })

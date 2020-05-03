@@ -3,7 +3,7 @@ $(function () {
 
     $("#app-add").on("click", function (event) {
         event.preventDefault(event);
-        // window.location.replace("/applications")
+        window.location.replace("/applications")
         var roleType;
         var interest;
         elements = document.getElementsByClassName("app-type");
@@ -11,12 +11,18 @@ $(function () {
             if ($(elements[i]).prop("checked")) {
                 roleType = ($(elements[i]).val())
             }
+            else{
+                interest = ""
+            }
         }
 
         elements = document.getElementsByClassName("role-interest");
         for (let i = 0; i < elements.length; i++) {
             if ($(elements[i]).prop("checked")) {
                 interest = ($(elements[i]).val())
+            }
+            else{
+                interest = ""
             }
         }
 
@@ -31,9 +37,6 @@ $(function () {
         }
 
 
-
-        console.log(appZip)
-
         var newApp = {
             title: $("#app-title").val(),
             type: roleType,
@@ -46,8 +49,6 @@ $(function () {
             UserId: globalUserID
         }
 
-
-        
 
         $.ajax("/api/application", {
             type: "POST",
@@ -79,9 +80,10 @@ $(function () {
                 $.ajax("/api/source/new", {
                     type: "POST",
                     data: newSource,
-                }).then(function (res4) {
-                    console.log(res4)
+                }).then(function (res3) {        
                 })
+
+                
 
 
 
