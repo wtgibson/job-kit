@@ -49,12 +49,33 @@ module.exports = function (app) {
     app.get("/api/stage/:stageId", (req, res) => {
         db.Stage.findOne({
             where: {
-                ApplicationId: req.params.applicationId,
                 id: req.params.stageId
             }
         }).then(stage => {
-            // Add partial ad third argument
-            renderStage(stage, res);
+            var x = {layout: false,
+                dataValues: {
+                    id: stage.id,
+                    currentStage: stage.currentStage,
+                    dateCurrentStage: stage.dateCurrentStage,
+                    nextStep: stage.nextStep,
+                    notes: stage.notes
+                }
+            }
+            res.render("partials/stages/stage-block", x);
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+    });
+
+    app.get("/api/stage/json/:stageId", (req, res) => {
+        db.Stage.findOne({
+            where: {
+                // ApplicationId: req.params.applicationId,
+                id: req.params.stageId
+            }
+        }).then(stage => {
+            res.json(stage)
         }).catch(err => {
             console.log(err);
             res.send("No data found");
