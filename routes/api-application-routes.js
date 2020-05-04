@@ -14,14 +14,11 @@ module.exports = function (app) {
                 { model: db.Company },
                 { model: db.Contact },
                 { model: db.Source },
-                { model: db.Stage},
-                
-                
+                { model: db.Stage},   
             ],
             order: [
                 [db.Stage, 'createdAt', 'DESC'],
             ]
-            
         }).then(applications => {
             renderApps(applications, res, "partials/jobs/application-block");
         }).catch(err => {
