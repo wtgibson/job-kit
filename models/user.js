@@ -11,19 +11,8 @@ module.exports = function (sequelize, DataTypes) {
                 isEmail: true
             }
         },
-<<<<<<< HEAD
-        
-=======
-        // password: {
-        //     type: DataTypes.STRING,
-        //     allowNull: false,
-        //     validate: {
-        //         len: [6]
-        //     }
-        // },
 
         // First and Last Name
->>>>>>> 4d673213dd3841400b8a637ca107c6345c69f747
         name: {
             type: DataTypes.STRING,
             allowNull: true,

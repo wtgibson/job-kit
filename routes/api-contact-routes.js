@@ -1,4 +1,6 @@
 var db = require("../models");
+var renderContact = require("./api-contact-render.js");
+
 
 function renderContact(contacts, res, partial) {
     if (partial === undefined) {

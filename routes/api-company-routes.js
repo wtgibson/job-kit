@@ -1,33 +1,5 @@
 var db = require("../models");
-
-
-function renderCompanies(companies, res, partial) {
-    if (partial === undefined) {
-        return res.json(companies);
-    }
-    var newCompany = companies;
-    // If a single object add to an array
-    if (!Array.isArray(companies)) {
-        newCompany = [companies];
-    }
-    var arrOfObjs = newCompany.map(({ dataValues: { id, name, zipCode, URL, Contacts } }) => ({
-        id,
-        name,
-        zipCode,
-        URL,
-        contacts: Contacts,
-
-    }));
-
-    // console.log(arrOfObjs)
-    var x = {
-        layout: false,
-        applications: arrOfObjs
-    }
-
-    // Partial: "partials/jobs/application-block"
-    res.render(partial, x);
-}
+var renderCompanies = require("./api-company-render.js");
 
 module.exports = function (app) {
 

@@ -5,6 +5,9 @@
 - ```GET``` all applications for user
 - ```GET``` unique application by id
 - ```GET``` all of elements from application field (titles, type, industry, zipcode, rating)
+- ```GET``` all of elements from source field (source, resumeVersion)
+- ```GET``` all of elements from stage field (currentStage)
+- ```GET``` all of elements from company field (name)
 - ```POST``` application
 - ```PUT``` application
 - ``` DELETE ``` application
@@ -13,15 +16,24 @@
 Returns all applications that meet filter 
 - By title
 - By zipCode
-- By Rating
+- By industry
+- By rating
+- By soure
+- By applyType
+- By resumeVersion
+- By currentStage
+- By name (Company)
 
 ## Company
 - ```GET``` all companies for user
 - ```GET``` unique user using id
+- ```GET``` all companies for application as json
 - ```GET``` all of elements from company field (name, zipCode)
 - ```POST``` company
+- ```PUT``` company
 
-#### Put & Delete can be added
+
+#### Delete can be added
 - If company is used for multiple users we don't want to update or delete
 - If company is a new instance for each application we may want to allow for update
 
