@@ -118,23 +118,8 @@ module.exports = function (app) {
             where: {
                 id: req.params.contactId
             },
-        }).then(contacts => {
-
-            console.log(contacts)
-            // AMF: created partial render page the old fashioned way
-
-            var x = {
-                layout: false,
-                dataValues: {
-                    id: contacts.id,
-                    name: contacts.name,
-                    email: contacts.email,
-                    phone: contacts.phone,
-                    type: contacts.type
-                }
-            }
-            // Add Partial as third argument
-            res.render("partials/contacts/contact-block", x);
+        }).then(() => {
+            res.send("Updated");
         }).catch(err => {
             console.log(err);
             res.send("Failed to update");

@@ -32,19 +32,19 @@ $(function () {
 
     });
 
-    // does this still in use?
-    $(document).on("click", "#details-btn", function (event) {
-        // event.preventDefault();
-        var id = event.target.value;;
+    // // does this still in use?
+    // $(document).on("click", "#details-btn", function (event) {
+    //     // event.preventDefault();
+    //     var id = event.target.value;;
 
-        $.ajax(`/api/application/${id}`, {
-            type: "GET"
-        }).then(function (res) {
-            // window.location.reload()
-            $("#details-modal").append(res);
-        })
+    //     $.ajax(`/api/application/${id}`, {
+    //         type: "GET"
+    //     }).then(function (res) {
+    //         // window.location.reload()
+    //         $("#details-modal").append(res);
+    //     })
 
-    });
+    // });
 
     // sets the current application id to whatever is selected by the details modal.
     $(document).on("click", ".details-link-modal", function (event) {
@@ -76,6 +76,12 @@ $(function () {
             phone: $(`#add-contact-phone-${appID}`).val(),
             ApplicationId: appID,
         }
+
+        $(`#add-contact-name-${appID}`).val("");
+        $(`#add-contact-type-${appID}`).val("");
+        $(`#add-contact-email-${appID}`).val("");
+       $(`#add-contact-phone-${appID}`).val("");
+
         $.ajax("/api/contact/new", {
             type: "POST",
             data: newContact,
@@ -118,13 +124,17 @@ $(function () {
             $(`#add-contact-type-${appID}`).val(res3.type);
             $(`#add-contact-email-${appID}`).val(res3.email);
             $(`#add-contact-phone-${appID}`).val(res3.phone);
+          
         })
 
         $(document).on("click", ".contact-update", function (event) {
             event.preventDefault();
             console.log(`contact id is ${contactid}`)
             $(`#add-form-${appID}`).addClass("uk-hidden")
+            
+            $(`#contact-${contactid}`).remove()
 
+          
             var updatedContact = {
                 name: $(`#add-contact-name-${appID}`).val(),
                 type: $(`#add-contact-type-${appID}`).val(),
@@ -132,14 +142,22 @@ $(function () {
                 phone: $(`#add-contact-phone-${appID}`).val(),
             }
 
+            $(`#add-contact-name-${appID}`).val("");
+            $(`#add-contact-type-${appID}`).val("");
+            $(`#add-contact-email-${appID}`).val("");
+           $(`#add-contact-phone-${appID}`).val("");
+
             console.log(`stringified: ${JSON.stringify(updatedContact)}`)
-           
             $.ajax(`/api/contact/${contactid}`, {
                 type: "PUT",
                 data: updatedContact,
             }).then(function (res1) {
-                console.log(res1)
-                $(`#contact-${appID}`).replaceWith(res1)
+                $.ajax(`/api/contact/${contactid}`, {
+                    type: "GET",
+                }).then(function (res2) {
+                    
+                    $(`#contacts-append-table-${appID}`).append(res2)
+                })
             })
 
         })
