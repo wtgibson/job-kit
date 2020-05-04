@@ -19,6 +19,7 @@
             <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{zipCode}}</h5>
             {{!-- <p class="uk-text-small uk-text-muted">{{description}}</p> --}}
             <p class="uk-text-small uk-text-muted uk-text-bold">${{salaryRange}}</p>
+            <p class="uk-text-small uk-text-muted uk-text-bold"> {{type}}</p>
             <!-- Model Button -->
             <div class="uk-grid-small uk-align-center" uk-grid>
                 <div class="uk-width-auto">
@@ -32,7 +33,6 @@
                     <button class="delete-app" uk-icon="trash" data-appid={{id}} type="button"></button>
                 </div>
             </div>
-            <p class="uk-text-small uk-text-muted uk-text-bold"> {{type}}</p>
 
             <!-- Modal Info -->
             <div id="modal-center-{{id}}" class="uk-flex-top" uk-modal>
