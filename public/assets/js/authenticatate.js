@@ -52,7 +52,6 @@ $("#login-button").on("click", function (event) {
           data: loginData,
         }).then(res => {
           // stores the user id to the globalUserID
-
           sessionStorage.setItem('uuid', res.user);
           sessionStorage.setItem('clid', res.codLang);
 
