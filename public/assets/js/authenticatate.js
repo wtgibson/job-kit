@@ -56,14 +56,13 @@ $("#login-button").on("click", function (event) {
 
           // if user profile is incomplete, send the user to the profile page to complete
           
-          // if (res.codLang === undefined || res.codLang === null) {
-          //   window.location.assign('/profile');
-          // } else {
-
+          if (res.codLang === undefined || res.codLang === null) {
+            window.location.assign('/profile');
+          } else {
             // stores the user id to the globalUserID
             // reroutes the user to the applications page once they have been authenticated
             window.location.assign("/applications");
-          // }
+          }
         })
         // User email/password did not match or is not in firebase
       }).catch(function(error) {

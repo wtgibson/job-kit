@@ -12,7 +12,7 @@ $(function () {
 
     $(document).on("click", ".profile-save", function () {
         event.preventDefault(event)
-        var zip = $("#prof-zip").val().trim()
+        // var zip = $("#prof-zip").val().trim()
         var name = $("#prof-name").val().trim()
         var job = $("#prof-job").val().trim()
         var language = $("#prof-lang").val().trim()
@@ -23,7 +23,7 @@ $(function () {
         var userUpdate = {
             name: name,
             jobTitle: job,
-            zipCode: zip,
+            // zipCode: zip,
             github: github,
             codingLanguage: language
         }
