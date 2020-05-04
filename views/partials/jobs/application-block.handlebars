@@ -15,7 +15,7 @@
         </div>
         <div class="uk-card-body">
             <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
-            <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyObj.name}}</h4>
+            <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyObj.dataValues.name}}</h4>
             <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{zipCode}}</h5>
             {{!-- <p class="uk-text-small uk-text-muted">{{description}}</p> --}}
             <p class="uk-text-small uk-text-muted uk-text-bold">${{salaryRange}}</p>
@@ -46,7 +46,7 @@
 
                     <p class="uk-float-right uk-text-center">Interest: {{rating}} <span uk-icon="star"></span></p>
                     <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
-                    <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyObj.name}}</h4>
+                    <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyObj.dataValues.name}}</h4>
                     <p class="uk-margin-small-bottom uk-margin-remove-adjacent">{{industry}}</p>
                     <p class="uk-text-small uk-text-muted uk-text-bold">{{zipCode}}</p>
                     <p class="uk-text-small uk-text-muted uk-text-bold">{{type}}</p>

@@ -13,8 +13,11 @@ module.exports = function (app) {
             include: [
                 { model: db.Company },
                 { model: db.Contact },
-                { model: db.Stage },
                 { model: db.Source },
+                { model: db.Stage},   
+            ],
+            order: [
+                [db.Stage, 'createdAt', 'DESC'],
             ]
         }).then(applications => {
             renderApps(applications, res, "partials/jobs/application-block");
