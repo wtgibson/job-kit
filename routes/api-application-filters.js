@@ -41,6 +41,25 @@ module.exports = function (app) {
 
     });
 
+    // Get All Apps with industry
+    app.get("/api/user/:userId/application/filter/industry/:industry", (req, res) => {
+        db.Application.findAll({
+            where: { userId: req.params.userId, industry: req.params.industry },
+            include: [
+                { model: db.Company },
+                { model: db.Contact },
+                { model: db.Stage },
+                { model: db.Source }
+            ]
+        }).then(applications => {
+            renderApps(applications, res, "partials/jobs/application-block");
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+
+    });
+
     // Get All Apps with Rating
     app.get("/api/user/:userId/application/filter/rating/:rating", (req, res) => {
         db.Application.findAll({
@@ -77,7 +96,6 @@ module.exports = function (app) {
                 },
                 { model: db.Company },
                 { model: db.Contact },
-                { model: db.Source },
                 { model: db.Stage }
 
             ]
@@ -107,7 +125,6 @@ module.exports = function (app) {
                 },
                 { model: db.Company },
                 { model: db.Contact },
-                { model: db.Source },
                 { model: db.Stage }
 
             ]
@@ -137,7 +154,6 @@ module.exports = function (app) {
                 },
                 { model: db.Company },
                 { model: db.Contact },
-                { model: db.Source },
                 { model: db.Stage }
 
             ]
@@ -167,8 +183,36 @@ module.exports = function (app) {
                 },
                 { model: db.Company },
                 { model: db.Contact },
-                { model: db.Source },
                 { model: db.Source }
+
+            ]
+        }).then(applications => {
+            renderApps(applications, res, "partials/jobs/application-block");
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+
+    });
+
+    // Filter application with company name
+    app.get("/api/user/:userId/application/filter/companyName/:filter", (req, res) => {
+        db.Application.findAll({
+            where: {
+                UserId: req.params.userId,
+            },
+            include: [
+                {
+                    model: db.Company,
+                    as: "Company".Company,
+                    required: true,
+                    where: {
+                        name: req.params.filter
+                    }
+                },
+                { model: db.Contact },
+                { model: db.Source },
+                { model: db.Stage }
 
             ]
         }).then(applications => {

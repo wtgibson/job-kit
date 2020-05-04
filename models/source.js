@@ -12,9 +12,11 @@ module.exports = function(sequelize, DataTypes) {
         jobID: {
             type: DataTypes.STRING
         },
+        // Type of Apply - OneClick, Referral
         applyType: {
             type: DataTypes.STRING
         },
+        // Resume Version or Number (used to apply at this source)
         resumeVersion: {
             type: DataTypes.STRING
         }

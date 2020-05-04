@@ -13,8 +13,11 @@ module.exports = function (app) {
             include: [
                 { model: db.Company },
                 { model: db.Contact },
-                { model: db.Stage },
                 { model: db.Source },
+                { model: db.Stage},   
+            ],
+            order: [
+                [db.Stage, 'createdAt', 'DESC'],
             ]
         }).then(applications => {
             renderApps(applications, res, "partials/jobs/application-block");
@@ -56,27 +59,27 @@ module.exports = function (app) {
             },
             attributes: [req.params.field]
         }).then(fieldList => {
-            // Map field list
+    
             const fieldArr = fieldList.map(app => Object.values(app.dataValues));
+
             let nonNestedArray = []
             fieldArr.forEach((element) => {
                 nonNestedArray.push(element[0])
             })
+
             const uniqueSet = new Set(nonNestedArray);
             const arraySet = [...uniqueSet];
-
-            
             var hbsObj = {
                 layout: false,
                 fieldList: arraySet
             }
 
             if (req.params.field === "rating") {
-    
+                // Render emoji options
                 res.render("partials/commonUI/filter-emoji-block", hbsObj);
             }
             else {
-                
+                // Render options with hbsobj
                 res.render("partials/commonUI/filter-block", hbsObj);
             }
 
@@ -155,6 +158,45 @@ module.exports = function (app) {
 
             stageArray.forEach(stage => {
                 fieldArray.push(stage[0].dataValues.currentStage);
+            });
+        
+            const uniqueSet = new Set(fieldArray);
+            const arraySet = [...uniqueSet];
+
+            var hbsObj = {
+                layout: false,
+                fieldList: arraySet
+            }
+
+            res.render("partials/commonUI/filter-block", hbsObj);
+
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+    });
+
+    // Get All Application - Company Name
+    app.get("/api/user/:userId/application/join/company/:field", (req, res) => {
+        db.Application.findAll({
+            where: {
+                UserId: req.params.userId
+            },
+            include: {
+                model: db.Company,
+                as: "Company",
+                required: true
+            }
+        }).then(fieldList => {
+            let companyArray = [];
+            let fieldArray = [];
+
+            fieldList.forEach(application => {
+                companyArray.push(application.Company);
+            });
+
+            companyArray.forEach(company => {
+                fieldArray.push(company.dataValues.name);
             });
         
             const uniqueSet = new Set(fieldArray);
