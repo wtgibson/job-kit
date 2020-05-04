@@ -1,32 +1,5 @@
 var db = require("../models");
-
-function renderStage(stages, res, partial) {
-    if (partial === undefined) {
-        return res.json(stages);
-    }
-    var newStages = stages;
-    // If a single object add to an array
-    if (!Array.isArray(stages)) {
-        newStages = [stages];
-    }
-    var arrOfObjs = newStages.map(({dataValues: {id, currentStage, dateCurrentStage, nextStep, notes}}) => ({
-        id,
-        currentStage,
-        dateCurrentStage,
-        nextStep,
-        notes
-    }));
-
-    // console.log(arrOfObjs)
-    var x = {
-        layout: false,
-        applications: arrOfObjs
-    }
-
-    // Partial: "partials/jobs/application-block"
-    res.render(partial, x);
-}
-
+var renderStage = require("./api-stage-render.js");
 
 module.exports = function (app) {
  
@@ -49,12 +22,33 @@ module.exports = function (app) {
     app.get("/api/stage/:stageId", (req, res) => {
         db.Stage.findOne({
             where: {
-                ApplicationId: req.params.applicationId,
                 id: req.params.stageId
             }
         }).then(stage => {
-            // Add partial ad third argument
-            renderStage(stage, res);
+            var x = {layout: false,
+                dataValues: {
+                    id: stage.id,
+                    currentStage: stage.currentStage,
+                    dateCurrentStage: stage.dateCurrentStage,
+                    nextStep: stage.nextStep,
+                    notes: stage.notes
+                }
+            }
+            res.render("partials/stages/stage-block", x);
+        }).catch(err => {
+            console.log(err);
+            res.send("No data found");
+        });
+    });
+
+    app.get("/api/stage/json/:stageId", (req, res) => {
+        db.Stage.findOne({
+            where: {
+                // ApplicationId: req.params.applicationId,
+                id: req.params.stageId
+            }
+        }).then(stage => {
+            res.json(stage)
         }).catch(err => {
             console.log(err);
             res.send("No data found");

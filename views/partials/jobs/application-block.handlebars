@@ -6,26 +6,33 @@
         <div class="uk-card-header">
             <div class="uk-grid uk-grid-small uk-text-small" data-uk-grid>
                 <div class="uk-width-expand">
-                    <span class="cat-txt">Job Application {{id}}</span>
+                    <span class="cat-txt uk-text-left">Job Application {{id}}</span>
                 </div>
                 <div class="uk-width-auto uk-text-right uk-text-muted">
-                    <span data-uk-icon="icon:clock; ratio: 0.8"></span> Date Applied: {{dateApplied}}
+                    <span data-uk-icon="icon:clock; ratio: 0.8"></span> {{dateApplied}}
                 </div>
             </div>
         </div>
         <div class="uk-card-body">
             <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
-            <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyObj.name}}</h4>
+            <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyObj.dataValues.name}}</h4>
             <h5 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{zipCode}}</h5>
-            <p class="uk-text-small uk-text-muted uk-text-bold"> {{type}}</p>
-
             {{!-- <p class="uk-text-small uk-text-muted">{{description}}</p> --}}
-            <p class="uk-text-small uk-text-muted uk-text-bold">Salary Range: {{salaryRange}}</p>
+            <p class="uk-text-small uk-text-muted uk-text-bold">${{salaryRange}}</p>
             <!-- Model Button -->
-            <button class="edit-app" uk-icon="pencil" data-appid={{id}} type="button"></button>
-            <button class="delete-app" uk-icon="trash" data-appid={{id}} type="button"></button>
-            <a data-id={{id}} class="details-link-modal uk-button uk-button-default uk-border-rounded"
-                href="#modal-center-{{id}}" uk-toggle>Details</a>
+            <div class="uk-grid-small uk-align-center" uk-grid>
+                <div class="uk-width-auto">
+                    <button class="edit-app" uk-icon="pencil" data-appid={{id}} type="button"></button>
+                </div>
+                <div class="uk-width-auto">
+                    <a data-id={{id}} class="details-link-modal uk-button uk-button-default uk-border-rounded"
+                    href="#modal-center-{{id}}" uk-toggle>Details</a>                
+                </div>
+                <div class="uk-width-auto">
+                    <button class="delete-app" uk-icon="trash" data-appid={{id}} type="button"></button>
+                </div>
+            </div>
+            <p class="uk-text-small uk-text-muted uk-text-bold"> {{type}}</p>
 
             <!-- Modal Info -->
             <div id="modal-center-{{id}}" class="uk-flex-top" uk-modal>
@@ -39,7 +46,7 @@
 
                     <p class="uk-float-right uk-text-center">Interest: {{rating}} <span uk-icon="star"></span></p>
                     <h3 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{title}}</h3>
-                    <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyObj.name}}</h4>
+                    <h4 class="uk-margin-small-bottom uk-margin-remove-adjacent">{{companyObj.dataValues.name}}</h4>
                     <p class="uk-margin-small-bottom uk-margin-remove-adjacent">{{industry}}</p>
                     <p class="uk-text-small uk-text-muted uk-text-bold">{{zipCode}}</p>
                     <p class="uk-text-small uk-text-muted uk-text-bold">{{type}}</p>
@@ -71,7 +78,7 @@
                     <hr>
 
                     <div class="uk-overflow-auto">
-                        <h4>Internal Contacts <span><a href="" uk-icon="plus-circle" class="add-contact" data-appid="{{id}}"></a> </span></h4>
+                        <h4>Contacts: <span><a href="" uk-icon="plus-circle" class="add-contact" data-appid="{{id}}"></a> </span></h4>
                         <form class="add-contact-form uk-section-muted uk-hidden add-form" id="add-form-{{id}}" >
                             <table class="uk-table">
                                 <thead>
@@ -102,6 +109,9 @@
                             <button
                                 class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-norder-rounded contact-save"
                                 id="save-contact-{{id}}">Save</button>
+                                 <button
+                                class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-norder-rounded contact-update uk-hidden"
+                                id="update-contact-{{id}}">Save Update</button>
                         </form>
 
                         <table class="uk-table uk-table-striped" id="contacts-append-table-{{id}}">
@@ -157,6 +167,10 @@
                             <button
                                 class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-norder-rounded stage-save"
                                 id="save-stage-{{id}}">Save</button>
+                                
+                            <button
+                                class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-norder-rounded stage-update uk-hidden"
+                                id="update-stage-{{id}}">Save Update</button>
                         </form>
 
                         <table class="uk-table uk-table-striped" id="stages-append-table-{{id}}">

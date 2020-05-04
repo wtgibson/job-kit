@@ -1,4 +1,6 @@
 var db = require("../models");
+var renderContact = require("./api-contact-render.js");
+
 
 function renderContact(contacts, res, partial) {
     if (partial === undefined) {
@@ -9,7 +11,7 @@ function renderContact(contacts, res, partial) {
     if (!Array.isArray(contacts)) {
         newContacts = [contacts];
     }
-    var arrOfObjs = newContacts.map(({dataValues: {id, name, email, phone, type}}) => ({
+    var arrOfObjs = newContacts.map(({ dataValues: { id, name, email, phone, type } }) => ({
         id,
         name,
         email,
@@ -29,7 +31,7 @@ function renderContact(contacts, res, partial) {
 
 module.exports = function (app) {
 
-    
+
     // Get All Contacts for Application
     app.get("/api/application/:applicationId/contact/all", (req, res) => {
         db.Contact.findAll({
@@ -42,7 +44,7 @@ module.exports = function (app) {
         }).catch(err => {
             console.log(err);
             res.send(false);
-        });  
+        });
     });
 
     // Get All Contacts for Company
@@ -58,7 +60,7 @@ module.exports = function (app) {
         }).catch(err => {
             console.log(err);
             res.send(false);
-        });  
+        });
     });
 
     // Get One Contact
@@ -70,7 +72,8 @@ module.exports = function (app) {
         }).then(contacts => {
             // AMF: created partial render page the old fashioned way
 
-            var x = {layout: false,
+            var x = {
+                layout: false,
                 dataValues: {
                     id: contacts.id,
                     name: contacts.name,
@@ -83,7 +86,20 @@ module.exports = function (app) {
             res.render("partials/contacts/contact-block", x);
         }).catch(err => {
             res.send(false);
-        });  
+        });
+    });
+
+    // AMF: get one contact in JSON
+    app.get("/api/contact/json/:contactId", (req, res) => {
+        db.Contact.findOne({
+            where: {
+                id: req.params.contactId
+            },
+        }).then(contacts => {
+            res.json(contacts)
+        }).catch(err => {
+            res.send(false);
+        });
     });
 
     // Create New Contact
@@ -105,11 +121,11 @@ module.exports = function (app) {
                 id: req.params.contactId
             },
         }).then(() => {
-            res.json("Completed");
+            res.send("Updated");
         }).catch(err => {
             console.log(err);
             res.send("Failed to update");
-        });  
+        });
     });
 
     // Delete Contact
