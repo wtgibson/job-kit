@@ -71,7 +71,7 @@
                     <hr>
 
                     <div class="uk-overflow-auto">
-                        <h4>Internal Contacts <span><a href="" uk-icon="plus-circle" class="add-contact" data-appid="{{id}}"></a> </span></h4>
+                        <h4>Contacts: <span><a href="" uk-icon="plus-circle" class="add-contact" data-appid="{{id}}"></a> </span></h4>
                         <form class="add-contact-form uk-section-muted uk-hidden add-form" id="add-form-{{id}}" >
                             <table class="uk-table">
                                 <thead>
@@ -102,6 +102,9 @@
                             <button
                                 class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-norder-rounded contact-save"
                                 id="save-contact-{{id}}">Save</button>
+                                 <button
+                                class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-norder-rounded contact-update uk-hidden"
+                                id="update-contact-{{id}}">Save Update</button>
                         </form>
 
                         <table class="uk-table uk-table-striped" id="contacts-append-table-{{id}}">
@@ -157,6 +160,10 @@
                             <button
                                 class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-norder-rounded stage-save"
                                 id="save-stage-{{id}}">Save</button>
+                                
+                            <button
+                                class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom uk-norder-rounded stage-update uk-hidden"
+                                id="update-stage-{{id}}">Save Update</button>
                         </form>
 
                         <table class="uk-table uk-table-striped" id="stages-append-table-{{id}}">

@@ -46,12 +46,21 @@ $(function () {
 
     });
 
+    // sets the current application id to whatever is selected by the details modal.
+    $(document).on("click", ".details-link-modal", function (event) {
+        event.preventDefault();
+        var applicationID = $(this).data("id")
+        sessionStorage.setItem('caid', applicationID);
+        appID = sessionStorage.getItem('caid');
+
+    })
+
     // --------------------  add, edit, save, delete Contact Code  -------------------- 
 
     // unhides add contact form with one button click
     $(document).on("click", ".add-contact", function (event) {
         event.preventDefault();
-        var id = $(".add-contact").data("appid")
+        // var id = $(".add-contact").data("appid")
         $(`#add-form-${appID}`).removeClass("uk-hidden")
     })
 
@@ -88,167 +97,207 @@ $(function () {
         var id = $(this).data("contactid");
         $(`#contact-${id}`).remove()
         $.ajax(`/api/contact/${id}`, {
-            type: "DELETE",
+            type: "GET",
+        }).then(function (res2) {
+            $(`#contacts-append-table-${appID}`).append(res2)
+        })
+    })
+
+    // edit contact: first read the data and show it on the form
+    $(document).on("click", ".contact-edit", function (event) {
+        event.preventDefault();
+        var contactid = $(this).data("contactid");
+        $(`#add-form-${appID}`).removeClass("uk-hidden")
+        $(`#update-contact-${appID}`).removeClass("uk-hidden")
+        $(`#save-contact-${appID}`).addClass("uk-hidden")
+
+        $.ajax(`/api/contact/json/${contactid}`, {
+            type: "GET",
         }).then(function (res3) {
-            
+            $(`#add-contact-name-${appID}`).val(res3.name);
+            $(`#add-contact-type-${appID}`).val(res3.type);
+            $(`#add-contact-email-${appID}`).val(res3.email);
+            $(`#add-contact-phone-${appID}`).val(res3.phone);
+        })
+
+        $(document).on("click", ".contact-update", function (event) {
+            event.preventDefault();
+            console.log(`contact id is ${contactid}`)
+            $(`#add-form-${appID}`).addClass("uk-hidden")
+
+            var updatedContact = {
+                name: $(`#add-contact-name-${appID}`).val(),
+                type: $(`#add-contact-type-${appID}`).val(),
+                email: $(`#add-contact-email-${appID}`).val(),
+                phone: $(`#add-contact-phone-${appID}`).val(),
+            }
+
+            console.log(`stringified: ${JSON.stringify(updatedContact)}`)
+           
+            $.ajax(`/api/contact/${contactid}`, {
+                type: "PUT",
+                data: updatedContact,
+            }).then(function (res1) {
+                console.log(res1)
+                $(`#contact-${appID}`).replaceWith(res1)
+            })
+
         })
     })
 
 
-    // --------------------  add, edit, save, delete stage Code  -------------------- 
 
 
-    $(document).on("click", ".add-stage", function (event) {
-        event.preventDefault();
-        var id = $(".add-stage").data("appid")
-        $(`#add-stage-${appID}`).removeClass("uk-hidden")
+
+
+// --------------------  add, edit, save, delete stage Code  -------------------- 
+
+
+$(document).on("click", ".add-stage", function (event) {
+    event.preventDefault();
+    var id = $(".add-stage").data("appid")
+    $(`#add-stage-${appID}`).removeClass("uk-hidden")
+})
+
+$(document).on("click", ".stage-save", function (event) {
+    event.preventDefault();
+    $(`#add-stage-${appID}`).addClass("uk-hidden")
+
+    var newStage = {
+        currentStage: $(`#add-stage-stage-${appID}`).val(),
+        dateCurrentStage: $(`#add-stage-date-${appID}`).val(),
+        nextStep: $(`#add-stage-next-${appID}`).val(),
+        notes: $(`#add-stage-notes-${appID}`).val(),
+        ApplicationId: appID,
+    }
+    $.ajax("/api/stage/new", {
+        type: "POST",
+        data: newStage,
+    }).then(function (res5) {
+        $(`#stages-append-table-${appID}`).append(res5)
+        console.log(res5)
     })
+})
 
-    $(document).on("click", ".stage-save", function (event) {
-        event.preventDefault();
-        $(`#add-stage-${appID}`).addClass("uk-hidden")
+$(document).on("click", ".stage-delete", function (event) {
+    event.preventDefault();
+    var id = $(this).data("stageid");
+    $.ajax(`/api/stage/${id}`, {
+        type: "DELETE",
+    }).then(function (res3) {
+        console.log(res3)
+        $(`#stage-${id}`).remove()
+    })
+})
 
-        var newStage = {
-            currentStage: $(`#add-stage-stage-${appID}`).val(),
-            dateCurrentStage: $(`#add-stage-date-${appID}`).val(),
-            nextStep: $(`#add-stage-next-${appID}`).val(),
-            notes: $(`#add-stage-notes-${appID}`).val(),
-            ApplicationId: appID,
-        }
-        $.ajax("/api/stage/new", {
-            type: "POST",
-            data: newStage,
-        }).then(function (res5) {
-            $(`#stages-append-table-${appID}`).append(res5)
-            console.log(res5)
+
+
+
+
+// Change Field - title, zipcode, etc.
+$("#field").on("change", function (event) {
+    field = event.target.value;
+    if (field === "0") {
+        return
+    }
+    $("#filter").empty();
+
+    // Filter on Application Field
+    if (field === "title" || field === "zipCode" || field === "rating") {
+        $.ajax(`/api/user/${globalUserID}/application/${field}`, {
+            type: "GET"
+        }).then(function (res) {
+            console.log(res)
+            $("#filter").append(res);
+        });
+    }
+    else if (field === "source" || field === "resumeVersion" || field === "applyType") {
+        $.ajax(`/api/user/${globalUserID}/application/join/source/${field}`, {
+            type: "GET"
+        }).then(function (res) {
+            console.log(res);
+            $("#filter").append(res);
+        });
+
+    }
+    else if (field === "currentStage") {
+        $.ajax(`/api/user/${globalUserID}/application/join/stage/${field}`, {
+            type: "GET"
+        }).then(function (res) {
+            console.log(res);
+            $("#filter").append(res);
+        });
+    }
+
+});
+
+// Change Filter - "Engineer", "Front-end Developer", etc.
+$("#filter").on("change", function (event) {
+    const filter = event.target.value;
+    $("#app-append").empty();
+    if (filter === "0") {
+        return
+    }
+    else if (field === "title") {
+        $.ajax(`/api/user/${globalUserID}/application/filter/title/${filter}`, {
+            type: "GET"
+        }).then(function (res) {
+            $("#app-append").append(res)
         })
-    })
-
-    $(document).on("click", ".stage-delete", function (event) {
-        event.preventDefault();
-        var id = $(this).data("stageid");
-        $.ajax(`/api/stage/${id}`, {
-            type: "DELETE",
-        }).then(function (res3) {
-            console.log(res3)
-            $(`#stage-${id}`).remove()
+    }
+    else if (field === "zipCode") {
+        $.ajax(`/api/user/${globalUserID}/application/filter/zipCode/${filter}`, {
+            type: "GET"
+        }).then(function (res) {
+            $("#app-append").append(res)
         })
-    })
+    }
+    else if (field === "rating") {
+        $.ajax(`/api/user/${globalUserID}/application/filter/rating/${filter}`, {
+            type: "GET"
+        }).then(function (res) {
+            $("#app-append").append(res)
+        })
+    }
+    else if (field === "source") {
+        $.ajax(`/api/user/${globalUserID}/application/filter/source/${filter}`, {
+            type: "GET"
+        }).then(function (res) {
+            $("#app-append").append(res)
+        })
+    }
+    else if (field === "applyType") {
+        $.ajax(`/api/user/${globalUserID}/application/filter/applyType/${filter}`, {
+            type: "GET"
+        }).then(function (res) {
+            $("#app-append").append(res)
+        })
+    }
+    else if (field === "resumeVersion") {
+        $.ajax(`/api/user/${globalUserID}/application/filter/resumeVersion/${filter}`, {
+            type: "GET"
+        }).then(function (res) {
+            $("#app-append").append(res)
+        })
+    }
+    else if (field === "currentStage") {
+        $.ajax(`/api/user/${globalUserID}/application/filter/currentStage/${filter}`, {
+            type: "GET"
+        }).then(function (res) {
+            $("#app-append").append(res)
+        })
+    }
+});
 
-
-    $(document).on("click", ".details-link-modal", function (event) {
-        event.preventDefault();
-        var applicationID = $(this).data("id")
-        sessionStorage.setItem('caid', applicationID);
-        appID = sessionStorage.getItem('caid');
-
-    })
-
-
-    // Change Field - title, zipcode, etc.
-    $("#field").on("change", function (event) {
-        field = event.target.value;
-        if (field === "0") {
-            return
-        }
-        $("#filter").empty();
-
-        // Filter on Application Field
-        if (field === "title" || field === "zipCode" || field === "rating") {
-            $.ajax(`/api/user/${globalUserID}/application/${field}`, {
-                type: "GET"
-            }).then(function (res) {
-                console.log(res)
-                $("#filter").append(res);
-            });
-        }
-        else if (field === "source" || field === "resumeVersion" || field === "applyType") {
-            $.ajax(`/api/user/${globalUserID}/application/join/source/${field}`, {
-                type: "GET"
-            }).then(function (res) {
-                console.log(res);
-                $("#filter").append(res);
-            });
-
-        }
-        else if (field === "currentStage") {
-            $.ajax(`/api/user/${globalUserID}/application/join/stage/${field}`, {
-                type: "GET"
-            }).then(function (res) {
-                console.log(res);
-                $("#filter").append(res);
-            });
-        }
-
-    });
-
-    // Change Filter - "Engineer", "Front-end Developer", etc.
-    $("#filter").on("change", function (event) {
-        const filter = event.target.value;
-        $("#app-append").empty();
-        if (filter === "0") {
-            return
-        }
-        else if (field === "title") {
-            $.ajax(`/api/user/${globalUserID}/application/filter/title/${filter}`, {
-                type: "GET"
-            }).then(function (res) {
-                $("#app-append").append(res)
-            })
-        }
-        else if (field === "zipCode") {
-            $.ajax(`/api/user/${globalUserID}/application/filter/zipCode/${filter}`, {
-                type: "GET"
-            }).then(function (res) {
-                $("#app-append").append(res)
-            })
-        }
-        else if (field === "rating") {
-            $.ajax(`/api/user/${globalUserID}/application/filter/rating/${filter}`, {
-                type: "GET"
-            }).then(function (res) {
-                $("#app-append").append(res)
-            })
-        }
-        else if (field === "source") {
-            $.ajax(`/api/user/${globalUserID}/application/filter/source/${filter}`, {
-                type: "GET"
-            }).then(function (res) {
-                $("#app-append").append(res)
-            })
-        }
-        else if (field === "applyType") {
-            $.ajax(`/api/user/${globalUserID}/application/filter/applyType/${filter}`, {
-                type: "GET"
-            }).then(function (res) {
-                $("#app-append").append(res)
-            })
-        }
-        else if (field === "resumeVersion") {
-            $.ajax(`/api/user/${globalUserID}/application/filter/resumeVersion/${filter}`, {
-                type: "GET"
-            }).then(function (res) {
-                $("#app-append").append(res)
-            })
-        }
-        else if (field === "currentStage") {
-            $.ajax(`/api/user/${globalUserID}/application/filter/currentStage/${filter}`, {
-                type: "GET"
-            }).then(function (res) {
-                $("#app-append").append(res)
-            })
-        }
-    });
-
-    // Click Reset Filter Button
-    $("#reset-btn").on("click", function (event) {
-        // event.preventDefault();
-        window.location.reload()
-        // $.ajax(`/api/user/${globalUserID}/application/all`, {
-        //     type: "GET"
-        // }).then(function (res) {
-        //     $("#app-append").append(res);
-        // });
-    });
+// Click Reset Filter Button
+$("#reset-btn").on("click", function (event) {
+    // event.preventDefault();
+    window.location.reload()
+    // $.ajax(`/api/user/${globalUserID}/application/all`, {
+    //     type: "GET"
+    // }).then(function (res) {
+    //     $("#app-append").append(res);
+    // });
+});
 
 }); 

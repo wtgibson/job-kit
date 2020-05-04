@@ -4,6 +4,7 @@ $(function () {
 
     var roleType;
     var interest;
+    let sourceID;
 
     $.ajax(`/api/application/${appID}`, {
         type: "GET"
@@ -27,7 +28,6 @@ $(function () {
         // $(el2[res.rating]).attr("checked", "checked")
     })
 
-    console.log(`/api/company/${appID}`)
 
 
     $.ajax(`/api/company/${appID}`, {
@@ -42,13 +42,17 @@ $(function () {
     $.ajax(`/api/application/${appID}/source/all`, {
         type: "GET"
     }).then(function (res3) {
+        console.log(res3)
         let firstSource = res3[0];
-        $("#src-source").val(firstSource.source);
-        $("#src-posting").val(firstSource.linkToPosting);
-        $("#src-applyType").val(firstSource.applyType);
-        $("#src-resume").val(firstSource.resumeVersion);
+        sourceID = firstSource.id
+        console.log(sourceID)
+        $("#src-source").val(firstSource.source)
+        $("#src-posting").val(firstSource.linkToPosting)
+        $("#src-applyType").val(firstSource.applyType)
+        $("#src-resume").val(firstSource.resumeVersion)
     })
 
+    console.log($("#src-source").data("sourceID"))
 
     $("#app-edit").on("click", function (event) {
         event.preventDefault();
@@ -64,6 +68,9 @@ $(function () {
         for (let i = 0; i < elements.length; i++) {
             if ($(elements[i]).prop("checked")) {
                 interest = ($(elements[i]).val())
+            }
+            else{
+                interest = 0
             }
         }
 
@@ -121,11 +128,11 @@ $(function () {
             resumeVersion: $("#src-resume").val(),
         }
 
-        $.ajax(`/api/source/${appID}`, {
+        $.ajax(`/api/source/${sourceID}`, {
             type: "PUT",
             data: updateSource,
         }).then(function (res) {
-            console.log(res)
+            window.location.replace("/applications")
         })
 
 
