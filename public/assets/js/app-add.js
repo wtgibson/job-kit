@@ -3,7 +3,7 @@ $(function () {
 
     $("#app-add").on("click", function (event) {
         event.preventDefault(event);
-        window.location.replace("/applications")
+       
         var roleType;
         var interest;
         elements = document.getElementsByClassName("app-type");
@@ -22,7 +22,7 @@ $(function () {
                 interest = ($(elements[i]).val())
             }
             else{
-                interest = ""
+                interest = 0
             }
         }
 
@@ -54,8 +54,8 @@ $(function () {
             type: "POST",
             data: newApp,
         }).then(function (res1) {
-            // receives back the user id
-            console.log(res1)
+            // receives back the application id
+            // console.log(res1)
             var newCompany = {
                 name: $("#comp-name").val(),
                 zipCode: $("#comp-zipCode").val(),
@@ -67,7 +67,7 @@ $(function () {
                 type: "POST",
                 data: newCompany,
             }).then(function (res2) {
-                console.log(res2)
+                // console.log(res2)
 
                 var newSource = {
                     source: $("#src-source").val(),
@@ -80,7 +80,9 @@ $(function () {
                 $.ajax("/api/source/new", {
                     type: "POST",
                     data: newSource,
-                }).then(function (res3) {        
+                }).then(function (res3) {       
+                    // console.log(res3) 
+                     window.location.replace("/applications")
                 })
 
                 

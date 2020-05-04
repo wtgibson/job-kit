@@ -32,26 +32,21 @@ $(function () {
 
     });
 
-    // does this still in use?
-    $(document).on("click", "#details-btn", function (event) {
-        // event.preventDefault();
-        var id = event.target.value;;
+    // sets the current application id to whatever is selected by the details modal.
+    $(document).on("click", ".details-link-modal", function (event) {
+        event.preventDefault();
+        var applicationID = $(this).data("id")
+        sessionStorage.setItem('caid', applicationID);
+        appID = sessionStorage.getItem('caid');
 
-        $.ajax(`/api/application/${id}`, {
-            type: "GET"
-        }).then(function (res) {
-            // window.location.reload()
-            $("#details-modal").append(res);
-        })
-
-    });
+    })
 
     // --------------------  add, edit, save, delete Contact Code  -------------------- 
 
     // unhides add contact form with one button click
     $(document).on("click", ".add-contact", function (event) {
         event.preventDefault();
-        var id = $(".add-contact").data("appid")
+        // var id = $(".add-contact").data("appid")
         $(`#add-form-${appID}`).removeClass("uk-hidden")
     })
 
@@ -67,6 +62,12 @@ $(function () {
             phone: $(`#add-contact-phone-${appID}`).val(),
             ApplicationId: appID,
         }
+
+        $(`#add-contact-name-${appID}`).val("");
+        $(`#add-contact-type-${appID}`).val("");
+        $(`#add-contact-email-${appID}`).val("");
+        $(`#add-contact-phone-${appID}`).val("");
+
         $.ajax("/api/contact/new", {
             type: "POST",
             data: newContact,
@@ -88,11 +89,67 @@ $(function () {
         var id = $(this).data("contactid");
         $(`#contact-${id}`).remove()
         $.ajax(`/api/contact/${id}`, {
-            type: "DELETE",
-        }).then(function (res3) {
-            
+            type: "GET",
+        }).then(function (res2) {
+            $(`#contacts-append-table-${appID}`).append(res2)
         })
     })
+
+    // edit contact: first read the data and show it on the form
+    $(document).on("click", ".contact-edit", function (event) {
+        event.preventDefault();
+        var contactid = $(this).data("contactid");
+        $(`#add-form-${appID}`).removeClass("uk-hidden")
+        $(`#update-contact-${appID}`).removeClass("uk-hidden")
+        $(`#save-contact-${appID}`).addClass("uk-hidden")
+
+        $.ajax(`/api/contact/json/${contactid}`, {
+            type: "GET",
+        }).then(function (res3) {
+            $(`#add-contact-name-${appID}`).val(res3.name);
+            $(`#add-contact-type-${appID}`).val(res3.type);
+            $(`#add-contact-email-${appID}`).val(res3.email);
+            $(`#add-contact-phone-${appID}`).val(res3.phone);
+
+        })
+
+        $(document).on("click", ".contact-update", function (event) {
+            event.preventDefault();
+            console.log(`contact id is ${contactid}`)
+            $(`#add-form-${appID}`).addClass("uk-hidden")
+
+
+            var updatedContact = {
+                name: $(`#add-contact-name-${appID}`).val(),
+                type: $(`#add-contact-type-${appID}`).val(),
+                email: $(`#add-contact-email-${appID}`).val(),
+                phone: $(`#add-contact-phone-${appID}`).val(),
+            }
+
+            $(`#add-contact-name-${appID}`).val("");
+            $(`#add-contact-type-${appID}`).val("");
+            $(`#add-contact-email-${appID}`).val("");
+            $(`#add-contact-phone-${appID}`).val("");
+
+            console.log(`stringified: ${JSON.stringify(updatedContact)}`)
+            $.ajax(`/api/contact/${contactid}`, {
+                type: "PUT",
+                data: updatedContact,
+            }).then(function (res1) {
+                $.ajax(`/api/contact/${contactid}`, {
+                    type: "GET",
+                }).then(function (res2) {
+                    $(`#contact-${contactid}`).replaceWith(res2)
+
+                })
+            })
+
+        })
+    })
+
+
+
+
 
 
     // --------------------  add, edit, save, delete stage Code  -------------------- 
@@ -135,14 +192,58 @@ $(function () {
         })
     })
 
-
-    $(document).on("click", ".details-link-modal", function (event) {
+    // edit contact: first read the data and show it on the form
+    $(document).on("click", ".stage-edit", function (event) {
         event.preventDefault();
-        var applicationID = $(this).data("id")
-        sessionStorage.setItem('caid', applicationID);
-        appID = sessionStorage.getItem('caid');
+        var stageid = $(this).data("stageid");
+        $(`#add-stage-${appID}`).removeClass("uk-hidden")
+        $(`#update-stage-${appID}`).removeClass("uk-hidden")
+        $(`#save-stage-${appID}`).addClass("uk-hidden")
 
+        $.ajax(`/api/stage/json/${stageid}`, {
+            type: "GET",
+        }).then(function (res3) {
+            $(`#add-stage-stage-${appID}`).val(res3.currentStage);
+            $(`#add-stage-date-${appID}`).val(res3.dateCurrentStage);
+            $(`#add-stage-next-${appID}`).val(res3.nextStep);
+            $(`#add-stage-notes-${appID}`).val(res3.notes);
+
+        })
+
+        $(document).on("click", ".stage-update", function (event) {
+            event.preventDefault();
+            console.log(`contact id is ${stageid}`)
+            $(`#add-form-${appID}`).addClass("uk-hidden")
+
+
+            var updatedStage = {
+                currentStage: $(`#add-stage-stage-${appID}`).val(),
+                dateCurrentStage: $(`#add-stage-date-${appID}`).val(),
+                nextStep: $(`#add-stage-next-${appID}`).val(),
+                notes: $(`#add-stage-notes-${appID}`).val(),
+            }
+
+            $(`#add-stage-stage-${appID}`).val("");
+            $(`#add-stage-date-${appID}`).val("");
+            $(`#add-stage-next-${appID}`).val("");
+            $(`#add-stage-notes-${appID}`).val("");
+
+            $.ajax(`/api/stage/${stageid}`, {
+                type: "PUT",
+                data: updatedStage,
+            }).then(function (res1) {
+                $.ajax(`/api/stage/${stageid}`, {
+                    type: "GET",
+                }).then(function (res2) {
+                    $(`#stage-${stageid}`).replaceWith(res2)
+
+                })
+            })
+
+        })
     })
+
+
 
 
     // Change Field - title, zipcode, etc.
