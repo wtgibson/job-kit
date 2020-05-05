@@ -23,7 +23,7 @@ $("#signup-button").on("click", function (event) {
     var email = $("#email");
     var password = $("#password");
     var confirm = $("#confirm");
-    console.log(email.val());
+    // console.log(email.val());
   
     // now we validate them
   
